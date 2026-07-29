@@ -9,10 +9,6 @@ Namespace My
     Partial Friend Class MyApplication
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
-            AddHandler System.Windows.Forms.Application.ThreadException, AddressOf OnUiThreadException
-            System.Windows.Forms.Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
-            AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf OnDomainUnhandledException
-
             SafeData.ApplyGermanCulture()
             AppLog.Info("Application startup")
 
