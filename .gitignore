@@ -1,0 +1,39 @@
+## Build
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+## Data (Access databases and runtime data)
+*.mdb
+*.accdb
+*.ldb
+*.laccdb
+
+## Secrets / signing
+*.pfx
+*.p12
+*.key
+*.cer
+
+## Local tooling / temp
+_*.ps1
+*.log
+Thumbs.db
+Desktop.ini
+
+## Large/binary runtime assets typically not source
+*.exe
+*.dll
+!Microsoft.VisualBasic.PowerPacks.Vs.dll
+
+## Publish / deploy leftovers
+*.application
+*.manifest
+!My Project/app.manifest
+publish/
