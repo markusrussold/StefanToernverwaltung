@@ -64,7 +64,6 @@
         End If
         SaveSetting("Datenbank", "alt", "T", SafeData.ExtractVersionStamp(Me.Text))
 
-
         '   FreischaltZiffer:
         '0      Test Törnverwaltung, keine Kursverwaltung
         '1      Törnverwaltung
@@ -173,7 +172,13 @@
             Label58.Visible = True
         End If
 
+        FormUi.CenterMain(Me)
     End Sub
+
+    Private Sub Menü_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Shown
+        FormUi.CenterMain(Me)
+    End Sub
+
     Private Sub Toernkosten()
         '                                    Zahlungen Törns
 
@@ -193,7 +198,9 @@
         bsBootKalkulation.CancelEdit()
         dsToernverwaltung.BootKalkulation.Clear()
         kAdapter.Fill(dsToernverwaltung.BootKalkulation)
-        bsBootKalkulation.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        If bsBootKalkulation.Count > 0 Then
+            bsBootKalkulation.Position = 0
+        End If
         '      j = bsCrewAdressen.Count + 1
         j = 1
         If bsBootKalkulation.Count > 0 Then
@@ -263,7 +270,9 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         xAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        If bsCrewAdressen.Count > 0 Then
+            bsCrewAdressen.Position = 0
+        End If
         If bsCrewAdressen.Count > 0 Then
             For i = 0 To bsCrewAdressen.Count - 1
                 If IsDBNull(dsToernverwaltung.CrewAdressen.Rows(i)("sterbedatum")) Then
@@ -536,7 +545,9 @@ weiter:
         bsTeilnehmer.CancelEdit()
         DsAusbildung.Teilnehmer.Clear()
         kAdapter.Fill(DsAusbildung.Teilnehmer)
-        bsTeilnehmer.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        If bsTeilnehmer.Count > 0 Then
+            bsTeilnehmer.Position = 0
+        End If
         If bsTeilnehmer.Count > 0 Then
             For i = 0 To bsTeilnehmer.Count - 1
                 leer = "Fällige Materialkosten:     "
@@ -597,7 +608,9 @@ weiter:
         bsTeilnehmer.CancelEdit()
         DsAusbildung.Teilnehmer.Clear()
         kAdapter.Fill(DsAusbildung.Teilnehmer)
-        bsTeilnehmer.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        If bsTeilnehmer.Count > 0 Then
+            bsTeilnehmer.Position = 0
+        End If
         If bsTeilnehmer.Count > 0 Then
             For i = 0 To bsTeilnehmer.Count - 1
                 leer = "Fällige Kurskosten:            "
@@ -695,304 +708,315 @@ weiter:
 
     Private Sub version(ByRef Vers)
         Dim sAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
-        Dim rs As System.Data.DataRowView = bsSteuerdaten.Current
         sAdapter.SelectCommand = New OleDb.OleDbCommand
         sAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         sAdapter.SelectCommand.CommandText = "Select * from steuerdaten"
         bsSteuerdaten.CancelEdit()
         dsToernverwaltung.Steuerdaten.Clear()
         sAdapter.Fill(dsToernverwaltung.Steuerdaten)
-        bsSteuerdaten.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         If bsSteuerdaten.Count = 0 Then
-            bsSteuerdaten.AddNew()
-            bsSteuerdaten.AddNew()
-            taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
-
-            sAdapter.SelectCommand = New OleDb.OleDbCommand
-            sAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-            sAdapter.SelectCommand.CommandText = "Select * from steuerdaten"
+            Dim neu As DataRow = dsToernverwaltung.Steuerdaten.NewRow()
+            neu("Bezeichnung") = "Version"
+            neu("feld1") = SafeData.ExtractVersionMajor(Convert.ToString(Vers)).ToString(Globalization.CultureInfo.InvariantCulture)
+            dsToernverwaltung.Steuerdaten.Rows.Add(neu)
+            Try
+                taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
+            Catch
+            End Try
             bsSteuerdaten.CancelEdit()
             dsToernverwaltung.Steuerdaten.Clear()
             sAdapter.Fill(dsToernverwaltung.Steuerdaten)
         End If
-        Dim requiredMajor As Integer = SafeData.ExtractVersionMajor(Convert.ToString(Vers))
-        If dsToernverwaltung.Steuerdaten.Rows(0)("bezeichnung").ToString = "Version" AndAlso SafeData.VersionAtLeast(dsToernverwaltung.Steuerdaten.Rows(0)("feld1"), requiredMajor) Then
-        Else
-            If My.Computer.FileSystem.FileExists("Toernverwaltung.mdb") And My.Computer.FileSystem.FileExists("update.exe") Then
-                SaveSetting("Datenbank", "vorhanden", "T", SafeData.ExtractVersionStamp(Me.Text))
-                Process.Start("Update.exe")
-            End If
-            ' Schema/Version werden von DatabaseBootstrap sichergestellt; Stempel hier aktualisieren.
-            If dsToernverwaltung.Steuerdaten.Rows.Count = 0 Then
-                bsSteuerdaten.AddNew()
-            End If
-            dsToernverwaltung.Steuerdaten.Rows(0)("Bezeichnung") = "Version"
-            dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = requiredMajor.ToString(Globalization.CultureInfo.InvariantCulture)
-            bsSteuerdaten.EndEdit()
-            taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
+        If bsSteuerdaten.Count > 0 Then
+            bsSteuerdaten.Position = 0
         End If
+        If dsToernverwaltung.Steuerdaten.Rows.Count = 0 Then
+            Dim neu As DataRow = dsToernverwaltung.Steuerdaten.NewRow()
+            neu("Bezeichnung") = "Version"
+            neu("feld1") = "0"
+            dsToernverwaltung.Steuerdaten.Rows.Add(neu)
+        End If
+
+        Dim requiredMajor As Integer = SafeData.ExtractVersionMajor(Convert.ToString(Vers))
+        Dim bezeichnung As String = SafeData.CoalesceString(dsToernverwaltung.Steuerdaten.Rows(0)("bezeichnung"))
+        Dim feld1 As Object = dsToernverwaltung.Steuerdaten.Rows(0)("feld1")
+        If bezeichnung = "Version" AndAlso SafeData.VersionAtLeast(feld1, requiredMajor) Then
+            Return
+        End If
+
+        If My.Computer.FileSystem.FileExists("Toernverwaltung.mdb") AndAlso My.Computer.FileSystem.FileExists("update.exe") Then
+            SaveSetting("Datenbank", "vorhanden", "T", SafeData.ExtractVersionStamp(Me.Text))
+            Process.Start("Update.exe")
+        End If
+        dsToernverwaltung.Steuerdaten.Rows(0)("Bezeichnung") = "Version"
+        dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = requiredMajor.ToString(Globalization.CultureInfo.InvariantCulture)
+        bsSteuerdaten.EndEdit()
+        Try
+            taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
+        Catch
+        End Try
     End Sub
 
 
     Private Sub DatenbankToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DatenbankToolStripMenuItem.Click
-        Datenbank.Show()
+        FormUi.ShowChild(Datenbank)
     End Sub
 
     Private Sub BootToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BootToolStripMenuItem.Click
         bootkey = " "
-        Boot.Show()
+        FormUi.ShowChild(Boot)
     End Sub
     Private Sub CrewToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CrewToolStripMenuItem.Click
-        Crew.Show()
+        FormUi.ShowChild(Crew)
     End Sub
 
     Private Sub CharterbasisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CharterbasisToolStripMenuItem.Click
-        Charter.Show()
+        FormUi.ShowChild(Charter)
     End Sub
 
     Private Sub TörnverwaltungToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TörnverwaltungToolStripMenuItem.Click
         ToernKey = " "
-        Toern.Show()
+        FormUi.ShowChild(Toern)
     End Sub
 
     Private Sub KalkulationsblattToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KalkulationsblattToolStripMenuItem.Click
-        Kalkulationsblatt.Show()
+        FormUi.ShowChild(Kalkulationsblatt)
     End Sub
 
     Private Sub FormularFürCrewdatenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FormularFürCrewdatenToolStripMenuItem.Click
-        Crewformular.Show()
+        FormUi.ShowChild(Crewformular)
     End Sub
 
     Private Sub CrewlisteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CrewlisteToolStripMenuItem.Click
-        Crewliste.Show()
+        FormUi.ShowChild(Crewliste)
     End Sub
 
     Private Sub MeilenauswertungToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MeilenauswertungToolStripMenuItem.Click
-        Meilenauswertung.Show()
+        FormUi.ShowChild(Meilenauswertung)
     End Sub
 
     Private Sub TörnblattToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TörnblattToolStripMenuItem.Click
-        Toernblatt.Show()
+        FormUi.ShowChild(Toernblatt)
     End Sub
 
     Private Sub GeburtstagskalenderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GeburtstagskalenderToolStripMenuItem.Click
-        Geburtstagskalender.Show()
+        FormUi.ShowChild(Geburtstagskalender)
     End Sub
 
     Private Sub SeemeilenbestätigungToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SeemeilenbestätigungToolStripMenuItem.Click
-        Seemeilenbestaetigung.Show()
+        FormUi.ShowChild(Seemeilenbestaetigung)
     End Sub
 
     Private Sub StatistikToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StatistikToolStripMenuItem.Click
-        Statistik.Show()
+        FormUi.ShowChild(Statistik)
     End Sub
 
     Private Sub TörnexportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TörnexportToolStripMenuItem.Click
-        ExpoNeu.Show()
+        FormUi.ShowChild(ExpoNeu)
     End Sub
 
     Private Sub TörnimportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TörnimportToolStripMenuItem.Click
-        ImportNeu.Show()
+        FormUi.ShowChild(ImportNeu)
     End Sub
 
     Private Sub InfoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InfoToolStripMenuItem.Click
-        Info.Show()
+        FormUi.ShowChild(Info)
     End Sub
 
     Private Sub FreischaltungToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FreischaltungToolStripMenuItem.Click
-        Key.Show()
+        FormUi.ShowChild(Key)
     End Sub
 
     Private Sub KalkulationKopierenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KalkulationKopierenToolStripMenuItem.Click
-        KalkToToern.Show()
+        FormUi.ShowChild(KalkToToern)
     End Sub
 
     Private Sub TexteVerwaltenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TexteVerwaltenToolStripMenuItem.Click
-        ComboBox.Show()
+        FormUi.ShowChild(ComboBox)
     End Sub
 
     Private Sub AdressenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AdressenToolStripMenuItem.Click
-        Adressen.Show()
+        FormUi.ShowChild(Adressen)
     End Sub
 
     Private Sub EmailSendenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmailSendenToolStripMenuItem.Click
-        EMail.Show()
+        FormUi.ShowChild(EMail)
     End Sub
 
     Private Sub EinstellungenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EinstellungenToolStripMenuItem.Click
-        Einstellungen.Show()
+        FormUi.ShowChild(Einstellungen)
     End Sub
 
     Private Sub DistressformularToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DistressformularToolStripMenuItem.Click
-        Distress.Show()
+        FormUi.ShowChild(Distress)
     End Sub
 
     Private Sub AgenturToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AgenturToolStripMenuItem.Click
-        Agentur.Show()
+        FormUi.ShowChild(Agentur)
     End Sub
     Private Sub TexteMarketingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TexteMarketingToolStripMenuItem.Click
-        ComboMarketing.Show()
+        FormUi.ShowChild(ComboMarketing)
     End Sub
 
     Private Sub KursmaterialToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KursmaterialToolStripMenuItem.Click
-        Kursmaterial.Show()
+        FormUi.ShowChild(Kursmaterial)
     End Sub
 
     Private Sub KurseToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KurseToolStripMenuItem.Click
-        Kurs.Show()
+        FormUi.ShowChild(Kurs)
     End Sub
     Private Sub TermineToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TermineToolStripMenuItem.Click
         '       Kurstermine.Show()
     End Sub
     Private Sub WerbungToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WerbungToolStripMenuItem1.Click
         werbungg = "Allg"
-        Werbung.Show()
+        FormUi.ShowChild(Werbung)
     End Sub
 
     Private Sub VeranstaltungenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VeranstaltungenToolStripMenuItem.Click
-        Veranstalltung.Show()
+        FormUi.ShowChild(Veranstalltung)
     End Sub
 
     Private Sub KontakteToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KontakteToolStripMenuItem1.Click
-        KursToernKontakte.Show()
+        FormUi.ShowChild(KursToernKontakte)
     End Sub
 
     Private Sub TabellenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabellenToolStripMenuItem.Click
-        Tabellen.Show()
+        FormUi.ShowChild(Tabellen)
     End Sub
 
     Private Sub KursstatistikToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KursstatistikToolStripMenuItem.Click
-        Kursstatistik.Show()
+        FormUi.ShowChild(Kursstatistik)
     End Sub
 
     Private Sub StatistikToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StatistikToolStripMenuItem1.Click
-        AktivStatistik.Show()
+        FormUi.ShowChild(AktivStatistik)
     End Sub
 
     Private Sub StandortToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StandortToolStripMenuItem.Click
-        Standort.Show()
+        FormUi.ShowChild(Standort)
     End Sub
 
     Private Sub WacheplanToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WacheplanToolStripMenuItem.Click
-        Wacheplan.Show()
+        FormUi.ShowChild(Wacheplan)
     End Sub
 
     Private Sub BordkassaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BordkassaToolStripMenuItem.Click
-        Bordkassa.Show()
+        FormUi.ShowChild(Bordkassa)
     End Sub
     Private Sub Label58_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Label58.MouseClick
         Process.Start(AcrobatReader, pdfname)
     End Sub
     Private Sub LogbuchToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LogbuchToolStripMenuItem.Click
-        LogbuchDruck.Show()
+        FormUi.ShowChild(LogbuchDruck)
     End Sub
     Private Sub LogbuchToolStripMenuItem1_Click_1(sender As System.Object, e As System.EventArgs) Handles LogbuchToolStripMenuItem1.Click
-        LogbuchMenü.Show()
+        FormUi.ShowChild(LogbuchMenü)
     End Sub
 
     Private Sub TeilnehmerKursToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
-        Kursteilnehmer1.Show()
+        FormUi.ShowChild(Kursteilnehmer1)
     End Sub
 
     Private Sub TeilnehmerlisteToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TeilnehmerlisteToolStripMenuItem.Click
-        Kursteilnehmer3.Show()
+        FormUi.ShowChild(Kursteilnehmer3)
     End Sub
 
     Private Sub TeilnehmerVerwaltenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
-        Kursteilnehmer2.Show()
+        FormUi.ShowChild(Kursteilnehmer2)
     End Sub
 
     Private Sub BestellformularToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BestellformularToolStripMenuItem.Click
-        Kursbestellung1.Show()
+        FormUi.ShowChild(Kursbestellung1)
     End Sub
 
     Private Sub BestellungProTeilnehmerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BestellungProTeilnehmerToolStripMenuItem.Click
-        Kursbestellung2.Show()
+        FormUi.ShowChild(Kursbestellung2)
     End Sub
 
     Private Sub SammelbestellungToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SammelbestellungToolStripMenuItem.Click
-        Kursbestellung3.Show()
+        FormUi.ShowChild(Kursbestellung3)
     End Sub
 
     Private Sub KalkulationToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles KalkulationToolStripMenuItem1.Click
-        Kalkulation.Show()
+        FormUi.ShowChild(Kalkulation)
     End Sub
 
     Private Sub CrewwerbungToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CrewwerbungToolStripMenuItem.Click
         werbungg = "Törn"
-        Werbung.Show()
+        FormUi.ShowChild(Werbung)
     End Sub
 
     Private Sub EinkaufslisteToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EinkaufslisteToolStripMenuItem.Click
-        Einkaufsliste.Show()
+        FormUi.ShowChild(Einkaufsliste)
     End Sub
 
     Private Sub DerErsteTagToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DerErsteTagToolStripMenuItem.Click
-        Ablauf.Show()
+        FormUi.ShowChild(Ablauf)
     End Sub
 
     Private Sub CrewDetailsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CrewDetailsToolStripMenuItem.Click
-        CrewDetails.Show()
+        FormUi.ShowChild(CrewDetails)
     End Sub
 
     Private Sub DerErsteTagToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles DerErsteTagToolStripMenuItem1.Click
-        ErsterTag.Show()
+        FormUi.ShowChild(ErsterTag)
     End Sub
 
     Private Sub CrewbesprechungToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles CrewbesprechungToolStripMenuItem1.Click
-        CrewBesprechungDruck.Show()
+        FormUi.ShowChild(CrewBesprechungDruck)
     End Sub
 
     Private Sub CharterToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles CharterToolStripMenuItem2.Click
-        VersichTarifeY.Show()
+        FormUi.ShowChild(VersichTarifeY)
     End Sub
 
     Private Sub CharterToolStripMenuItem3_Click(sender As System.Object, e As System.EventArgs) Handles CharterToolStripMenuItem3.Click
-        Versicherter.Show()
+        FormUi.ShowChild(Versicherter)
     End Sub
 
     Private Sub SchadenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SchadenToolStripMenuItem.Click
-        SchadenY.Show()
+        FormUi.ShowChild(SchadenY)
     End Sub
 
     Private Sub SchadenToolStripMenuItem1_Click_1(sender As System.Object, e As System.EventArgs) Handles SchadenToolStripMenuItem1.Click
-        SchadenYDruck.Show()
+        FormUi.ShowChild(SchadenYDruck)
     End Sub
 
     Private Sub GruppeZuordnenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GruppeZuordnenToolStripMenuItem.Click
-        KurstermineGZ.Show()
+        FormUi.ShowChild(KurstermineGZ)
     End Sub
 
     Private Sub EinzelZuordnenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EinzelZuordnenToolStripMenuItem.Click
-        KurstermineEZ.Show()
+        FormUi.ShowChild(KurstermineEZ)
     End Sub
 
     Private Sub EnzeiVerwaltenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EnzeiVerwaltenToolStripMenuItem.Click
-        KurstermineEV.Show()
+        FormUi.ShowChild(KurstermineEV)
     End Sub
 
     Private Sub AnwesenheitslisteDruckenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AnwesenheitslisteDruckenToolStripMenuItem.Click
-        KurstermineAD.Show()
+        FormUi.ShowChild(KurstermineAD)
     End Sub
 
     Private Sub KursZuordnenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles KursZuordnenToolStripMenuItem.Click
         '       KursMTeilnehmer.Show()
-        Kursteilnehmer1.Show()
+        FormUi.ShowChild(Kursteilnehmer1)
     End Sub
 
     Private Sub KostenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles KostenToolStripMenuItem.Click
-        KursTeilnVerw.Show()
+        FormUi.ShowChild(KursTeilnVerw)
     End Sub
 
     Private Sub BestellungenBuchenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BestellungenBuchenToolStripMenuItem.Click
-        KursBestBuchen.Show()
+        FormUi.ShowChild(KursBestBuchen)
     End Sub
 
     Private Sub CrewbesprechungDruckenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CrewbesprechungDruckenToolStripMenuItem.Click
-        CrewBesprechungDruck.Show()
+        FormUi.ShowChild(CrewBesprechungDruck)
     End Sub
 
     Private Sub NachtansteuerungenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NachtansteuerungenToolStripMenuItem.Click
-        Nachtansteuerung.Show()
+        FormUi.ShowChild(Nachtansteuerung)
     End Sub
 End Class

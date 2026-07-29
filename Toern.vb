@@ -1,4 +1,4 @@
-﻿Public Class Toern
+Public Class Toern
     Public logbuch As String
     Public bericht As String
     Public aenderung As Boolean
@@ -1007,7 +1007,7 @@ subende:
                     End If
                 Else
                     Menü.crewkey = aaa
-                    Crew.Show()
+                    FormUi.ShowChild(Crew)
                 End If
             End If
         End If
@@ -1036,7 +1036,7 @@ subende:
                     End If
                 Else
                     Menü.crewkey = aaa
-                    Crew.Show()
+                    FormUi.ShowChild(Crew)
                 End If
             End If
         End If
@@ -1599,7 +1599,7 @@ ok:
 
     Private Sub TextBox18_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TextBox18.Click
         Menü.bootkey = ComboBox1.Text
-        Boot.Show()
+        FormUi.ShowChild(Boot)
     End Sub
 
     Private Sub ComboBox1_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox1.LostFocus

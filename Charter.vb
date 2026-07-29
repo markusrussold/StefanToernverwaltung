@@ -1,4 +1,4 @@
-﻿Public Class Charter
+Public Class Charter
      Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -297,7 +297,7 @@ Gefunden:
     Private Sub ListBox1_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListBox1.MouseDoubleClick
         If ListBox1.Text > " " Then
             Menü.bootkey = ListBox1.Text
-            Boot.Show()
+            FormUi.ShowChild(Boot)
         End If
     End Sub
 
@@ -348,7 +348,7 @@ Gefunden:
         If ListBox2.Text > " " Then
             Menü.bootkey = ListBox1.Text
             Menü.ToernKey = ListBox2.Text
-            Toern.Show()
+            FormUi.ShowChild(Toern)
         End If
 
     End Sub

@@ -31,7 +31,9 @@
         bsSteuerdaten.CancelEdit()
         dsToernverwaltung.Steuerdaten.Clear()
         sAdapter.Fill(dsToernverwaltung.Steuerdaten)
-        bsSteuerdaten.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        If bsSteuerdaten.Count > 0 Then
+            bsSteuerdaten.Position = 0
+        End If
         If bsSteuerdaten.Count > 0 Then
             If dsToernverwaltung.Steuerdaten.Rows(0)("bezeichnung").ToString = "Version" Then
                 Label6.Text = "Datenbank        Version " + dsToernverwaltung.Steuerdaten.Rows(0)("feld1").ToString

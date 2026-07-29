@@ -298,27 +298,27 @@ Gefunden:
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-        Cover.Show()
+        FormUi.ShowChild(Cover)
         Me.Close()
     End Sub
 
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
-        Sicherheitseinweisung.Show()
+        FormUi.ShowChild(Sicherheitseinweisung)
         Me.Close()
     End Sub
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-        Logdaten.Show()
+        FormUi.ShowChild(Logdaten)
         Me.Close()
     End Sub
 
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
-        Zusammenfassung.Show()
+        FormUi.ShowChild(Zusammenfassung)
         Me.Close()
     End Sub
 
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
-        Maengel.Show()
+        FormUi.ShowChild(Maengel)
         '      Me.Close()
     End Sub
 

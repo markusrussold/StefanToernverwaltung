@@ -1,4 +1,4 @@
-﻿Public Class Datenbank
+Public Class Datenbank
     Dim speicherbild As String
     Dim speicheradressen As String
     Dim speicherformular As String
@@ -451,7 +451,7 @@ schleife:
         End If
     End Sub
      Private Sub PictureBox2_Click(sender As System.Object, e As System.EventArgs) Handles PictureBox2.Click
-        SucheDatei.Show()
+        FormUi.ShowChild(SucheDatei)
     End Sub
 
     Private Sub ListBox1_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles ListBox1.MouseClick

@@ -1,4 +1,4 @@
-﻿Public Class Agentur
+Public Class Agentur
     Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -280,14 +280,14 @@ Gefunden:
     Private Sub ListBox1_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListBox1.MouseDoubleClick
         If ListBox1.Text > " " Then
             Menü.bootkey = ListBox1.Text
-            Boot.Show()
+            FormUi.ShowChild(Boot)
         End If
     End Sub
 
     Private Sub ListBox2_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListBox2.MouseDoubleClick
         If ListBox2.Text > " " Then
             Menü.charterkey = ListBox2.Text
-            Charter.Show()
+            FormUi.ShowChild(Charter)
         End If
     End Sub
 

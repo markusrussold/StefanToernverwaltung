@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Public Class Boot
     Public aenderung As Boolean
     Public aaa As String
@@ -525,7 +525,7 @@ Gefunden:
     Private Sub ListBox1_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListBox1.MouseDoubleClick
         If ListBox1.Text > " " Then
             Menü.ToernKey = ListBox1.Text
-            Toern.Show()
+            FormUi.ShowChild(Toern)
         End If
 
     End Sub

@@ -1,4 +1,4 @@
-﻿Public Class Cover
+Public Class Cover
     Dim aaa As String
     Dim buch1 As String
     Dim position As Integer
@@ -255,10 +255,10 @@ Gefunden:
         f13()
     End Sub
     Private Sub PictureBox3_Click(sender As System.Object, e As System.EventArgs) Handles PictureBox3.Click
-        SucheDatei.Show()
+        FormUi.ShowChild(SucheDatei)
     End Sub
     Private Sub PictureBox2_Click(sender As System.Object, e As System.EventArgs) Handles PictureBox2.Click
-        SucheDatei.Show()
+        FormUi.ShowChild(SucheDatei)
     End Sub
     Private Sub TextBox9_GotFocus(sender As Object, e As System.EventArgs) Handles TextBox9.GotFocus
         f9()

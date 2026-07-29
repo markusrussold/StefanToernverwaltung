@@ -1,4 +1,4 @@
-﻿Public Class Crew
+Public Class Crew
      Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -621,13 +621,13 @@ Gefunden:
             Crewformular.TextBox2.Enabled = True
             Crewformular.GroupBox1.Enabled = True
         End If
-        Crewformular.Show()
+        FormUi.ShowChild(Crewformular)
     End Sub
 
     Private Sub ListBox1_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListBox1.MouseDoubleClick
         If ListBox1.Text > " " Then
             Menü.ToernKey = ListBox1.Text.Substring(11, Len(ListBox1.Text) - 11)
-            Toern.Show()
+            FormUi.ShowChild(Toern)
         End If
     End Sub
 

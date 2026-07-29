@@ -116,6 +116,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="DatabaseBootstrap.vb" />
     <Compile Include="SafeData.vb" />
+    <Compile Include="FormUi.vb" />
     <Compile Include="CheckKey.vb" />
     <Compile Include="Begruessung.Designer.vb">
       <DependentUpon>Begruessung.vb</DependentUpon>
