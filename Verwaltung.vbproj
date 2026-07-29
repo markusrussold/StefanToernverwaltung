@@ -77,11 +77,11 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Wikinger.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Wikinger.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
+      <HintPath>Resources\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -113,512 +113,512 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="DatabaseBootstrap.vb" />
-    <Compile Include="SafeData.vb" />
-    <Compile Include="FormUi.vb" />
-    <Compile Include="CheckKey.vb" />
-    <Compile Include="Begruessung.Designer.vb">
+    <Compile Include="Helpers\ApplicationEvents.vb" />
+    <Compile Include="Helpers\DatabaseBootstrap.vb" />
+    <Compile Include="Helpers\SafeData.vb" />
+    <Compile Include="Helpers\FormUi.vb" />
+    <Compile Include="Helpers\CheckKey.vb" />
+    <Compile Include="Forms\Begruessung.Designer.vb">
       <DependentUpon>Begruessung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Begruessung.vb">
+    <Compile Include="Forms\Begruessung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Agentur.Designer.vb">
+    <Compile Include="Forms\Agentur.Designer.vb">
       <DependentUpon>Agentur.vb</DependentUpon>
     </Compile>
-    <Compile Include="Agentur.vb">
+    <Compile Include="Forms\Agentur.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutosizeI.vb" />
-    <Compile Include="CheckKurs.vb" />
-    <Compile Include="CheckGesamt.vb" />
-    <Compile Include="Checkkod.vb" />
-    <Compile Include="CheckBNull.vb" />
-    <Compile Include="AktivStatistik.Designer.vb">
+    <Compile Include="Helpers\AutosizeI.vb" />
+    <Compile Include="Helpers\CheckKurs.vb" />
+    <Compile Include="Helpers\CheckGesamt.vb" />
+    <Compile Include="Helpers\Checkkod.vb" />
+    <Compile Include="Helpers\CheckBNull.vb" />
+    <Compile Include="Forms\AktivStatistik.Designer.vb">
       <DependentUpon>AktivStatistik.vb</DependentUpon>
     </Compile>
-    <Compile Include="AktivStatistik.vb">
+    <Compile Include="Forms\AktivStatistik.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Bordkassa.Designer.vb">
+    <Compile Include="Forms\Bordkassa.Designer.vb">
       <DependentUpon>Bordkassa.vb</DependentUpon>
     </Compile>
-    <Compile Include="Bordkassa.vb">
+    <Compile Include="Forms\Bordkassa.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CrewbesprechungDataSet.vb">
+    <Compile Include="Data\CrewbesprechungDataSet.vb">
       <DependentUpon>CrewbesprechungDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ExportDataSet.Designer.vb">
+    <Compile Include="Data\ExportDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExportDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Nachtansteuerung.Designer.vb">
+    <Compile Include="Forms\Nachtansteuerung.Designer.vb">
       <DependentUpon>Nachtansteuerung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Nachtansteuerung.vb">
+    <Compile Include="Forms\Nachtansteuerung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImportNeu.Designer.vb">
+    <Compile Include="Forms\ImportNeu.Designer.vb">
       <DependentUpon>ImportNeu.vb</DependentUpon>
     </Compile>
-    <Compile Include="ImportNeu.vb">
+    <Compile Include="Forms\ImportNeu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KursBestBuchen.Designer.vb">
+    <Compile Include="Forms\KursBestBuchen.Designer.vb">
       <DependentUpon>KursBestBuchen.vb</DependentUpon>
     </Compile>
-    <Compile Include="KursBestBuchen.vb">
+    <Compile Include="Forms\KursBestBuchen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KursTeilnVerw.Designer.vb">
+    <Compile Include="Forms\KursTeilnVerw.Designer.vb">
       <DependentUpon>KursTeilnVerw.vb</DependentUpon>
     </Compile>
-    <Compile Include="KursTeilnVerw.vb">
+    <Compile Include="Forms\KursTeilnVerw.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KursMTeilnehmer.Designer.vb">
+    <Compile Include="Forms\KursMTeilnehmer.Designer.vb">
       <DependentUpon>KursMTeilnehmer.vb</DependentUpon>
     </Compile>
-    <Compile Include="KursMTeilnehmer.vb">
+    <Compile Include="Forms\KursMTeilnehmer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KurstermineAD.Designer.vb">
+    <Compile Include="Forms\KurstermineAD.Designer.vb">
       <DependentUpon>KurstermineAD.vb</DependentUpon>
     </Compile>
-    <Compile Include="KurstermineAD.vb">
+    <Compile Include="Forms\KurstermineAD.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KurstermineEV.Designer.vb">
+    <Compile Include="Forms\KurstermineEV.Designer.vb">
       <DependentUpon>KurstermineEV.vb</DependentUpon>
     </Compile>
-    <Compile Include="KurstermineEV.vb">
+    <Compile Include="Forms\KurstermineEV.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KurstermineEZ.Designer.vb">
+    <Compile Include="Forms\KurstermineEZ.Designer.vb">
       <DependentUpon>KurstermineEZ.vb</DependentUpon>
     </Compile>
-    <Compile Include="KurstermineEZ.vb">
+    <Compile Include="Forms\KurstermineEZ.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KurstermineGZ.Designer.vb">
+    <Compile Include="Forms\KurstermineGZ.Designer.vb">
       <DependentUpon>KurstermineGZ.vb</DependentUpon>
     </Compile>
-    <Compile Include="KurstermineGZ.vb">
+    <Compile Include="Forms\KurstermineGZ.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NMEARelayPipeHelper.vb" />
-    <Compile Include="PrintOutSch.vb" />
-    <Compile Include="SchadenYDruck.Designer.vb">
+    <Compile Include="Helpers\NMEARelayPipeHelper.vb" />
+    <Compile Include="Printing\PrintOutSch.vb" />
+    <Compile Include="Forms\SchadenYDruck.Designer.vb">
       <DependentUpon>SchadenYDruck.vb</DependentUpon>
     </Compile>
-    <Compile Include="SchadenYDruck.vb">
+    <Compile Include="Forms\SchadenYDruck.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SchadenY.Designer.vb">
+    <Compile Include="Forms\SchadenY.Designer.vb">
       <DependentUpon>SchadenY.vb</DependentUpon>
     </Compile>
-    <Compile Include="SchadenY.vb">
+    <Compile Include="Forms\SchadenY.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VersichTarifeY.Designer.vb">
+    <Compile Include="Forms\VersichTarifeY.Designer.vb">
       <DependentUpon>VersichTarifeY.vb</DependentUpon>
     </Compile>
-    <Compile Include="VersichTarifeY.vb">
+    <Compile Include="Forms\VersichTarifeY.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Versicherter.Designer.vb">
+    <Compile Include="Forms\Versicherter.Designer.vb">
       <DependentUpon>Versicherter.vb</DependentUpon>
     </Compile>
-    <Compile Include="Versicherter.vb">
+    <Compile Include="Forms\Versicherter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutWE.vb" />
-    <Compile Include="PrintoutCB.vb" />
-    <Compile Include="CrewbesprechungDataSet.Designer.vb">
+    <Compile Include="Printing\PrintOutWE.vb" />
+    <Compile Include="Printing\PrintoutCB.vb" />
+    <Compile Include="Data\CrewbesprechungDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrewbesprechungDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Einkaufsliste.Designer.vb">
+    <Compile Include="Forms\Einkaufsliste.Designer.vb">
       <DependentUpon>Einkaufsliste.vb</DependentUpon>
     </Compile>
-    <Compile Include="Einkaufsliste.vb">
+    <Compile Include="Forms\Einkaufsliste.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ablauf.Designer.vb">
+    <Compile Include="Forms\Ablauf.Designer.vb">
       <DependentUpon>Ablauf.vb</DependentUpon>
     </Compile>
-    <Compile Include="Ablauf.vb">
+    <Compile Include="Forms\Ablauf.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ErsterTag.Designer.vb">
+    <Compile Include="Forms\ErsterTag.Designer.vb">
       <DependentUpon>ErsterTag.vb</DependentUpon>
     </Compile>
-    <Compile Include="ErsterTag.vb">
+    <Compile Include="Forms\ErsterTag.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CrewDetails.Designer.vb">
+    <Compile Include="Forms\CrewDetails.Designer.vb">
       <DependentUpon>CrewDetails.vb</DependentUpon>
     </Compile>
-    <Compile Include="CrewDetails.vb">
+    <Compile Include="Forms\CrewDetails.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CrewBesprechungDruck.Designer.vb">
+    <Compile Include="Forms\CrewBesprechungDruck.Designer.vb">
       <DependentUpon>CrewBesprechungDruck.vb</DependentUpon>
     </Compile>
-    <Compile Include="CrewBesprechungDruck.vb">
+    <Compile Include="Forms\CrewBesprechungDruck.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kursbestellung3.Designer.vb">
+    <Compile Include="Forms\Kursbestellung3.Designer.vb">
       <DependentUpon>Kursbestellung3.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursbestellung3.vb">
+    <Compile Include="Forms\Kursbestellung3.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kursbestellung2.Designer.vb">
+    <Compile Include="Forms\Kursbestellung2.Designer.vb">
       <DependentUpon>Kursbestellung2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursbestellung2.vb">
+    <Compile Include="Forms\Kursbestellung2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kursbestellung1.Designer.vb">
+    <Compile Include="Forms\Kursbestellung1.Designer.vb">
       <DependentUpon>Kursbestellung1.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursbestellung1.vb">
+    <Compile Include="Forms\Kursbestellung1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kursteilnehmer2.Designer.vb">
+    <Compile Include="Forms\Kursteilnehmer2.Designer.vb">
       <DependentUpon>Kursteilnehmer2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursteilnehmer2.vb">
+    <Compile Include="Forms\Kursteilnehmer2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kursteilnehmer3.Designer.vb">
+    <Compile Include="Forms\Kursteilnehmer3.Designer.vb">
       <DependentUpon>Kursteilnehmer3.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursteilnehmer3.vb">
+    <Compile Include="Forms\Kursteilnehmer3.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kursteilnehmer1.Designer.vb">
+    <Compile Include="Forms\Kursteilnehmer1.Designer.vb">
       <DependentUpon>Kursteilnehmer1.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursteilnehmer1.vb">
+    <Compile Include="Forms\Kursteilnehmer1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SucheDatei.Designer.vb">
+    <Compile Include="Forms\SucheDatei.Designer.vb">
       <DependentUpon>SucheDatei.vb</DependentUpon>
     </Compile>
-    <Compile Include="SucheDatei.vb">
+    <Compile Include="Forms\SucheDatei.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogbuchMenü.Designer.vb">
+    <Compile Include="Forms\LogbuchMenü.Designer.vb">
       <DependentUpon>LogbuchMenü.vb</DependentUpon>
     </Compile>
-    <Compile Include="LogbuchMenü.vb">
+    <Compile Include="Forms\LogbuchMenü.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutLB.vb" />
-    <Compile Include="dsLogbuch.Designer.vb">
+    <Compile Include="Printing\PrintOutLB.vb" />
+    <Compile Include="Data\dsLogbuch.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsLogbuch.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsLogbuch.vb">
+    <Compile Include="Data\dsLogbuch.vb">
       <DependentUpon>dsLogbuch.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Cover.Designer.vb">
+    <Compile Include="Forms\Cover.Designer.vb">
       <DependentUpon>Cover.vb</DependentUpon>
     </Compile>
-    <Compile Include="Cover.vb">
+    <Compile Include="Forms\Cover.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogbuchDruck.Designer.vb">
+    <Compile Include="Forms\LogbuchDruck.Designer.vb">
       <DependentUpon>LogbuchDruck.vb</DependentUpon>
     </Compile>
-    <Compile Include="LogbuchDruck.vb">
+    <Compile Include="Forms\LogbuchDruck.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Logdaten.Designer.vb">
+    <Compile Include="Forms\Logdaten.Designer.vb">
       <DependentUpon>Logdaten.vb</DependentUpon>
     </Compile>
-    <Compile Include="Logdaten.vb">
+    <Compile Include="Forms\Logdaten.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VersicherungDataSet.Designer.vb">
+    <Compile Include="Data\VersicherungDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VersicherungDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Zusammenfassung.Designer.vb">
+    <Compile Include="Forms\Zusammenfassung.Designer.vb">
       <DependentUpon>Zusammenfassung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Zusammenfassung.vb">
+    <Compile Include="Forms\Zusammenfassung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sicherheitseinweisung.Designer.vb">
+    <Compile Include="Forms\Sicherheitseinweisung.Designer.vb">
       <DependentUpon>Sicherheitseinweisung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Sicherheitseinweisung.vb">
+    <Compile Include="Forms\Sicherheitseinweisung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maengel.Designer.vb">
+    <Compile Include="Forms\Maengel.Designer.vb">
       <DependentUpon>Maengel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maengel.vb">
+    <Compile Include="Forms\Maengel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LangXText.vb" />
-    <Compile Include="LetzterString.vb" />
-    <Compile Include="Tabellengitter.vb" />
-    <Compile Include="PrintoutBF.vb" />
-    <Compile Include="PrintoutBK.vb">
+    <Compile Include="Helpers\LangXText.vb" />
+    <Compile Include="Helpers\LetzterString.vb" />
+    <Compile Include="Helpers\Tabellengitter.vb" />
+    <Compile Include="Printing\PrintoutBF.vb" />
+    <Compile Include="Printing\PrintoutBK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExpoNeu.Designer.vb">
+    <Compile Include="Forms\ExpoNeu.Designer.vb">
       <DependentUpon>ExpoNeu.vb</DependentUpon>
     </Compile>
-    <Compile Include="ExpoNeu.vb">
+    <Compile Include="Forms\ExpoNeu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutWP.vb" />
-    <Compile Include="Wacheplan.Designer.vb">
+    <Compile Include="Printing\PrintOutWP.vb" />
+    <Compile Include="Forms\Wacheplan.Designer.vb">
       <DependentUpon>Wacheplan.vb</DependentUpon>
     </Compile>
-    <Compile Include="Wacheplan.vb">
+    <Compile Include="Forms\Wacheplan.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutSD.vb" />
-    <Compile Include="Standort.Designer.vb">
+    <Compile Include="Printing\PrintOutSD.vb" />
+    <Compile Include="Forms\Standort.Designer.vb">
       <DependentUpon>Standort.vb</DependentUpon>
     </Compile>
-    <Compile Include="Standort.vb">
+    <Compile Include="Forms\Standort.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintoutAA.vb" />
-    <Compile Include="PrintOutVS.vb" />
-    <Compile Include="PrintoutKS.vb" />
-    <Compile Include="Kursstatistik.Designer.vb">
+    <Compile Include="Printing\PrintoutAA.vb" />
+    <Compile Include="Printing\PrintOutVS.vb" />
+    <Compile Include="Printing\PrintoutKS.vb" />
+    <Compile Include="Forms\Kursstatistik.Designer.vb">
       <DependentUpon>Kursstatistik.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursstatistik.vb">
+    <Compile Include="Forms\Kursstatistik.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutKO.vb" />
-    <Compile Include="dsAusbildung.vb">
+    <Compile Include="Printing\PrintOutKO.vb" />
+    <Compile Include="Data\dsAusbildung.vb">
       <DependentUpon>dsAusbildung.xsd</DependentUpon>
     </Compile>
-    <Compile Include="PrintoutKT.vb" />
-    <Compile Include="PrintOutIM.vb" />
-    <Compile Include="PrintOutAktion.vb" />
-    <Compile Include="Tabellen.Designer.vb">
+    <Compile Include="Printing\PrintoutKT.vb" />
+    <Compile Include="Printing\PrintOutIM.vb" />
+    <Compile Include="Printing\PrintOutAktion.vb" />
+    <Compile Include="Forms\Tabellen.Designer.vb">
       <DependentUpon>Tabellen.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tabellen.vb">
+    <Compile Include="Forms\Tabellen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Veranstalltung.Designer.vb">
+    <Compile Include="Forms\Veranstalltung.Designer.vb">
       <DependentUpon>Veranstalltung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Veranstalltung.vb">
+    <Compile Include="Forms\Veranstalltung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutAL.vb" />
-    <Compile Include="PrintOutTl.vb" />
-    <Compile Include="PrintOutPL.vb" />
-    <Compile Include="KursToernKontakte.Designer.vb">
+    <Compile Include="Printing\PrintOutAL.vb" />
+    <Compile Include="Printing\PrintOutTl.vb" />
+    <Compile Include="Printing\PrintOutPL.vb" />
+    <Compile Include="Forms\KursToernKontakte.Designer.vb">
       <DependentUpon>KursToernKontakte.vb</DependentUpon>
     </Compile>
-    <Compile Include="KursToernKontakte.vb">
+    <Compile Include="Forms\KursToernKontakte.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kurstermine.Designer.vb">
+    <Compile Include="Forms\Kurstermine.Designer.vb">
       <DependentUpon>Kurstermine.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kurstermine.vb">
+    <Compile Include="Forms\Kurstermine.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutMK.vb" />
-    <Compile Include="dsAusbildung.Designer.vb">
+    <Compile Include="Printing\PrintOutMK.vb" />
+    <Compile Include="Data\dsAusbildung.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsAusbildung.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ComboMarketing.Designer.vb">
+    <Compile Include="Forms\ComboMarketing.Designer.vb">
       <DependentUpon>ComboMarketing.vb</DependentUpon>
     </Compile>
-    <Compile Include="ComboMarketing.vb">
+    <Compile Include="Forms\ComboMarketing.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kurs.Designer.vb">
+    <Compile Include="Forms\Kurs.Designer.vb">
       <DependentUpon>Kurs.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kurs.vb">
+    <Compile Include="Forms\Kurs.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kursmaterial.Designer.vb">
+    <Compile Include="Forms\Kursmaterial.Designer.vb">
       <DependentUpon>Kursmaterial.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kursmaterial.vb">
+    <Compile Include="Forms\Kursmaterial.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Werbung.Designer.vb">
+    <Compile Include="Forms\Werbung.Designer.vb">
       <DependentUpon>Werbung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Werbung.vb">
+    <Compile Include="Forms\Werbung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutBO.vb" />
-    <Compile Include="printOutDs.vb" />
-    <Compile Include="Einstellungen.Designer.vb">
+    <Compile Include="Printing\PrintOutBO.vb" />
+    <Compile Include="Printing\printOutDs.vb" />
+    <Compile Include="Forms\Einstellungen.Designer.vb">
       <DependentUpon>Einstellungen.vb</DependentUpon>
     </Compile>
-    <Compile Include="Einstellungen.vb">
+    <Compile Include="Forms\Einstellungen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Distress.Designer.vb">
+    <Compile Include="Forms\Distress.Designer.vb">
       <DependentUpon>Distress.vb</DependentUpon>
     </Compile>
-    <Compile Include="Distress.vb">
+    <Compile Include="Forms\Distress.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Langtext.vb" />
-    <Compile Include="PrintOutEmail.vb" />
-    <Compile Include="e-mail.Designer.vb">
+    <Compile Include="Helpers\Langtext.vb" />
+    <Compile Include="Printing\PrintOutEmail.vb" />
+    <Compile Include="Forms\e-mail.Designer.vb">
       <DependentUpon>e-mail.vb</DependentUpon>
     </Compile>
-    <Compile Include="e-mail.vb">
+    <Compile Include="Forms\e-mail.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ComboBox.Designer.vb">
+    <Compile Include="Forms\ComboBox.Designer.vb">
       <DependentUpon>ComboBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="ComboBox.vb">
+    <Compile Include="Forms\ComboBox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Adressen.Designer.vb">
+    <Compile Include="Forms\Adressen.Designer.vb">
       <DependentUpon>Adressen.vb</DependentUpon>
     </Compile>
-    <Compile Include="Adressen.vb">
+    <Compile Include="Forms\Adressen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Leerstelle.vb" />
-    <Compile Include="KalkToToern.Designer.vb">
+    <Compile Include="Helpers\Leerstelle.vb" />
+    <Compile Include="Forms\KalkToToern.Designer.vb">
       <DependentUpon>KalkToToern.vb</DependentUpon>
     </Compile>
-    <Compile Include="KalkToToern.vb">
+    <Compile Include="Forms\KalkToToern.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Key.Designer.vb">
+    <Compile Include="Forms\Key.Designer.vb">
       <DependentUpon>Key.vb</DependentUpon>
     </Compile>
-    <Compile Include="Key.vb">
+    <Compile Include="Forms\Key.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Info.Designer.vb">
+    <Compile Include="Forms\Info.Designer.vb">
       <DependentUpon>Info.vb</DependentUpon>
     </Compile>
-    <Compile Include="Info.vb">
+    <Compile Include="Forms\Info.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="printOutST.vb" />
-    <Compile Include="Statistik.Designer.vb">
+    <Compile Include="Printing\printOutST.vb" />
+    <Compile Include="Forms\Statistik.Designer.vb">
       <DependentUpon>Statistik.vb</DependentUpon>
     </Compile>
-    <Compile Include="Statistik.vb">
+    <Compile Include="Forms\Statistik.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutSM.vb" />
-    <Compile Include="Seemeilenbestaetigung.Designer.vb">
+    <Compile Include="Printing\PrintOutSM.vb" />
+    <Compile Include="Forms\Seemeilenbestaetigung.Designer.vb">
       <DependentUpon>Seemeilenbestaetigung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Seemeilenbestaetigung.vb">
+    <Compile Include="Forms\Seemeilenbestaetigung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutGK.vb" />
-    <Compile Include="Geburtstagskalender.Designer.vb">
+    <Compile Include="Printing\PrintOutGK.vb" />
+    <Compile Include="Forms\Geburtstagskalender.Designer.vb">
       <DependentUpon>Geburtstagskalender.vb</DependentUpon>
     </Compile>
-    <Compile Include="Geburtstagskalender.vb">
+    <Compile Include="Forms\Geburtstagskalender.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutTB.vb" />
-    <Compile Include="Toernblatt.Designer.vb">
+    <Compile Include="Printing\PrintOutTB.vb" />
+    <Compile Include="Forms\Toernblatt.Designer.vb">
       <DependentUpon>Toernblatt.vb</DependentUpon>
     </Compile>
-    <Compile Include="Toernblatt.vb">
+    <Compile Include="Forms\Toernblatt.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOutMA.vb" />
-    <Compile Include="Meilenauswertung.Designer.vb">
+    <Compile Include="Printing\PrintOutMA.vb" />
+    <Compile Include="Forms\Meilenauswertung.Designer.vb">
       <DependentUpon>Meilenauswertung.vb</DependentUpon>
     </Compile>
-    <Compile Include="Meilenauswertung.vb">
+    <Compile Include="Forms\Meilenauswertung.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintoutCL.vb" />
-    <Compile Include="Crewliste.Designer.vb">
+    <Compile Include="Printing\PrintoutCL.vb" />
+    <Compile Include="Forms\Crewliste.Designer.vb">
       <DependentUpon>Crewliste.vb</DependentUpon>
     </Compile>
-    <Compile Include="Crewliste.vb">
+    <Compile Include="Forms\Crewliste.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintoutCF.vb" />
-    <Compile Include="Crewformular.Designer.vb">
+    <Compile Include="Printing\PrintoutCF.vb" />
+    <Compile Include="Forms\Crewformular.Designer.vb">
       <DependentUpon>Crewformular.vb</DependentUpon>
     </Compile>
-    <Compile Include="Crewformular.vb">
+    <Compile Include="Forms\Crewformular.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintOut.vb" />
-    <Compile Include="Datenbank.Designer.vb">
+    <Compile Include="Printing\PrintOut.vb" />
+    <Compile Include="Forms\Datenbank.Designer.vb">
       <DependentUpon>Datenbank.vb</DependentUpon>
     </Compile>
-    <Compile Include="Datenbank.vb">
+    <Compile Include="Forms\Datenbank.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Boot.Designer.vb">
+    <Compile Include="Forms\Boot.Designer.vb">
       <DependentUpon>Boot.vb</DependentUpon>
     </Compile>
-    <Compile Include="Boot.vb">
+    <Compile Include="Forms\Boot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Crew.Designer.vb">
+    <Compile Include="Forms\Crew.Designer.vb">
       <DependentUpon>Crew.vb</DependentUpon>
     </Compile>
-    <Compile Include="Crew.vb">
+    <Compile Include="Forms\Crew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Charter.Designer.vb">
+    <Compile Include="Forms\Charter.Designer.vb">
       <DependentUpon>Charter.vb</DependentUpon>
     </Compile>
-    <Compile Include="Charter.vb">
+    <Compile Include="Forms\Charter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kalkulationsblatt.Designer.vb">
+    <Compile Include="Forms\Kalkulationsblatt.Designer.vb">
       <DependentUpon>Kalkulationsblatt.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kalkulationsblatt.vb">
+    <Compile Include="Forms\Kalkulationsblatt.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kalkulation.Designer.vb">
+    <Compile Include="Forms\Kalkulation.Designer.vb">
       <DependentUpon>Kalkulation.vb</DependentUpon>
     </Compile>
-    <Compile Include="Kalkulation.vb">
+    <Compile Include="Forms\Kalkulation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Toern.Designer.vb">
+    <Compile Include="Forms\Toern.Designer.vb">
       <DependentUpon>Toern.vb</DependentUpon>
     </Compile>
-    <Compile Include="Toern.vb">
+    <Compile Include="Forms\Toern.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menue.vb">
+    <Compile Include="Forms\Menue.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menue.Designer.vb">
+    <Compile Include="Forms\Menue.Designer.vb">
       <DependentUpon>Menue.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -637,217 +637,217 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ToernverwaltungDataSet.Designer.vb">
+    <Compile Include="Data\ToernverwaltungDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ToernverwaltungDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ToernverwaltungDataSet.vb">
+    <Compile Include="Data\ToernverwaltungDataSet.vb">
       <DependentUpon>ToernverwaltungDataSet.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Ablauf.resx">
+    <EmbeddedResource Include="Forms\Ablauf.resx">
       <DependentUpon>Ablauf.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Adressen.resx">
+    <EmbeddedResource Include="Forms\Adressen.resx">
       <DependentUpon>Adressen.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Agentur.resx">
+    <EmbeddedResource Include="Forms\Agentur.resx">
       <DependentUpon>Agentur.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Begruessung.resx">
+    <EmbeddedResource Include="Forms\Begruessung.resx">
       <DependentUpon>Begruessung.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Boot.resx">
+    <EmbeddedResource Include="Forms\Boot.resx">
       <DependentUpon>Boot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bordkassa.resx">
+    <EmbeddedResource Include="Forms\Bordkassa.resx">
       <DependentUpon>Bordkassa.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ComboBox.resx">
+    <EmbeddedResource Include="Forms\ComboBox.resx">
       <DependentUpon>ComboBox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Crew.resx">
+    <EmbeddedResource Include="Forms\Crew.resx">
       <DependentUpon>Crew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CrewDetails.resx">
+    <EmbeddedResource Include="Forms\CrewDetails.resx">
       <DependentUpon>CrewDetails.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Datenbank.resx">
+    <EmbeddedResource Include="Forms\Datenbank.resx">
       <DependentUpon>Datenbank.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Charter.resx">
+    <EmbeddedResource Include="Forms\Charter.resx">
       <DependentUpon>Charter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Crewformular.resx">
+    <EmbeddedResource Include="Forms\Crewformular.resx">
       <DependentUpon>Crewformular.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Crewliste.resx">
+    <EmbeddedResource Include="Forms\Crewliste.resx">
       <DependentUpon>Crewliste.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Einkaufsliste.resx">
+    <EmbeddedResource Include="Forms\Einkaufsliste.resx">
       <DependentUpon>Einkaufsliste.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Einstellungen.resx">
+    <EmbeddedResource Include="Forms\Einstellungen.resx">
       <DependentUpon>Einstellungen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="e-mail.resx">
+    <EmbeddedResource Include="Forms\e-mail.resx">
       <DependentUpon>e-mail.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Distress.resx">
+    <EmbeddedResource Include="Forms\Distress.resx">
       <DependentUpon>Distress.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ComboMarketing.resx">
+    <EmbeddedResource Include="Forms\ComboMarketing.resx">
       <DependentUpon>ComboMarketing.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AktivStatistik.resx">
+    <EmbeddedResource Include="Forms\AktivStatistik.resx">
       <DependentUpon>AktivStatistik.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ErsterTag.resx">
+    <EmbeddedResource Include="Forms\ErsterTag.resx">
       <DependentUpon>ErsterTag.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExpoNeu.resx">
+    <EmbeddedResource Include="Forms\ExpoNeu.resx">
       <DependentUpon>ExpoNeu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cover.resx">
+    <EmbeddedResource Include="Forms\Cover.resx">
       <DependentUpon>Cover.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CrewBesprechungDruck.resx">
+    <EmbeddedResource Include="Forms\CrewBesprechungDruck.resx">
       <DependentUpon>CrewBesprechungDruck.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Nachtansteuerung.resx">
+    <EmbeddedResource Include="Forms\Nachtansteuerung.resx">
       <DependentUpon>Nachtansteuerung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImportNeu.resx">
+    <EmbeddedResource Include="Forms\ImportNeu.resx">
       <DependentUpon>ImportNeu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KursBestBuchen.resx">
+    <EmbeddedResource Include="Forms\KursBestBuchen.resx">
       <DependentUpon>KursBestBuchen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KursTeilnVerw.resx">
+    <EmbeddedResource Include="Forms\KursTeilnVerw.resx">
       <DependentUpon>KursTeilnVerw.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KursMTeilnehmer.resx">
+    <EmbeddedResource Include="Forms\KursMTeilnehmer.resx">
       <DependentUpon>KursMTeilnehmer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KurstermineAD.resx">
+    <EmbeddedResource Include="Forms\KurstermineAD.resx">
       <DependentUpon>KurstermineAD.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KurstermineEZ.resx">
+    <EmbeddedResource Include="Forms\KurstermineEZ.resx">
       <DependentUpon>KurstermineEZ.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KurstermineGZ.resx">
+    <EmbeddedResource Include="Forms\KurstermineGZ.resx">
       <DependentUpon>KurstermineGZ.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KurstermineEV.resx">
+    <EmbeddedResource Include="Forms\KurstermineEV.resx">
       <DependentUpon>KurstermineEV.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SchadenY.resx">
+    <EmbeddedResource Include="Forms\SchadenY.resx">
       <DependentUpon>SchadenY.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SchadenYDruck.resx">
+    <EmbeddedResource Include="Forms\SchadenYDruck.resx">
       <DependentUpon>SchadenYDruck.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VersichTarifeY.resx">
+    <EmbeddedResource Include="Forms\VersichTarifeY.resx">
       <DependentUpon>VersichTarifeY.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursbestellung3.resx">
+    <EmbeddedResource Include="Forms\Kursbestellung3.resx">
       <DependentUpon>Kursbestellung3.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursbestellung2.resx">
+    <EmbeddedResource Include="Forms\Kursbestellung2.resx">
       <DependentUpon>Kursbestellung2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursbestellung1.resx">
+    <EmbeddedResource Include="Forms\Kursbestellung1.resx">
       <DependentUpon>Kursbestellung1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursteilnehmer1.resx">
+    <EmbeddedResource Include="Forms\Kursteilnehmer1.resx">
       <DependentUpon>Kursteilnehmer1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursteilnehmer2.resx">
+    <EmbeddedResource Include="Forms\Kursteilnehmer2.resx">
       <DependentUpon>Kursteilnehmer2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursteilnehmer3.resx">
+    <EmbeddedResource Include="Forms\Kursteilnehmer3.resx">
       <DependentUpon>Kursteilnehmer3.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SucheDatei.resx">
+    <EmbeddedResource Include="Forms\SucheDatei.resx">
       <DependentUpon>SucheDatei.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogbuchDruck.resx">
+    <EmbeddedResource Include="Forms\LogbuchDruck.resx">
       <DependentUpon>LogbuchDruck.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogbuchMenü.resx">
+    <EmbeddedResource Include="Forms\LogbuchMenü.resx">
       <DependentUpon>LogbuchMenü.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Logdaten.resx">
+    <EmbeddedResource Include="Forms\Logdaten.resx">
       <DependentUpon>Logdaten.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maengel.resx">
+    <EmbeddedResource Include="Forms\Maengel.resx">
       <DependentUpon>Maengel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sicherheitseinweisung.resx">
+    <EmbeddedResource Include="Forms\Sicherheitseinweisung.resx">
       <DependentUpon>Sicherheitseinweisung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Versicherter.resx">
+    <EmbeddedResource Include="Forms\Versicherter.resx">
       <DependentUpon>Versicherter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wacheplan.resx">
+    <EmbeddedResource Include="Forms\Wacheplan.resx">
       <DependentUpon>Wacheplan.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursstatistik.resx">
+    <EmbeddedResource Include="Forms\Kursstatistik.resx">
       <DependentUpon>Kursstatistik.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KursToernKontakte.resx">
+    <EmbeddedResource Include="Forms\KursToernKontakte.resx">
       <DependentUpon>KursToernKontakte.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kurstermine.resx">
+    <EmbeddedResource Include="Forms\Kurstermine.resx">
       <DependentUpon>Kurstermine.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kurs.resx">
+    <EmbeddedResource Include="Forms\Kurs.resx">
       <DependentUpon>Kurs.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kursmaterial.resx">
+    <EmbeddedResource Include="Forms\Kursmaterial.resx">
       <DependentUpon>Kursmaterial.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Standort.resx">
+    <EmbeddedResource Include="Forms\Standort.resx">
       <DependentUpon>Standort.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tabellen.resx">
+    <EmbeddedResource Include="Forms\Tabellen.resx">
       <DependentUpon>Tabellen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Veranstalltung.resx">
+    <EmbeddedResource Include="Forms\Veranstalltung.resx">
       <DependentUpon>Veranstalltung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Werbung.resx">
+    <EmbeddedResource Include="Forms\Werbung.resx">
       <DependentUpon>Werbung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KalkToToern.resx">
+    <EmbeddedResource Include="Forms\KalkToToern.resx">
       <DependentUpon>KalkToToern.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Info.resx">
+    <EmbeddedResource Include="Forms\Info.resx">
       <DependentUpon>Info.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Key.resx">
+    <EmbeddedResource Include="Forms\Key.resx">
       <DependentUpon>Key.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Seemeilenbestaetigung.resx">
+    <EmbeddedResource Include="Forms\Seemeilenbestaetigung.resx">
       <DependentUpon>Seemeilenbestaetigung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Geburtstagskalender.resx">
+    <EmbeddedResource Include="Forms\Geburtstagskalender.resx">
       <DependentUpon>Geburtstagskalender.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kalkulation.resx">
+    <EmbeddedResource Include="Forms\Kalkulation.resx">
       <DependentUpon>Kalkulation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kalkulationsblatt.resx">
+    <EmbeddedResource Include="Forms\Kalkulationsblatt.resx">
       <DependentUpon>Kalkulationsblatt.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Meilenauswertung.resx">
+    <EmbeddedResource Include="Forms\Meilenauswertung.resx">
       <DependentUpon>Meilenauswertung.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menue.resx">
+    <EmbeddedResource Include="Forms\Menue.resx">
       <DependentUpon>Menue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -856,63 +856,63 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Statistik.resx">
+    <EmbeddedResource Include="Forms\Statistik.resx">
       <DependentUpon>Statistik.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Toern.resx">
+    <EmbeddedResource Include="Forms\Toern.resx">
       <DependentUpon>Toern.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Toernblatt.resx">
+    <EmbeddedResource Include="Forms\Toernblatt.resx">
       <DependentUpon>Toernblatt.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Zusammenfassung.resx">
+    <EmbeddedResource Include="Forms\Zusammenfassung.resx">
       <DependentUpon>Zusammenfassung.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="CrewbesprechungDataSet.xsc">
+    <None Include="Data\CrewbesprechungDataSet.xsc">
       <DependentUpon>CrewbesprechungDataSet.xsd</DependentUpon>
     </None>
-    <None Include="CrewbesprechungDataSet.xsd">
+    <None Include="Data\CrewbesprechungDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>CrewbesprechungDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="CrewbesprechungDataSet.xss">
+    <None Include="Data\CrewbesprechungDataSet.xss">
       <DependentUpon>CrewbesprechungDataSet.xsd</DependentUpon>
     </None>
-    <None Include="dsAusbildung.xsc">
+    <None Include="Data\dsAusbildung.xsc">
       <DependentUpon>dsAusbildung.xsd</DependentUpon>
     </None>
-    <None Include="dsAusbildung.xsd">
+    <None Include="Data\dsAusbildung.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsAusbildung.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="dsAusbildung.xss">
+    <None Include="Data\dsAusbildung.xss">
       <DependentUpon>dsAusbildung.xsd</DependentUpon>
     </None>
-    <None Include="dsLogbuch.xsc">
+    <None Include="Data\dsLogbuch.xsc">
       <DependentUpon>dsLogbuch.xsd</DependentUpon>
     </None>
-    <None Include="dsLogbuch.xsd">
+    <None Include="Data\dsLogbuch.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsLogbuch.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="dsLogbuch.xss">
+    <None Include="Data\dsLogbuch.xss">
       <DependentUpon>dsLogbuch.xsd</DependentUpon>
     </None>
-    <None Include="ExportDataSet.xsc">
+    <None Include="Data\ExportDataSet.xsc">
       <DependentUpon>ExportDataSet.xsd</DependentUpon>
     </None>
-    <None Include="ExportDataSet.xsd">
+    <None Include="Data\ExportDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ExportDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ExportDataSet.xss">
+    <None Include="Data\ExportDataSet.xss">
       <DependentUpon>ExportDataSet.xsd</DependentUpon>
     </None>
     <None Include="My Project\app.manifest" />
@@ -925,26 +925,26 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="ToernverwaltungDataSet.xsc">
+    <None Include="Data\ToernverwaltungDataSet.xsc">
       <DependentUpon>ToernverwaltungDataSet.xsd</DependentUpon>
     </None>
-    <None Include="ToernverwaltungDataSet.xsd">
+    <None Include="Data\ToernverwaltungDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ToernverwaltungDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ToernverwaltungDataSet.xss">
+    <None Include="Data\ToernverwaltungDataSet.xss">
       <DependentUpon>ToernverwaltungDataSet.xsd</DependentUpon>
     </None>
-    <None Include="VersicherungDataSet.xsc">
+    <None Include="Data\VersicherungDataSet.xsc">
       <DependentUpon>VersicherungDataSet.xsd</DependentUpon>
     </None>
-    <None Include="VersicherungDataSet.xsd">
+    <None Include="Data\VersicherungDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>VersicherungDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="VersicherungDataSet.xss">
+    <None Include="Data\VersicherungDataSet.xss">
       <DependentUpon>VersicherungDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
@@ -994,8 +994,8 @@
     <Content Include="Versicherung.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wikinger.ico" />
-    <Content Include="Wikinger1.ico" />
+    <Content Include="Resources\Wikinger.ico" />
+    <Content Include="Resources\Wikinger1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
