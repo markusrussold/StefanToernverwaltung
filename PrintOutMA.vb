@@ -259,12 +259,12 @@ Public Class PrintOutMA
 
                     '                             2. Zeile
                     If row(1) > "" Then
-                        von = row(1).substring(0, 10)
+                        von = SafeData.FormatDateDe(row(1), "  ")
                     Else
                         von = "  "
                     End If
                     If row(2) > "" Then
-                        bis = row(2).substring(0, 10)
+                        bis = SafeData.FormatDateDe(row(2), "  ")
                     Else
                         bis = "  "
                     End If

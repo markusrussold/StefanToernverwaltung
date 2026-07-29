@@ -431,15 +431,16 @@ Gefunden:
 
     Private Sub MaskedTextBox1_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox1.LostFocus
         Try
+            Dim geburtsdatum As Date
             If TextBox10.Text > "" Then
             Else
-                If MaskedTextBox1.Text > "  ,  ,    " Then
-                    TextBox10.Text = Year(Today) - Year(MaskedTextBox1.Text)
+                If SafeData.TryParseMaskedDate(MaskedTextBox1.Text, geburtsdatum) Then
+                    TextBox10.Text = Year(Today) - Year(geburtsdatum)
                 Else
                 End If
             End If
             TextBox9.Focus()
-            If CDate(MaskedTextBox1.Text) < Begruessung.anfang Or CDate(MaskedTextBox1.Text) > Begruessung.ende Then
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox1.Text, geburtsdatum) OrElse geburtsdatum < Begruessung.anfang OrElse geburtsdatum > Begruessung.ende Then
                 MsgBox("Datum hat falsches Format")
                 MaskedTextBox1.Text = vbNullString
                 TextBox10.Text = vbNullString

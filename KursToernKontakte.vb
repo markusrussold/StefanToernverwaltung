@@ -213,20 +213,7 @@
         End If
     End Sub
     Private Sub PictureBox2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
-        Dim min As String
-        Dim std As String
-        min = CStr(Date.Now.Minute)
-        If Len(min) > 1 Then
-            MaskedTextBox4.Text = CStr(Date.Now.Date) + " " + CStr(Date.Now.Hour) + ":" + CStr(Date.Now.Minute)
-        Else
-            MaskedTextBox4.Text = CStr(Date.Now.Date) + " " + CStr(Date.Now.Hour) + ":0" + CStr(Date.Now.Minute)
-        End If
-        std = CStr(Date.Now.Hour)
-        If Len(std) > 1 Then
-            MaskedTextBox4.Text = CStr(Date.Now.Date) + " " + CStr(Date.Now.Hour) + ":" + MaskedTextBox4.Text.Substring(14, 2)
-        Else
-            MaskedTextBox4.Text = CStr(Date.Now.Date) + "0" + CStr(Date.Now.Hour) + ":" + MaskedTextBox4.Text.Substring(14, 2)
-        End If
+        MaskedTextBox4.Text = Date.Now.ToString("dd.MM.yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
         MaskedTextBox4.Focus()
         BemerkungGruppe.Location = New Point(12, 175)
         BemerkungGruppe.Size = New Point(920, 362)
@@ -476,11 +463,11 @@ GefundenK:
                 PeriodeGruppe.Location = New Point(200, 150)
                 MaskedTextBox2.Focus()
                 If Not IsDBNull(DsAusbildung.Kontakte.Rows(0)("Datum")) Then
-                    MaskedTextBox2.Text = DsAusbildung.Kontakte.Rows(0)("Datum").ToString.Substring(0, 10)
+                    MaskedTextBox2.Text = SafeData.FormatDateDe(DsAusbildung.Kontakte.Rows(0)("Datum"))
                 Else
                     MaskedTextBox2.Text = "01.01.2001"
                 End If
-                If Not IsDBNull(DsAusbildung.Kontakte.Rows(bsKontakte.Count - 1)("Datum").ToString) Then MaskedTextBox3.Text = DsAusbildung.Kontakte.Rows(bsKontakte.Count - 1)("Datum").ToString.Substring(0, 10)
+                If Not SafeData.IsNullOrEmptyValue(DsAusbildung.Kontakte.Rows(bsKontakte.Count - 1)("Datum")) Then MaskedTextBox3.Text = SafeData.FormatDateDe(DsAusbildung.Kontakte.Rows(bsKontakte.Count - 1)("Datum"))
             Else
                 MsgBox("Keine Kontakte mit dieser Person")
             End If
@@ -519,11 +506,12 @@ GefundenK:
     End Sub
     Private Sub MaskedTextBox4_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox4.LostFocus
         MaskedTextBox1.Text = MaskedTextBox4.Text
-        dt = MaskedTextBox1.Text.Substring(6, 4)
-        dt += MaskedTextBox1.Text.Substring(3, 2)
-        dt += MaskedTextBox1.Text.Substring(0, 2)
-        dt += MaskedTextBox1.Text.Substring(11, 2)
-        dt += MaskedTextBox1.Text.Substring(14, 2)
+        Dim zeitpunkt As Date
+        If SafeData.TryParseDate(MaskedTextBox1.Text, zeitpunkt) Then
+            dt = zeitpunkt.ToString("yyyyMMddHHmm", System.Globalization.CultureInfo.InvariantCulture)
+        Else
+            dt = ""
+        End If
     End Sub
 
     Private Sub PictureBox1_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox1.MouseHover

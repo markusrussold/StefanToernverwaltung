@@ -135,7 +135,7 @@ Public Class EMail
                 iii = bsVeranstaltungen.Count - 1
                 For i = 0 To iii
                     If DsAusbildung.Veranstaltungen.Rows(i)("Veranstaltung").ToString > "" Then
-                        aaa = DsAusbildung.Veranstaltungen.Rows(i)("Veranstaltung").ToString + " am " + DsAusbildung.Veranstaltungen.Rows(i)("Datum").ToString.Substring(0, 10)
+                        aaa = DsAusbildung.Veranstaltungen.Rows(i)("Veranstaltung").ToString + " am " + SafeData.FormatDateDe(DsAusbildung.Veranstaltungen.Rows(i)("Datum"))
                         ComboBox4.Items.Add(aaa)
                     End If
                 Next

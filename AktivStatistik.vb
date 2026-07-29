@@ -108,8 +108,8 @@
                 Feld1.Text = DsAusbildung.Veranstaltungen.Rows(i)("Veranstaltung").ToString
                 Feld2.Text = DsAusbildung.VeranstalTeilnehmer.Rows(j)("vzname").ToString
                 Feld3.Text = DsAusbildung.Veranstaltungen.Rows(i)("Ort1").ToString
-                Feld4.Text = DsAusbildung.Veranstaltungen.Rows(i)("Datum").ToString.Substring(0, 10)
-                aaa = DsAusbildung.Veranstaltungen.Rows(i)("Datum").ToString.Substring(0, 10)
+                Feld4.Text = SafeData.FormatDateDe(DsAusbildung.Veranstaltungen.Rows(i)("Datum"))
+                aaa = SafeData.FormatDateDe(DsAusbildung.Veranstaltungen.Rows(i)("Datum"))
                 Feld5.Text = aaa.Substring(6, 4) + aaa.Substring(3, 2) + aaa.Substring(0, 2)
                 taTemp.Update(dsToernverwaltung.Temp)
                 '            Next

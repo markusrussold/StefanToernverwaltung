@@ -161,8 +161,12 @@
                 TextBox5.Text = geschlecht
                 TextBox6.Text = anfdatum
                 TextBox7.Text = Kursdauer
-                hilfsdatum = CDate(anfdatum)
-                TextBox8.Text = hilfsdatum.Substring(6, 4) + hilfsdatum.Substring(3, 2) + hilfsdatum.Substring(0, 2)
+                Dim kursdatum As Date
+                If SafeData.TryParseDate(anfdatum, kursdatum) Then
+                    TextBox8.Text = kursdatum.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+                Else
+                    TextBox8.Text = ""
+                End If
                 taTemp.Update(dsToernverwaltung.Temp)
             Next
        Next
@@ -174,8 +178,12 @@
         TextBox5.Text = geschlecht
         TextBox6.Text = anfdatum
         TextBox7.Text = Kursdauer
-        hilfsdatum = CDate(anfdatum)
-        TextBox8.Text = hilfsdatum.Substring(6, 4) + hilfsdatum.Substring(3, 2) + hilfsdatum.Substring(0, 2)
+        Dim letztesKursdatum As Date
+        If SafeData.TryParseDate(anfdatum, letztesKursdatum) Then
+            TextBox8.Text = letztesKursdatum.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+        Else
+            TextBox8.Text = ""
+        End If
         taTemp.Update(dsToernverwaltung.Temp)
     End Sub
 

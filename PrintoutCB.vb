@@ -373,12 +373,10 @@ bild1:
     Private Sub zeit(ev, ypos, xpos, zt)
         If zt > " " Then
             Dim dat As String
-            dat = zt
-            dat = dat.Substring(0, 10)
+            dat = SafeData.FormatDateDe(zt)
             ev.Graphics.DrawString(dat, printFont, Brushes.Black, xpos, ypos, New StringFormat())
-            dat = zt
-            If Len(dat) > 14 Then
-                dat = dat.Substring(11, 5)
+            dat = SafeData.FormatTimeHm(zt)
+            If dat > "" Then
                 ev.Graphics.DrawString(dat, printFont, Brushes.Black, xpos + 80, ypos, New StringFormat())
             End If
         End If

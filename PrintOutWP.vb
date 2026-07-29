@@ -140,7 +140,7 @@ Public Class PrintOutWP
                     If Len(datum1) < 16 Then
                         datum1 = datum1 + " 00:00:00"
                     End If
-                    tag1 = datum1.Substring(0, 10)
+                    tag1 = SafeData.FormatDateDe(datum1)
                     If tag1 <> datum11 Then                                             ' neuer Tag
                         wochentag = WeekdayName(Weekday(tag1, FirstDayOfWeek.Monday))
                         ev.Graphics.DrawLine(Pens.Black, New Point(leftMargin - 60, yPos), New Point(ev.MarginBounds.Right + 40, yPos))
@@ -149,7 +149,7 @@ Public Class PrintOutWP
                         datum11 = tag1
                         '                   grauzaehler = 0
                     End If
-                    ev.Graphics.DrawString(datum1.Substring(11, 5) + " bis " + datum2.Substring(11, 5), printFont, Schriftfarbe, xPos(2), yPos, New StringFormat())
+                    ev.Graphics.DrawString(SafeData.FormatTimeHm(datum1) + " bis " + SafeData.FormatTimeHm(datum2), printFont, Schriftfarbe, xPos(2), yPos, New StringFormat())
                 Else
                     yPos = topMargin + zeile * printFont.GetHeight(ev.Graphics)
                     ev.Graphics.DrawString(pers1, printFont, Schriftfarbe, xPos(0), yPos, New StringFormat())
@@ -161,13 +161,13 @@ Public Class PrintOutWP
                     If Len(datum1) < 16 Then
                         datum1 = datum1 + " 00:00:00"
                     End If
-                    tag1 = datum1.Substring(0, 10)
+                    tag1 = SafeData.FormatDateDe(datum1)
                     If tag1 <> datum11 Then
                         ev.Graphics.DrawLine(Pens.Black, New Point(leftMargin - 60, yPos), New Point(ev.MarginBounds.Right + 40, yPos))
                         ev.Graphics.DrawString(tag1, printFont, Schriftfarbe, xPos(3), yPos, New StringFormat())
                         datum11 = tag1
                     End If
-                    ev.Graphics.DrawString(datum1.Substring(11, 5) + " bis " + datum2.Substring(11, 5), printFont, Schriftfarbe, xPos(2), yPos, New StringFormat())
+                    ev.Graphics.DrawString(SafeData.FormatTimeHm(datum1) + " bis " + SafeData.FormatTimeHm(datum2), printFont, Schriftfarbe, xPos(2), yPos, New StringFormat())
                     zeile += 1
                     yPos = topMargin + zeile * printFont.GetHeight(ev.Graphics)
                     ev.Graphics.DrawString(pers2, printFont, Schriftfarbe, xPos(1), yPos, New StringFormat())
@@ -179,8 +179,8 @@ Public Class PrintOutWP
                     If Len(datum1) < 16 Then
                         datum1 = datum1 + " 00:00:00"
                     End If
-                    tag1 = datum1.Substring(0, 10)
-                    ev.Graphics.DrawString(datum1.Substring(11, 5) + " bis " + datum2.Substring(11, 5), printFont, Schriftfarbe, xPos(2), yPos, New StringFormat())
+                    tag1 = SafeData.FormatDateDe(datum1)
+                    ev.Graphics.DrawString(SafeData.FormatTimeHm(datum1) + " bis " + SafeData.FormatTimeHm(datum2), printFont, Schriftfarbe, xPos(2), yPos, New StringFormat())
                 End If
                 letztezeile = zeile
                 rNbr += 1

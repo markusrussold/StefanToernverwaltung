@@ -205,11 +205,12 @@
     End Sub
     Private Sub dokulesen()
         MaskedTextBox2.Text = aktuellerTag
-        Dim datmu As Date = CDate(MaskedTextBox2.Text)
+        Dim datmu As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
         datmu = DateAdd(DateInterval.Day, -1, datmu)
         MaskedTextBox2.Text = CStr(datmu)
         Dim mmon As Single = Month(datmu)
-        Dim ttag As Single = MaskedTextBox2.Text.Substring(0, 2)
+        Dim ttag As Single = datmu.Day
         Dim yyear As Single = Year(datmu)
         Dim rp As System.Data.DataRowView = bsDokumentation.Current
         pAdapter.SelectCommand = New OleDb.OleDbCommand
@@ -264,9 +265,10 @@
         logSeite = True
         gbFahrt.Text = "Fahrt log am " + Label13.Text + " den " + MaskedTextBox2.Text
         '       aenderungL = True
-        Dim datmu As Date = CDate(MaskedTextBox2.Text)
+        Dim datmu As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
         Dim mmon As Single = Month(datmu)
-        Dim ttag As Single = MaskedTextBox2.Text.Substring(0, 2)
+        Dim ttag As Single = datmu.Day
         Dim yyear As Single = Year(datmu)
         Dim rx As System.Data.DataRowView = bsDokumentation.Current
         xAdapter.SelectCommand = New OleDb.OleDbCommand
@@ -316,11 +318,12 @@
         End If
     End Sub
     Private Sub AT_Lesen()
-        Dim datmu As Date = CDate(MaskedTextBox2.Text)
+        Dim datmu As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
         '       datmu = DateAdd(DateInterval.Day, 1, datmu)
         MaskedTextBox2.Text = CStr(datmu)
         Dim mmon As Single = Month(datmu)
-        Dim ttag As Single = MaskedTextBox2.Text.Substring(0, 2)
+        Dim ttag As Single = datmu.Day
         Dim yyear As Single = Year(datmu)
         Dim rp As System.Data.DataRowView = bsDokumentation.Current
         pAdapter.SelectCommand = New OleDb.OleDbCommand
@@ -377,9 +380,9 @@
         Dim ttag As Single
         Dim yyear As Single
         Dim i As Integer
-        datmu = CDate(MaskedTextBox2.Text)
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
         mmon = Month(datmu)
-        ttag = MaskedTextBox2.Text.Substring(0, 2)
+        ttag = datmu.Day
         yyear = Year(datmu)
         xAdapter.SelectCommand = New OleDb.OleDbCommand
         xAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=logbuch.mdb")
@@ -474,9 +477,9 @@
             TagesTrace0(distanzt)                   ' Tagesdistanz des Vortages übernehmen wenn nicht mit 0 begonnen
 
             '          TagesbuchungLesen()
-            datmu = CDate(MaskedTextBox2.Text)
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then GoTo endesub
             mmon = Month(datmu)
-            ttag = MaskedTextBox2.Text.Substring(0, 2)
+            ttag = datmu.Day
             yyear = Year(datmu)
             xAdapter.SelectCommand = New OleDb.OleDbCommand
             xAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=logbuch.mdb")
@@ -580,9 +583,9 @@ endesub:
         Dim ttag As Single
         Dim yyear As Single
         Dim rx As System.Data.DataRowView = bsLogdaten.Current
-        datmu = CDate(MaskedTextBox2.Text)
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
         mmon = Month(datmu)
-        ttag = MaskedTextBox2.Text.Substring(0, 2)
+        ttag = datmu.Day
         yyear = Year(datmu)
         xAdapter.SelectCommand = New OleDb.OleDbCommand
         xAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=logbuch.mdb")
@@ -599,9 +602,10 @@ endesub:
                 alt_distanz = 0
             Else
                 alt_distanz = TextBox22.Text
-                datmu = DateAdd("d", -1, CDate(MaskedTextBox2.Text))
+                If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
+                datmu = DateAdd("d", -1, datmu)
                 mmon = Month(datmu)
-                ttag = datmu.ToString.Substring(0, 2)
+                ttag = datmu.Day
                 yyear = Year(datmu)
                 xAdapter.SelectCommand = New OleDb.OleDbCommand
                 xAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=logbuch.mdb")
@@ -621,16 +625,18 @@ endesub:
     End Sub
     Private Sub Wochentag()
         Dim thisWeekDay As Integer
-        If MaskedTextBox2.Text > "  ,  ,    " Then
-            Dim datmu As Date = CDate(MaskedTextBox2.Text)
+        If Not SafeData.IsBlankOrMask(MaskedTextBox2.Text) Then
+            Dim datmu As Date
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
             thisWeekDay = Weekday(datmu, FirstDayOfWeek.Monday)
             Label13.Text = WeekdayName(thisWeekDay)
         End If
     End Sub
     Private Sub wacheplan()
-        Dim datmu As Date = CDate(MaskedTextBox2.Text)
+        Dim datmu As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
         Dim mmon As Single = Month(datmu)
-        Dim ttag As Single = MaskedTextBox2.Text.Substring(0, 2)
+        Dim ttag As Single = datmu.Day
         Dim yyear As Single = Year(datmu)
         Dim rw As System.Data.DataRowView = bsLogWacheplan.Current
         WAdapter.SelectCommand = New OleDb.OleDbCommand
@@ -672,13 +678,13 @@ endesub:
                     TextBox33.Text = dsToernverwaltung.Wacheplan.Rows(iii)("vzname1").ToString
                     TextBox34.Text = dsToernverwaltung.Wacheplan.Rows(iii)("vzname2").ToString
                     TextBox36.Text = dsToernverwaltung.Wacheplan.Rows(iii)("vzname3").ToString
-                    TextBox29.Text = dsToernverwaltung.Wacheplan.Rows(iii)("Datum1").ToString.Substring(11, 5)
+                    TextBox29.Text = SafeData.FormatTimeHm(dsToernverwaltung.Wacheplan.Rows(iii)("Datum1"))
                     If iii < aaa - 1 Then
-                        TextBox30.Text = dsToernverwaltung.Wacheplan.Rows(iii + 1)("Datum1").ToString.Substring(11, 5)
+                        TextBox30.Text = SafeData.FormatTimeHm(dsToernverwaltung.Wacheplan.Rows(iii + 1)("Datum1"))
                     Else
                         TextBox30.Text = "Ende"
                     End If
-                    TextBox31.Text = dsToernverwaltung.Wacheplan.Rows(iii)("datum1").ToString.Substring(0, 10)
+                    TextBox31.Text = SafeData.FormatDateDe(dsToernverwaltung.Wacheplan.Rows(iii)("datum1"))
                     TextBox32.Text = toerna
                     bsLogWacheplan.AddNew()
                     taLogWacheplan.Update(DsLogbuch.LogWacheplan)

@@ -871,8 +871,8 @@
         dsVersicherung.YPdeRue.Clear()
         RueAdapter.Fill(dsVersicherung.YPdeRue)
         TextBox64.Text = anz
-        TextBox65.Text = tbeg.Substring(0, 10)
-        TextBox66.Text = tend.Substring(0, 10)
+        TextBox65.Text = SafeData.FormatDateDe(tbeg)
+        TextBox66.Text = SafeData.FormatDateDe(tend)
         TextBox67.Text = chk
         TextBox68.Text = wk
         zahl = chk

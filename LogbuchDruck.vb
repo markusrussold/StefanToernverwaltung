@@ -724,11 +724,11 @@ endeboot:
             ProgressBar6.PerformStep()
             TextBox2.Text = "6"
             TextBox3.Text = "2"                                 '            Reihenfolge intern  Feld2
-            TextBox4.Text = dsToernverwaltung.Wacheplan.Rows(Me.iii)("Datum1").ToString.Substring(0, 10)
-            If Not DBNull.Value.Equals(dsToernverwaltung.Wacheplan.Rows(Me.iii)("Datum1").ToString.Substring(11, 5)) Then TextBox5.Text = dsToernverwaltung.Wacheplan.Rows(Me.iii)("Datum1").ToString.Substring(11, 5)
+            TextBox4.Text = SafeData.FormatDateDe(dsToernverwaltung.Wacheplan.Rows(Me.iii)("Datum1"))
+            TextBox5.Text = SafeData.FormatTimeHm(dsToernverwaltung.Wacheplan.Rows(Me.iii)("Datum1"))
             TextBox6.Text = dsToernverwaltung.Wacheplan.Rows(Me.iii)("Person1")           'feld6
             Blank(TextBox9.Text, dsToernverwaltung.Wacheplan.Rows(Me.iii)("Person2"), " ")              ' Feld18
-            If Not DBNull.Value.Equals(dsToernverwaltung.Wacheplan.Rows(Me.iii + 1)("Datum2").ToString.Substring(11, 5)) Then TextBox11.Text = dsToernverwaltung.Wacheplan.Rows(Me.iii + 1)("Datum2").ToString.Substring(11, 5)
+            TextBox11.Text = SafeData.FormatTimeHm(dsToernverwaltung.Wacheplan.Rows(Me.iii + 1)("Datum2"))
             bsTemp.AddNew()
             taTemp.Update(DsLogbuch.Temp)
         Next

@@ -49,8 +49,8 @@
             xAdapter.Fill(dsToernverwaltung.Toernname)
             If bsToernname.Count > 0 Then
                 Label14.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
-                datvon = dsToernverwaltung.Toernname.Rows(0)("datumvon").ToString.Substring(0, 10)
-                datbis = dsToernverwaltung.Toernname.Rows(0)("datumbis").ToString.Substring(0, 10)
+                datvon = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon"))
+                datbis = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))
                 Label17.Text = "von " + datvon + " bis " + datbis
             Else
                 MsgBox("Logbuch gilt nur für Törns in der Verwaltung. Törn " + aaa + " wird erst kalkuliert.")
@@ -100,8 +100,8 @@
             Case 1
                 bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label14.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
-                datvon = dsToernverwaltung.Toernname.Rows(0)("datumvon").ToString.Substring(0, 10)
-                datbis = dsToernverwaltung.Toernname.Rows(0)("datumbis").ToString.Substring(0, 10)
+                datvon = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon"))
+                datbis = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))
                 Label17.Text = "von " + datvon + " bis " + datbis
                 GroupBox3.Location = New Point(1200, 110)
                 GroupBox1.Location = New Point(30, 130)
@@ -202,7 +202,7 @@
         Else
             DataGridView2.DataSource = bsZusammenfassung2
             bsZusammenfassung2.Position = aaa - 1
-            If DsLogbuch.Zusammenfassung2.Rows(aaa - 1)("datumbis") < datmu Then Label11.Text = "Zusammenfassung ab den  " & Convert.ToString(DsLogbuch.Zusammenfassung2.Rows(aaa - 1)("datumbis").ToString.Substring(0, 10)) & " wurde noch nicht durchgeführt." Else Label11.Text = "o.k."
+            If DsLogbuch.Zusammenfassung2.Rows(aaa - 1)("datumbis") < datmu Then Label11.Text = "Zusammenfassung ab den  " & SafeData.FormatDateDe(DsLogbuch.Zusammenfassung2.Rows(aaa - 1)("datumbis")) & " wurde noch nicht durchgeführt." Else Label11.Text = "o.k."
         End If
     End Sub
     Private Sub Tageslog()
@@ -222,7 +222,7 @@
         Else
             DataGridView2.DataSource = bsDokumentation
             bsDokumentation.Position = aaa - 1
-            If DsLogbuch.Dokumentation.Rows(aaa - 1)("datum") < datbiss Then Label10.Text = "Tageslogbuch und Tagesdokumentation ab den  " & Convert.ToString(DsLogbuch.Dokumentation.Rows(aaa - 1)("datum").ToString.Substring(0, 10)) & " fehlen" Else Label10.Text = "o.k."
+            If DsLogbuch.Dokumentation.Rows(aaa - 1)("datum") < datbiss Then Label10.Text = "Tageslogbuch und Tagesdokumentation ab den  " & SafeData.FormatDateDe(DsLogbuch.Dokumentation.Rows(aaa - 1)("datum")) & " fehlen" Else Label10.Text = "o.k."
         End If
     End Sub
     Private Sub Sicherheit()
@@ -400,13 +400,13 @@ Gefunden:
                     TextBox33.Text = dsToernverwaltung.Wacheplan.Rows(iii)("vzname1").ToString
                     TextBox34.Text = dsToernverwaltung.Wacheplan.Rows(iii)("vzname2").ToString
                     TextBox3.Text = dsToernverwaltung.Wacheplan.Rows(iii)("vzname3").ToString
-                    TextBox29.Text = dsToernverwaltung.Wacheplan.Rows(iii)("Datum1").ToString.Substring(11, 5)
+                    TextBox29.Text = SafeData.FormatTimeHm(dsToernverwaltung.Wacheplan.Rows(iii)("Datum1"))
                     If iii < aaa - 1 Then
-                        TextBox30.Text = dsToernverwaltung.Wacheplan.Rows(iii + 1)("Datum1").ToString.Substring(11, 5)
+                        TextBox30.Text = SafeData.FormatTimeHm(dsToernverwaltung.Wacheplan.Rows(iii + 1)("Datum1"))
                     Else
                         TextBox30.Text = "Ende"
                     End If
-                    TextBox31.Text = dsToernverwaltung.Wacheplan.Rows(iii)("datum1").ToString.Substring(0, 10)
+                    TextBox31.Text = SafeData.FormatDateDe(dsToernverwaltung.Wacheplan.Rows(iii)("datum1"))
                     TextBox32.Text = TextBox1.Text
                     bsLogWacheplan.AddNew()
                     taLogWacheplan.Update(DsLogbuch.LogWacheplan)

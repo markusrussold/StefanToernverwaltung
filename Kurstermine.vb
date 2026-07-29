@@ -108,12 +108,17 @@
     End Sub
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
         '                     Termine speichern
-        If MaskedTextBox2.Text > "  ,  , " And TextBox18.Text > "" And TextBox5.Text > "" Then
+        If Not SafeData.IsBlankOrMask(MaskedTextBox2.Text) And TextBox18.Text > "" And TextBox5.Text > "" Then
             If TextBox7.Text > "" Then
-                Dim da As String = CDate(MaskedTextBox2.Text)
-                Dim dy As String = da.Substring(0, 2)
-                Dim mo As String = da.Substring(3, 2)
-                Dim ye As String = da.Substring(6, 4)
+                Dim da As Date
+                If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, da) Then
+                    MsgBox("Datum hat falsches Format")
+                    MaskedTextBox2.Focus()
+                    Exit Sub
+                End If
+                Dim dy As Integer = da.Day
+                Dim mo As Integer = da.Month
+                Dim ye As Integer = da.Year
                 '          year(datumvon) >= '" & TextBox22.Text & "' and year(datumvon) <= '" & TextBox24.Text & "'"
                 GroupBox1.Visible = True
                 GroupBox1.Location = New Point(1444, 444)
@@ -481,9 +486,11 @@ DruckEnde:
         TextBox1.Text = RTrim(TextBox1.Text)
         '        TextBox1.Text = TextBox13.Text
         If TextBox2.Text > "  " Then
-            Dim tag As Single = MaskedTextBox1.Text.Substring(0, 2)
-            Dim mon As Single = MaskedTextBox1.Text.Substring(3, 2)
-            Dim jahr As Single = MaskedTextBox1.Text.Substring(6, 4)
+            Dim datum As Date
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox1.Text, datum) Then Exit Sub
+            Dim tag As Integer = datum.Day
+            Dim mon As Integer = datum.Month
+            Dim jahr As Integer = datum.Year
             teAdapter.SelectCommand.CommandText = "Select * from Termine where VZName = '" & TextBox4.Text & "' and Kursbezeichnung = '" & TextBox1.Text & "' and fahrtbereich ='" & TextBox2.Text & "' and year(datum) = '" & jahr & "' and month(datum) = '" & mon & "' and  day(datum) = '" & tag & "' " '  "
             '           xAdapter.SelectCommand.CommandText = "Select * from CrewAdressen where yaer(datum) = '"jahr"' and month(datum) = '" & mon & "' and  day(datum) = '" & tag & "' order by day(gebdatum)"                Datum = '" & MaskedTextBox1.Text &
 

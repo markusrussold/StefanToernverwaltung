@@ -133,7 +133,7 @@
                 bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label2.Text = "Bootsname: " + dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 lbCrew.Items.Add(dsToernverwaltung.Toernname.Rows(0)("skipper").ToString)
-                Label1.Text = dsToernverwaltung.Toernname.Rows(0)("datumvon").ToString.Substring(0, 10) + " - " + dsToernverwaltung.Toernname.Rows(0)("datumbis").ToString.Substring(0, 10)
+                Label1.Text = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon")) + " - " + SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))
                 GroupBox1.Location = New Point(12000, 94)
                 GroupBox2.Location = New Point(20, 140)
                 Crewanzahl()

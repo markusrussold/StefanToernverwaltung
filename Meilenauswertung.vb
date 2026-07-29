@@ -342,7 +342,7 @@ Gefunden:
                 dsToernverwaltung.Temp.Rows(ij + ki + i + ink)("Feld4") = DsAusbildung.Kurse.Rows(0)("Vortragende").ToString
                 dsToernverwaltung.Temp.Rows(ij + ki + i + ink)("Feld7") = DsAusbildung.Kurse.Rows(0)("Kursdauer").ToString
                 dsToernverwaltung.Temp.Rows(ij + ki + i + ink)("Feld12") = " "
-                dsToernverwaltung.Temp.Rows(ij + ki + i + ink)("Feld2") = DsAusbildung.Kurse.Rows(0)("Kursbeginn").ToString.Substring(0, 10)
+                dsToernverwaltung.Temp.Rows(ij + ki + i + ink)("Feld2") = SafeData.FormatDateDe(DsAusbildung.Kurse.Rows(0)("Kursbeginn"))
                 taTemp.Update(dsToernverwaltung.Temp)
             Else
                 ink -= 1

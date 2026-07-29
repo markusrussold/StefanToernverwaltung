@@ -76,7 +76,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM ToernnameE WHERE Toernbezeichnung = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM ToernnameE WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -164,7 +164,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM TCE WHERE Toern = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM TCE WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -209,7 +209,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM BootE WHERE Bootname = '" & TextBox4.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM BootE WHERE Bootname = '" & SafeData.SqlQuote(TextBox4.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -286,7 +286,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM CharterE WHERE Charterfirma = '" & TextBox6.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM CharterE WHERE Charterfirma = '" & SafeData.SqlQuote(TextBox6.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -332,7 +332,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM AgenturE WHERE Agentur = '" & TextBox5.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM AgenturE WHERE Agentur = '" & SafeData.SqlQuote(TextBox5.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -373,7 +373,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Wacheplan WHERE Toern = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Wacheplan WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -415,7 +415,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Bordkassa WHERE Toern = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Bordkassa WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -456,7 +456,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Bootlog WHERE Bootname = '" & TextBox4.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Bootlog WHERE Bootname = '" & SafeData.SqlQuote(TextBox4.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -491,7 +491,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Sicherheitseinweisung WHERE Toernbezeichnung = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Sicherheitseinweisung WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -541,7 +541,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Toerndaten WHERE Toernbezeichnung = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Toerndaten WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -593,7 +593,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Dokumentation WHERE Toernbezeichnung = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Dokumentation WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -644,7 +644,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM LogDaten WHERE Toerbezeichnung = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM LogDaten WHERE Toerbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -688,7 +688,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Maengel WHERE Toernbezeichnung = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Maengel WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -721,7 +721,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Zusammenfassung2 WHERE Toernbezeichnung = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM Zusammenfassung2 WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()
@@ -766,7 +766,7 @@ Public Class ImportNeu
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM LogWacheplan WHERE Toern = '" & TextBox1.Text & "' "
+        Dim sqlSelect As String = "SELECT * FROM LogWacheplan WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
 
         connQuelle.Open()

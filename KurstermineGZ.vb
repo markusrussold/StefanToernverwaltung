@@ -163,12 +163,17 @@
     End Sub
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
         '                     Termine speichern
-        If MaskedTextBox2.Text > "  ,  , " And TextBox18.Text > "" And TextBox5.Text > "" Then
+        If Not SafeData.IsBlankOrMask(MaskedTextBox2.Text) And TextBox18.Text > "" And TextBox5.Text > "" Then
             If TextBox7.Text > "" Then
-                Dim da As String = CDate(MaskedTextBox2.Text)
-                Dim dy As String = da.Substring(0, 2)
-                Dim mo As String = da.Substring(3, 2)
-                Dim ye As String = da.Substring(6, 4)
+                Dim da As Date
+                If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, da) Then
+                    MsgBox("Datum hat falsches Format")
+                    MaskedTextBox2.Focus()
+                    Exit Sub
+                End If
+                Dim dy As Integer = da.Day
+                Dim mo As Integer = da.Month
+                Dim ye As Integer = da.Year
                 '          year(datumvon) >= '" & TextBox22.Text & "' and year(datumvon) <= '" & TextBox24.Text & "'"
                 '           bsTermine.AddNew()
                 For i = 0 To ListBox1.Items.Count - 1

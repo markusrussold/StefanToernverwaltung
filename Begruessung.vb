@@ -1,5 +1,5 @@
 ﻿Public Class Begruessung
-    Public anfang As Date = CDate("01.01.1920")
-    Public ende As Date = CDate("31.12.2050")
+    Public anfang As Date = New Date(1920, 1, 1)
+    Public ende As Date = New Date(2050, 12, 31)
 
 End Class

@@ -114,9 +114,15 @@
         teAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=ausbildung.mdb")
         If TextBox12.Text > "  " Then
             If d > "" Then
-                Dim tag As Single = MaskedTextBox3.Text.Substring(0, 2)
-                Dim mon As Single = MaskedTextBox3.Text.Substring(3, 2)
-                Dim jahr As Single = MaskedTextBox3.Text.Substring(6, 4)
+                Dim datum As Date
+                If Not SafeData.TryParseMaskedDate(MaskedTextBox3.Text, datum) Then
+                    MsgBox("Datum hat falsches Format")
+                    MaskedTextBox3.Focus()
+                    Exit Sub
+                End If
+                Dim tag As Integer = datum.Day
+                Dim mon As Integer = datum.Month
+                Dim jahr As Integer = datum.Year
                 '         teAdapter.SelectCommand.CommandText = "Select * from termine where  year(datum) = '" & jahr & "' and month(datum) = '" & mon & "'  and   day(datum) = '" & tag & "' " '  "
                 teAdapter.SelectCommand.CommandText = "Select * from Termine where fahrtbereich ='" & TextBox11.Text & "' and year(datum) = '" & jahr & "' and month(datum) = '" & mon & "' and VZName = '" & TextBox8.Text & "' and Kursbezeichnung = '" & TextBox12.Text & "' and   day(datum) = '" & tag & "' " '  "
             Else

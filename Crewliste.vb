@@ -265,7 +265,7 @@ Gefunden:
                 Select Case bsToernKalkulation.Count
                     Case 1
                         If dsToernverwaltung.ToernKalkulation.Rows(0)("HinFlugNr").ToString > "" And dsToernverwaltung.ToernKalkulation.Rows(0)("rueFlugNr").ToString > "" Then dsToernverwaltung.Temp.Rows(pii + kk)("Feld11") = dsToernverwaltung.ToernKalkulation.Rows(0)("HinFlugNr").ToString + "/" + dsToernverwaltung.ToernKalkulation.Rows(0)("RueFlugNr").ToString
-                        If dsToernverwaltung.ToernKalkulation.Rows(0)("HinFlugDatum").ToString > "" And dsToernverwaltung.ToernKalkulation.Rows(0)("rueFlugDatum").ToString > "" Then dsToernverwaltung.Temp.Rows(pii + kk)("Feld12") = dsToernverwaltung.ToernKalkulation.Rows(0)("HinFlugDatum").ToString.Substring(0, 10) + "/" + dsToernverwaltung.ToernKalkulation.Rows(0)("RueFlugDatum").ToString.Substring(0, 10)
+                        If dsToernverwaltung.ToernKalkulation.Rows(0)("HinFlugDatum").ToString > "" And dsToernverwaltung.ToernKalkulation.Rows(0)("rueFlugDatum").ToString > "" Then dsToernverwaltung.Temp.Rows(pii + kk)("Feld12") = SafeData.FormatDateDe(dsToernverwaltung.ToernKalkulation.Rows(0)("HinFlugDatum")) + "/" + SafeData.FormatDateDe(dsToernverwaltung.ToernKalkulation.Rows(0)("RueFlugDatum"))
                         If dsToernverwaltung.ToernKalkulation.Rows(0)("Flughafen").ToString > "" Then dsToernverwaltung.Temp.Rows(pii + kk)("Feld13") = dsToernverwaltung.ToernKalkulation.Rows(0)("Flughafen").ToString
                 End Select
                 taTemp.Update(dsToernverwaltung.Temp)

@@ -150,7 +150,7 @@ Public Class PrintOutAktion
                 ij += 1
                 yPos = topMargin + zeile * printFont.GetHeight(ev.Graphics)
                 ev.Graphics.DrawString(ij, printFont, Brushes.Black, xPos(0), yPos, New StringFormat())
-                aaa = row(4).ToString.Substring(0, 10)
+                aaa = SafeData.FormatDateDe(row(4))
                 ev.Graphics.DrawString(row(0), printFont, Brushes.Black, xPos(1) - 60, yPos, New StringFormat())
                 ev.Graphics.DrawString(aaa, printFont, Brushes.Black, xPos(2) + 20, yPos, New StringFormat())
                 If row(5) > "0" Then

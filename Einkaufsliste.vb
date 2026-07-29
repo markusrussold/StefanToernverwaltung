@@ -90,7 +90,7 @@
             Case 1
                 bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label2.Text = "Bootsname: " + dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
-                Label1.Text = dsToernverwaltung.Toernname.Rows(0)("datumvon").ToString.Substring(0, 10) + " - " + dsToernverwaltung.Toernname.Rows(0)("datumbis").ToString.Substring(0, 10)
+                Label1.Text = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon")) + " - " + SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))
                 gbArbeitsbox.Location = New Point(12000, 94)
                 gbKopie.Location = New Point(12, 94)
                 törn = TextBox1.Text

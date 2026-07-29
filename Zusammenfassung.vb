@@ -227,7 +227,7 @@
                     dRi = 0
                     iR = 0
                     If antrieb = "" And tageslog Then
-                        Label14.Text = "Achtung: am " + tagBis.Substring(0, 10) + " " + TageszeitEnde + " ist die Antriebsart nicht versorgt."
+                        Label14.Text = "Achtung: am " + SafeData.FormatDateDe(tagBis, SafeData.LeftSafe(tagBis, 10)) + " " + TageszeitEnde + " ist die Antriebsart nicht versorgt."
                     End If
                     logtag = DsLogbuch.Logdaten.Rows(i)("datum").ToString
                     SummeTSegel = 0
@@ -574,20 +574,31 @@ endesub:
 
     End Sub
     Private Sub crewnachtan(dtm, p1, p2, zeit)
-        Dim mmon As Single = dtm.Substring(3, 2)
-        Dim ttag As Single = dtm.Substring(0, 2)
-        Dim yyear As Single = dtm.Substring(6, 4)
+        Dim parsed As Date
+        Dim mmon As Single
+        Dim ttag As Single
+        Dim yyear As Single
+        If SafeData.TryParseDate(dtm, parsed) Then
+            mmon = parsed.Month
+            ttag = parsed.Day
+            yyear = parsed.Year
+        Else
+            mmon = SafeData.ParseNumberOrZero(SafeData.SafeSubstring(dtm, 3, 2))
+            ttag = SafeData.ParseNumberOrZero(SafeData.SafeSubstring(dtm, 0, 2))
+            yyear = SafeData.ParseNumberOrZero(SafeData.SafeSubstring(dtm, 6, 4))
+        End If
+        Dim dateText As String = SafeData.FormatDateDe(dtm, SafeData.LeftSafe(dtm, 10))
         Dim rt As System.Data.DataRowView = bsTC.Current
         tAdapter.SelectCommand = New OleDb.OleDbCommand
         tAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-        tAdapter.SelectCommand.CommandText = "Select * from tc where toern = '" & TextBox1.Text & "' and  vzname = '" & p1 & "'  "
+        tAdapter.SelectCommand.CommandText = "Select * from tc where toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' and  vzname = '" & SafeData.SqlQuote(p1) & "'  "
         bsToernname.CancelEdit()
         dsToernverwaltung.TC.Clear()
         tAdapter.Fill(dsToernverwaltung.TC)
 
         yAdapter.SelectCommand = New OleDb.OleDbCommand
         yAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=logbuch.mdb")
-        yAdapter.SelectCommand.CommandText = "Select * from logdaten where toerbezeichnung = '" & TextBox1.Text & "' and  month(datum) = '" & mmon & "' and day(datum) = '" & ttag & "'  and year(datum) = '" & yyear & "' and  Uhrzeit =  '" & zeit & "' "
+        yAdapter.SelectCommand.CommandText = "Select * from logdaten where toerbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' and  month(datum) = '" & mmon & "' and day(datum) = '" & ttag & "'  and year(datum) = '" & yyear & "' and  Uhrzeit =  '" & SafeData.SqlQuote(zeit) & "' "
         bsLogdaten.CancelEdit()
         DsLogbuch.Logdaten.Clear()
         yAdapter.Fill(DsLogbuch.Logdaten)
@@ -595,7 +606,7 @@ endesub:
         If bsLogdaten.Count = 1 Then
             If dsToernverwaltung.TC.Rows(0)("Nachtahafen1").ToString = "" Then
                 TextBox27.Text = DsLogbuch.Logdaten.Rows(0)("Position").ToString
-                TextBox28.Text = dtm.substring(0, 10)
+                TextBox28.Text = dateText
                 TextBox29.Text = zeit
             Else
                 If dsToernverwaltung.TC.Rows(0)("Nachtahafen1").ToString = DsLogbuch.Logdaten.Rows(0)("Position").ToString Then
@@ -603,7 +614,7 @@ endesub:
                 End If
                 If dsToernverwaltung.TC.Rows(0)("Nachtahafen2").ToString = "" Then
                     TextBox30.Text = DsLogbuch.Logdaten.Rows(0)("Position").ToString
-                    TextBox31.Text = dtm.substring(0, 10)
+                    TextBox31.Text = dateText
                     TextBox32.Text = zeit
                 Else
                     If dsToernverwaltung.TC.Rows(0)("Nachtahafen2").ToString = DsLogbuch.Logdaten.Rows(0)("Position").ToString Then
@@ -611,7 +622,7 @@ endesub:
                     End If
                     If dsToernverwaltung.TC.Rows(0)("Nachtahafen3").ToString = "" Then
                         TextBox33.Text = DsLogbuch.Logdaten.Rows(0)("Position").ToString
-                        TextBox34.Text = dtm.substring(0, 10)
+                        TextBox34.Text = dateText
                         TextBox35.Text = zeit
                     End If
                 End If
@@ -620,13 +631,13 @@ endesub:
             taTc.Update(dsToernverwaltung.TC)
             GoTo vorhanden2
 vorhanden1:
-            tAdapter.SelectCommand.CommandText = "Select * from tc where toern = '" & TextBox1.Text & "' and  vzname = '" & p2 & "'  "
+            tAdapter.SelectCommand.CommandText = "Select * from tc where toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' and  vzname = '" & SafeData.SqlQuote(p2) & "'  "
             bsToernname.CancelEdit()
             dsToernverwaltung.TC.Clear()
             tAdapter.Fill(dsToernverwaltung.TC)
             If dsToernverwaltung.TC.Rows(0)("Nachtahafen1").ToString = "" Then
                 TextBox27.Text = DsLogbuch.Logdaten.Rows(0)("Position").ToString
-                TextBox28.Text = dtm.substring(0, 10)
+                TextBox28.Text = dateText
                 TextBox29.Text = zeit
             Else
                 If dsToernverwaltung.TC.Rows(0)("Nachtahafen1").ToString = DsLogbuch.Logdaten.Rows(0)("Position").ToString Then
@@ -634,7 +645,7 @@ vorhanden1:
                 End If
                 If dsToernverwaltung.TC.Rows(0)("Nachtahafen2").ToString = "" Then
                     TextBox30.Text = DsLogbuch.Logdaten.Rows(0)("Position").ToString
-                    TextBox31.Text = dtm.substring(0, 10)
+                    TextBox31.Text = dateText
                     TextBox32.Text = zeit
                 Else
                     If dsToernverwaltung.TC.Rows(0)("Nachtahafen2").ToString = DsLogbuch.Logdaten.Rows(0)("Position").ToString Then
@@ -642,7 +653,7 @@ vorhanden1:
                     End If
                     If dsToernverwaltung.TC.Rows(0)("Nachtahafen3").ToString = "" Then
                         TextBox33.Text = DsLogbuch.Logdaten.Rows(0)("Position").ToString
-                        TextBox34.Text = dtm.substring(0, 10)
+                        TextBox34.Text = dateText
                         TextBox35.Text = zeit
                     End If
                 End If
@@ -854,10 +865,10 @@ Gefunden:
 
                     If DsLogbuch.Logdaten.Rows(iii - 1)("uhrzeit").ToString < "22:00" And DsLogbuch.Logdaten.Rows(iii)("uhrzeit").ToString > "03:00" Then
                         If DsLogbuch.Logdaten.Rows(iii - 1)("antriebsart").ToString <> "m" And DsLogbuch.Logdaten.Rows(iii - 1)("DueGTag").ToString > 0 Then
-                            MsgBox("Tagesabschluss am " & Convert.ToString(DsLogbuch.Logdaten.Rows(iii - 1)("datum").ToString.Substring(0, 10)) & " ist nicht durchgeführt.")
+                            MsgBox("Tagesabschluss am " & SafeData.FormatDateDe(DsLogbuch.Logdaten.Rows(iii - 1)("datum")) & " ist nicht durchgeführt.")
                         Else
                             If Char.IsUpper(DsLogbuch.Logdaten.Rows(iii - 1)("antriebsart").ToString) Then
-                                MsgBox("Tagesabschluss am " & Convert.ToString(DsLogbuch.Logdaten.Rows(iii - 1)("datum").ToString.Substring(0, 10)) & " ist nicht durchgeführt.")
+                                MsgBox("Tagesabschluss am " & SafeData.FormatDateDe(DsLogbuch.Logdaten.Rows(iii - 1)("datum")) & " ist nicht durchgeführt.")
                             End If
                         End If
                     End If

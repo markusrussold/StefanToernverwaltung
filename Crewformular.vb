@@ -99,7 +99,7 @@ Public Class Crewformular
                         Zeilentext(2) = ";Name*:;" + dsToernverwaltung.CrewAdressen.Rows(0)("Zuname").ToString
                     End If
                     If dsToernverwaltung.CrewAdressen.Rows(0)("gebdatum").ToString > "" Then
-                        aaa = dsToernverwaltung.CrewAdressen.Rows(0)("gebdatum").ToString.Substring(0, 10)
+                        aaa = SafeData.FormatDateDe(dsToernverwaltung.CrewAdressen.Rows(0)("gebdatum"))
                         Zeilentext(2) = Zeilentext(2) + ";;; Geburtsdatum*:;;" + aaa
                     Else
                         Zeilentext(2) = Zeilentext(2) + ";;; Geburtsdatum*:;;___________________"

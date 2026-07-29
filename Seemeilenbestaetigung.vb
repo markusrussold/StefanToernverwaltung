@@ -648,10 +648,7 @@ Gefunden:
                     bsTemp.AddNew()
                     bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                     dsToernverwaltung.Temp.Rows(0)("Feld0") = dsToernverwaltung.CrewAdressen.Rows(0)("VZname").ToString
-                    gebdat = dsToernverwaltung.CrewAdressen.Rows(0)("Gebdatum").ToString
-                    If gebdat.Length > 10 Then
-                        gebdat = gebdat.Substring(0, 10)
-                    End If
+                    gebdat = SafeData.FormatDateDe(dsToernverwaltung.CrewAdressen.Rows(0)("Gebdatum"))
                     dsToernverwaltung.Temp.Rows(0)("Feld1") = gebdat
                     dsToernverwaltung.Temp.Rows(0)("Feld2") = dsToernverwaltung.CrewAdressen.Rows(0)("Gebort").ToString
                     dsToernverwaltung.Temp.Rows(0)("Feld3") = dsToernverwaltung.CrewAdressen.Rows(0)("Plz").ToString + " " + dsToernverwaltung.CrewAdressen.Rows(0)("ort").ToString + ", " + dsToernverwaltung.CrewAdressen.Rows(0)("Straße").ToString
@@ -930,10 +927,7 @@ Gefunden:
 
     End Sub
     Private Function datum10(ByVal dat)
-        If Len(dat) > 10 Then
-            dat = dat.ToString.Substring(0, 10)
-        End If
-        Return dat
+        Return SafeData.FormatDateDe(dat)
     End Function
     Private Sub Crewwahl()
         Dim crewnr As Integer

@@ -134,7 +134,7 @@
                 pAdapter.Fill(dsToernverwaltung.Toernname)
                 bsToernname.Position = 0
                 boot = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
-                termin = dsToernverwaltung.Toernname.Rows(0)("Datumvon").ToString.Substring(0, 10) + " - " + dsToernverwaltung.Toernname.Rows(0)("Datumbis").ToString.Substring(0, 10)
+                termin = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("Datumvon")) + " - " + SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("Datumbis"))
                 revier = ""
                 If dsToernverwaltung.Toernname.Rows(0)("Revier").ToString > " " Then revier = dsToernverwaltung.Toernname.Rows(0)("Revier").ToString
                 If revier > "" And dsToernverwaltung.Toernname.Rows(0)("Route").ToString > " " Then revier = revier + "/" + dsToernverwaltung.Toernname.Rows(0)("Route").ToString
@@ -355,7 +355,7 @@ weiter:
         TextBox4.Text = " "
         If Not DBNull.Value.Equals(dsCrewbesprechung.Ablauf.Rows(0)("Datum").ToString) Then
             If dsCrewbesprechung.Ablauf.Rows(0)("Datum").ToString > "" Then
-                TextBox4.Text = dsCrewbesprechung.Ablauf.Rows(0)("Datum").ToString.Substring(0, 10)
+                TextBox4.Text = SafeData.FormatDateDe(dsCrewbesprechung.Ablauf.Rows(0)("Datum"))
             End If
         End If
         Ablauf1copy(TextBox5.Text, dsCrewbesprechung.Ablauf.Rows(0)("Thema").ToString)

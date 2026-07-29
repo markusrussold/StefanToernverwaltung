@@ -556,8 +556,8 @@ Gefunden:
             TextBox28.Text = anzahl.ToString("##,#0.00") + " €"
             TextBox27.Text = beitrag.ToString("##,#0.00") + " €"
             TextBox82.Text = anz.ToString("##,#0.00") + " €"
-            MaskedTextBox5.Text = datumanzahlung.ToString.Substring(0, 10)
-            MaskedTextBox8.Text = datumrest.ToString.Substring(0, 10)
+            MaskedTextBox5.Text = SafeData.FormatDateDe(datumanzahlung)
+            MaskedTextBox8.Text = SafeData.FormatDateDe(datumrest)
             Label60.Text = kosten.ToString("##,#0.00") + " €"
             If ij >= 2 Then
                 cla(1, CheckBox2, CheckBox17)
@@ -565,8 +565,8 @@ Gefunden:
                 TextBox29.Text = anzahl.ToString("##,#0.00") + " €"
                 TextBox30.Text = beitrag.ToString("##,#0.00") + " €"
                 TextBox84.Text = anz.ToString("##,#0.00") + " €"
-                MaskedTextBox10.Text = datumanzahlung.ToString.Substring(0, 10)
-                MaskedTextBox9.Text = datumrest.ToString.Substring(0, 10)
+                MaskedTextBox10.Text = SafeData.FormatDateDe(datumanzahlung)
+                MaskedTextBox9.Text = SafeData.FormatDateDe(datumrest)
                 Label61.Text = kosten.ToString("##,#0.00") + " €"
                 If ij >= 3 Then
                     cla(2, CheckBox3, CheckBox18)
@@ -574,8 +574,8 @@ Gefunden:
                     TextBox31.Text = anzahl.ToString("##,#0.00") + " €"
                     TextBox32.Text = beitrag.ToString("##,#0.00") + " €"
                     TextBox85.Text = anz.ToString("##,#0.00") + " €"
-                    MaskedTextBox12.Text = datumanzahlung.ToString.Substring(0, 10)
-                    MaskedTextBox11.Text = datumrest.ToString.Substring(0, 10)
+                    MaskedTextBox12.Text = SafeData.FormatDateDe(datumanzahlung)
+                    MaskedTextBox11.Text = SafeData.FormatDateDe(datumrest)
                     Label62.Text = kosten.ToString("##,#0.00") + " €"
                     If ij >= 4 Then
                         cla(3, CheckBox4, CheckBox19)
@@ -583,8 +583,8 @@ Gefunden:
                         TextBox33.Text = anzahl.ToString("##,#0.00") + " €"
                         TextBox34.Text = beitrag.ToString("##,#0.00") + " €"
                         TextBox83.Text = anz.ToString("##,#0.00") + " €"
-                        MaskedTextBox14.Text = datumanzahlung.ToString.Substring(0, 10)
-                        MaskedTextBox13.Text = datumrest.ToString.Substring(0, 10)
+                        MaskedTextBox14.Text = SafeData.FormatDateDe(datumanzahlung)
+                        MaskedTextBox13.Text = SafeData.FormatDateDe(datumrest)
                         Label63.Text = kosten.ToString("##,#0.00") + " €"
                         If ij >= 5 Then
                             cla(4, CheckBox5, CheckBox20)
@@ -592,8 +592,8 @@ Gefunden:
                             TextBox35.Text = anzahl.ToString("##,#0.00") + " €"
                             TextBox36.Text = beitrag.ToString("##,#0.00") + " €"
                             TextBox81.Text = anz.ToString("##,#0.00") + " €"
-                            MaskedTextBox16.Text = datumanzahlung.ToString.Substring(0, 10)
-                            MaskedTextBox15.Text = datumrest.ToString.Substring(0, 10)
+                            MaskedTextBox16.Text = SafeData.FormatDateDe(datumanzahlung)
+                            MaskedTextBox15.Text = SafeData.FormatDateDe(datumrest)
                             Label64.Text = kosten.ToString("##,#0.00") + " €"
                             If ij >= 6 Then
                                 cla(5, CheckBox6, CheckBox21)
@@ -601,8 +601,8 @@ Gefunden:
                                 TextBox37.Text = anzahl.ToString("##,#0.00") + " €"
                                 TextBox38.Text = beitrag.ToString("##,#0.00") + " €"
                                 TextBox80.Text = anz.ToString("##,#0.00") + " €"
-                                MaskedTextBox18.Text = datumanzahlung.ToString.Substring(0, 10)
-                                MaskedTextBox17.Text = datumrest.ToString.Substring(0, 10)
+                                MaskedTextBox18.Text = SafeData.FormatDateDe(datumanzahlung)
+                                MaskedTextBox17.Text = SafeData.FormatDateDe(datumrest)
                                 Label65.Text = kosten.ToString("##,#0.00") + " €"
                                 If ij >= 7 Then
                                     cla(6, CheckBox7, CheckBox22)
@@ -610,8 +610,8 @@ Gefunden:
                                     TextBox39.Text = anzahl.ToString("##,#0.00") + " €"
                                     TextBox40.Text = beitrag.ToString("##,#0.00") + " €"
                                     TextBox79.Text = anz.ToString("##,#0.00") + " €"
-                                    MaskedTextBox20.Text = datumanzahlung.ToString.Substring(0, 10)
-                                    MaskedTextBox19.Text = datumrest.ToString.Substring(0, 10)
+                                    MaskedTextBox20.Text = SafeData.FormatDateDe(datumanzahlung)
+                                    MaskedTextBox19.Text = SafeData.FormatDateDe(datumrest)
                                     Label66.Text = kosten.ToString("##,#0.00") + " €"
                                     If ij >= 8 Then
                                         cla(7, CheckBox8, CheckBox23)
@@ -619,8 +619,8 @@ Gefunden:
                                         KabineEinlesen(8)
                                         TextBox42.Text = beitrag.ToString("##,#0.00") + " €"
                                         TextBox78.Text = anz.ToString("##,#0.00") + " €"
-                                        MaskedTextBox22.Text = datumanzahlung.ToString.Substring(0, 10)
-                                        MaskedTextBox21.Text = datumrest.ToString.Substring(0, 10)
+                                        MaskedTextBox22.Text = SafeData.FormatDateDe(datumanzahlung)
+                                        MaskedTextBox21.Text = SafeData.FormatDateDe(datumrest)
                                         Label67.Text = kosten.ToString("##,#0.00") + " €"
                                         If ij >= 9 Then
                                             cla(8, CheckBox9, CheckBox24)
@@ -628,8 +628,8 @@ Gefunden:
                                             TextBox43.Text = anzahl.ToString("##,#0.00") + " €"
                                             TextBox44.Text = beitrag.ToString("##,#0.00") + " €"
                                             TextBox77.Text = anz.ToString("##,#0.00") + " €"
-                                            MaskedTextBox24.Text = datumanzahlung.ToString.Substring(0, 10)
-                                            MaskedTextBox23.Text = datumrest.ToString.Substring(0, 10)
+                                            MaskedTextBox24.Text = SafeData.FormatDateDe(datumanzahlung)
+                                            MaskedTextBox23.Text = SafeData.FormatDateDe(datumrest)
                                             Label68.Text = kosten.ToString("##,#0.00") + " €"
                                             If ij >= 10 Then
                                                 cla(9, CheckBox10, CheckBox25)
@@ -637,8 +637,8 @@ Gefunden:
                                                 TextBox45.Text = anzahl.ToString("##,#0.00") + " €"
                                                 TextBox46.Text = beitrag.ToString("##,#0.00") + " €"
                                                 TextBox76.Text = anz.ToString("##,#0.00") + " €"
-                                                MaskedTextBox26.Text = datumanzahlung.ToString.Substring(0, 10)
-                                                MaskedTextBox25.Text = datumrest.ToString.Substring(0, 10)
+                                                MaskedTextBox26.Text = SafeData.FormatDateDe(datumanzahlung)
+                                                MaskedTextBox25.Text = SafeData.FormatDateDe(datumrest)
                                                 Label69.Text = kosten.ToString("##,#0.00") + " €"
                                                 If ij >= 11 Then
                                                     cla(10, CheckBox11, CheckBox25)
@@ -877,7 +877,7 @@ Gefunden:
                         Else
                             TextBox71.Text = Now.AddDays(5)
                         End If
-                        TextBox70.Text = TextBox70.Text.Substring(0, 10)
+                        TextBox70.Text = SafeData.FormatDateDe(TextBox70.Text)
                         '                    MaskedTextBox7.Text = TextBox71.Text.Substring(0, 10)
                         '                   MaskedTextBox6.Text = TextBox70.Text
 
@@ -2048,7 +2048,7 @@ ok:
             Else
                 TextBox71.Text = Now.AddDays(5)
             End If
-            TextBox70.Text = TextBox70.Text.Substring(0, 10)
+            TextBox70.Text = SafeData.FormatDateDe(TextBox70.Text)
             '           MaskedTextBox7.Text = TextBox71.Text.Substring(0, 10)
             '          MaskedTextBox6.Text = TextBox70.Text
 
@@ -2204,8 +2204,9 @@ ByVal e As System.EventArgs) Handles RadioButton1.Click, RadioButton2.Click, Rad
     End Sub
 
     Private Sub MaskedTextBox4_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox4.LostFocus
-        If MaskedTextBox4.Text > "  ,  ,    " Then
-            If CDate(MaskedTextBox4.Text) < Begruessung.anfang Or CDate(MaskedTextBox4.Text) > Begruessung.ende Then
+        If Not SafeData.IsBlankOrMask(MaskedTextBox4.Text) Then
+            Dim datum As Date
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox4.Text, datum) OrElse datum < Begruessung.anfang OrElse datum > Begruessung.ende Then
                 MsgBox("Datum hat falsches Format")
                 MaskedTextBox4.Text = vbNullString
                 MaskedTextBox4.Focus()
@@ -2217,22 +2218,25 @@ ByVal e As System.EventArgs) Handles RadioButton1.Click, RadioButton2.Click, Rad
         End If
     End Sub
     Private Sub MaskedTextBox1_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox1.LostFocus
-        If CDate(MaskedTextBox1.Text) < Begruessung.anfang Or CDate(MaskedTextBox1.Text) > Begruessung.ende Then
+        Dim datum As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox1.Text, datum) OrElse datum < Begruessung.anfang OrElse datum > Begruessung.ende Then
             MsgBox("Datum hat falsches Format")
             MaskedTextBox1.Text = vbNullString
             MaskedTextBox1.Focus()
         End If
     End Sub
     Private Sub MaskedTextBox2_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox2.LostFocus
-        If CDate(MaskedTextBox2.Text) < Begruessung.anfang Or CDate(MaskedTextBox2.Text) > Begruessung.ende Then
+        Dim datum As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datum) OrElse datum < Begruessung.anfang OrElse datum > Begruessung.ende Then
             MsgBox("Datum hat falsches Format")
             MaskedTextBox2.Text = vbNullString
             MaskedTextBox2.Focus()
         End If
     End Sub
     Private Sub MaskedTextBox3_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox3.LostFocus
-        If MaskedTextBox3.Text > "  ,  ,    " Then
-            If CDate(MaskedTextBox3.Text) < Begruessung.anfang Or CDate(MaskedTextBox3.Text) > Begruessung.ende Then
+        If Not SafeData.IsBlankOrMask(MaskedTextBox3.Text) Then
+            Dim datum As Date
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox3.Text, datum) OrElse datum < Begruessung.anfang OrElse datum > Begruessung.ende Then
                 MsgBox("Datum hat falsches Format")
                 MaskedTextBox3.Text = vbNullString
                 MaskedTextBox3.Focus()
@@ -2297,18 +2301,18 @@ ByVal e As System.EventArgs) Handles RadioButton1.Click, RadioButton2.Click, Rad
         LoeschenButton.Enabled = False
         FormularButton.Enabled = False
         SpeichernButton.Enabled = False
-        bbb = TextBox26.Text.Substring(0, Len(TextBox26.Text) - 5) - Bordkassa
+        bbb = SafeData.ParseMoneyText(TextBox26.Text) - Bordkassa
         Label75.Text = bbb.ToString("##,##.00") + " €"
-        If Len(TextBox27.Text) > 5 Then ccc = TextBox27.Text.Substring(0, Len(TextBox27.Text) - 5) + skipperant
-        If Len(TextBox30.Text) > 5 Then ccc += TextBox30.Text.Substring(0, Len(TextBox30.Text) - 5)
-        If Len(TextBox32.Text) > 5 Then ccc += TextBox32.Text.Substring(0, Len(TextBox32.Text) - 5)
-        If Len(TextBox34.Text) > 5 Then ccc += TextBox34.Text.Substring(0, Len(TextBox34.Text) - 5)
-        If Len(TextBox36.Text) > 5 Then ccc += TextBox36.Text.Substring(0, Len(TextBox36.Text) - 5)
-        If Len(TextBox38.Text) > 5 Then ccc += TextBox38.Text.Substring(0, Len(TextBox38.Text) - 5)
-        If Len(TextBox40.Text) > 5 Then ccc += TextBox40.Text.Substring(0, Len(TextBox40.Text) - 5)
-        If Len(TextBox42.Text) > 5 Then ccc += TextBox42.Text.Substring(0, Len(TextBox42.Text) - 5)
-        If Len(TextBox44.Text) > 5 Then ccc += TextBox44.Text.Substring(0, Len(TextBox44.Text) - 5)
-        If Len(TextBox46.Text) > 5 Then ccc += TextBox46.Text.Substring(0, Len(TextBox46.Text) - 5)
+        ccc = SafeData.ParseMoneyText(TextBox27.Text) + skipperant
+        ccc += SafeData.ParseMoneyText(TextBox30.Text)
+        ccc += SafeData.ParseMoneyText(TextBox32.Text)
+        ccc += SafeData.ParseMoneyText(TextBox34.Text)
+        ccc += SafeData.ParseMoneyText(TextBox36.Text)
+        ccc += SafeData.ParseMoneyText(TextBox38.Text)
+        ccc += SafeData.ParseMoneyText(TextBox40.Text)
+        ccc += SafeData.ParseMoneyText(TextBox42.Text)
+        ccc += SafeData.ParseMoneyText(TextBox44.Text)
+        ccc += SafeData.ParseMoneyText(TextBox46.Text)
         Label77.Text = ccc.ToString("##,##.00") + " €"
         ccc -= bbb
         Label78.Text = ccc.ToString("##,##.00") + " €"
@@ -2799,11 +2803,7 @@ Gefunden:
 
     End Sub
     Private Sub Gezahlt(ByRef neuersaldo, ByVal bezahlt, ByRef zahlung)
-        If Len(bezahlt) > 5 Then
-            anzahl = bezahlt.Substring(0, Len(bezahlt) - 2)
-        Else
-            anzahl = 0
-        End If
+        anzahl = SafeData.ParseMoneyText(Convert.ToString(bezahlt))
         If zahlung > "0" Then
             anzahl += zahlung
         End If

@@ -270,10 +270,7 @@ Public Class PrintOutSM
                 Exit While
             End If
             If row(1) > "" Then
-                geburtsdatum = row(1)
-                If geburtsdatum.Length > 9 Then
-                    geburtsdatum = geburtsdatum.Substring(0, 10)
-                End If
+                geburtsdatum = SafeData.FormatDateDe(row(1))
             Else
                 geburtsdatum = " "
             End If
@@ -408,7 +405,7 @@ Public Class PrintOutSM
             If row(42) > "-----" Then
                 yPos = topMargin + (zeile + 0.8) * printFont.GetHeight(ev.Graphics)
                 ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(42)), "", row(42)), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
-                aaa = row(43).ToString.Substring(0, 10)
+                aaa = SafeData.FormatDateDe(row(43))
                 ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(2) + 60, yPos, New StringFormat())
                 LetzterString.letztes(row(43), " ", aaa)
                 '             aaa = row(43).ToString.Substring(11, 5)
@@ -418,7 +415,7 @@ Public Class PrintOutSM
             If row(44) > "----- " Then
                 yPos = topMargin + (zeile + 1.3) * printFont.GetHeight(ev.Graphics)
                 ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(44)), "", row(44)), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
-                aaa = row(45).ToString.Substring(0, 10)
+                aaa = SafeData.FormatDateDe(row(45))
                 ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(2) + 60, yPos, New StringFormat())
                 LetzterString.letztes(row(45), " ", aaa)
                 '      aaa = row(45).ToString.Substring(11, 5)
@@ -428,7 +425,7 @@ Public Class PrintOutSM
             If row(46) > "----- " Then
                 yPos = topMargin + (zeile + 1.8) * printFont.GetHeight(ev.Graphics)
                 ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(46)), "", row(46)), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
-                aaa = row(47).ToString.Substring(0, 10)
+                aaa = SafeData.FormatDateDe(row(47))
                 ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(2) + 60, yPos, New StringFormat())
                 LetzterString.letztes(row(47), " ", aaa)
                 ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(3) + 30, yPos, New StringFormat())
@@ -453,13 +450,13 @@ Public Class PrintOutSM
             If row(24) > "----- " Then
                 LetzterString.letztes(row(26), " / ", aaa)
                 datende = aaa.Substring(2, 10)
-                Dim dat_dif As Long = DateDiff("d", row(26).ToString.Substring(0, 10), datende)
+                Dim dat_dif As Long = DateDiff("d", SafeData.FormatDateDe(row(26)), datende)
                 Select Case dat_dif
                     Case 1
                         yPos = topMargin + (zeile + 0.8) * printFont.GetHeight(ev.Graphics)
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(24)), "", row(24)), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(25)), "", row(25)), printFont, Brushes.Black, xPos(2) + 95, yPos, New StringFormat())
-                        aaa = row(26).ToString.Substring(0, 10)
+                        aaa = SafeData.FormatDateDe(row(26))
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(3) - 70, yPos, New StringFormat())
                         LetzterString.letztes(row(26), " / ", aaa)
                         LetzterString.letztes(aaa.Substring(2, 16), " ", aaa)
@@ -470,7 +467,7 @@ Public Class PrintOutSM
                         yPos = topMargin + (zeile + 0.8) * printFont.GetHeight(ev.Graphics)
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(24)), "", row(24)), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(25)), "", row(25)), printFont, Brushes.Black, xPos(2) + 95, yPos, New StringFormat())
-                        aaa = row(26).ToString.Substring(0, 10)
+                        aaa = SafeData.FormatDateDe(row(26))
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(3) - 70, yPos, New StringFormat())
                         LetzterString.letztes(row(26).ToString.Substring(2, 16), " ", aaa)
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(3) + 30, yPos, New StringFormat())
@@ -490,13 +487,13 @@ Public Class PrintOutSM
             If row(27) > "----- " Then
                 LetzterString.letztes(row(29), " / ", aaa)
                 datende = aaa.Substring(2, 10)
-                Dim dat_dif As Long = DateDiff("d", row(29).ToString.Substring(0, 10), datende)
+                Dim dat_dif As Long = DateDiff("d", SafeData.FormatDateDe(row(29)), datende)
                 Select Case dat_dif
                     Case 1
                         yPos = topMargin + (zeile + 1.3) * printFont.GetHeight(ev.Graphics)
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(27)), "", row(27)), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(28)), "", row(28)), printFont, Brushes.Black, xPos(2) + 95, yPos, New StringFormat())
-                        aaa = row(29).ToString.Substring(0, 10)
+                        aaa = SafeData.FormatDateDe(row(29))
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(3) - 70, yPos, New StringFormat())
                         LetzterString.letztes(row(29), " / ", aaa)
                         LetzterString.letztes(aaa.Substring(2, 16), " ", aaa)
@@ -507,7 +504,7 @@ Public Class PrintOutSM
                         yPos = topMargin + (zeile + 1.3) * printFont.GetHeight(ev.Graphics)
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(27)), "", row(27)), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(28)), "", row(28)), printFont, Brushes.Black, xPos(2) + 95, yPos, New StringFormat())
-                        aaa = row(29).ToString.Substring(0, 10)
+                        aaa = SafeData.FormatDateDe(row(29))
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(3) - 70, yPos, New StringFormat())
                         LetzterString.letztes(row(29).ToString.Substring(2, 16), " ", aaa)
                         ev.Graphics.DrawString(IIf(DBNull.Value.Equals(aaa), "", aaa), printFont, Brushes.Black, xPos(3) + 30, yPos, New StringFormat())

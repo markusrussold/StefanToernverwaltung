@@ -1,6 +1,6 @@
 ﻿Public Class CheckBNull
     Public Shared Function checkDBNull(ByRef wert)
-        Dim check As Single
+        Dim check As Single = 0
         If IsDBNull(wert) = False Then
             If IsNumeric(wert) Then
                 check = wert

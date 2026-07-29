@@ -2,30 +2,23 @@
 
     Public Shared Function keypruefen(ByVal key)
         Dim ok As Boolean
-        Dim z1 As String
-        Dim z2 As String
-        Dim z3 As String
-        Dim z4 As String
-        Dim summe As Single
-        Dim intege As Decimal
-        Dim summand As String
+        Dim z1 As Integer
+        Dim z2 As Integer
+        Dim z3 As Integer
+        Dim z4 As Integer
+        Dim summand As Integer
 
         If key Is Nothing Then
             ok = False
         Else
             If Len(key) = 20 Then
-                z1 = key.substring(0, 1)
-                z2 = key.substring(4, 1)
-                z3 = key.substring(8, 1)
-                z4 = key.substring(12, 1)
-                summand = key.substring(13, 1)
-                summe = z1
-                summe = summe * z2
-                summe = summe * z3
-                summe += z4
-                intege = summe.ToString.Substring(Len(summe.ToString) - 1, 1)
-
-                If intege = summand Then
+                Dim keyText As String = Convert.ToString(key)
+                If Not Integer.TryParse(keyText.Substring(0, 1), z1) OrElse
+                   Not Integer.TryParse(keyText.Substring(4, 1), z2) OrElse
+                   Not Integer.TryParse(keyText.Substring(8, 1), z3) OrElse
+                   Not Integer.TryParse(keyText.Substring(12, 1), z4) OrElse
+                   Not Integer.TryParse(keyText.Substring(13, 1), summand) Then Return False
+                If ((z1 * z2 * z3) + z4) Mod 10 = summand Then
                     ok = True
                 Else
                     ok = False

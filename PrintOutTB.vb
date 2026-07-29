@@ -76,12 +76,12 @@ Public Class PrintOutTB
                     ev.Graphics.DrawString(Today, printFont, Brushes.Black, xPos(2) + 30, yPos - 30, New StringFormat())
                     ' Feld1 ...4    Skipper, von, bis, Boot
                     If row(1) > "" Then
-                        von = row(1).substring(0, 10)
+                        von = SafeData.FormatDateDe(row(1), "  ")
                     Else
                         von = "  "
                     End If
                     If row(2) > "" Then
-                        bis = row(2).substring(0, 10)
+                        bis = SafeData.FormatDateDe(row(2), "  ")
                     Else
                         bis = "  "
                     End If

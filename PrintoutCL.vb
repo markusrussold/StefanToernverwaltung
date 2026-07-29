@@ -67,12 +67,12 @@ Public Class PrintoutCL
         ' Feld1 ...4    Skipper, von, bis, Boot
         zeile += 2
         If row(1) > "" Then
-            von = row(1).substring(0, 10)
+            von = SafeData.FormatDateDe(row(1), "  ")
         Else
             von = "  "
         End If
         If row(6) > "" Then
-            bis = row(6).substring(0, 10)
+            bis = SafeData.FormatDateDe(row(6), "  ")
         Else
             bis = "  "
         End If
@@ -225,7 +225,7 @@ Public Class PrintoutCL
                 ev.Graphics.DrawString(row(0), printFont, Brushes.Black, xPos(1), yPos, New StringFormat())
             End If
             If row(2) > "" Then
-                von = row(2).substring(0, 10)
+                von = SafeData.FormatDateDe(row(2), von)
             End If
             ev.Graphics.DrawString(von, printFont, Brushes.Black, xPos(3), yPos, New StringFormat())
             zs = row(3).indexof("/")

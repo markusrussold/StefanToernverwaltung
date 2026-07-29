@@ -109,13 +109,13 @@ Public Class PrintOut
         anzc = row(10)
         anzv = row(10)
         anzk = row(10)
-        If drucksteuerung.Substring(1, 1) = "1" Then
+        If SafeData.SafeSubstring(drucksteuerung, 1, 1) = "1" Then
             anzv += 1
         End If
-        If drucksteuerung.Substring(2, 1) = "1" Then
+        If SafeData.SafeSubstring(drucksteuerung, 2, 1) = "1" Then
             anzc += 1
         End If
-        If drucksteuerung.Substring(3, 1) = "1" Then
+        If SafeData.SafeSubstring(drucksteuerung, 3, 1) = "1" Then
             anzk += 1
         End If
 
@@ -163,7 +163,7 @@ Public Class PrintOut
             ppk = var
             zeile += 1
             yPos = topMargin + zeile * printFont.GetHeight(ev.Graphics)
-            If drucksteuerung.Substring(1, 3) > "000" Then
+            If SafeData.SafeSubstring(drucksteuerung, 1, 3, "000") > "000" Then
                 ev.Graphics.DrawString("+ Skipper = " + Str(row(10) + 1), printFont, Brushes.Black, xPos(0), yPos, New StringFormat())
             Else
                 ev.Graphics.DrawString("Skipper ist frei ", printFont, Brushes.Black, xPos(0), yPos, New StringFormat())
@@ -204,7 +204,7 @@ Public Class PrintOut
             ev.Graphics.DrawString(IIf(DBNull.Value.Equals(row(10)), "", "Crewanzahl:       Personen"), printFont, Brushes.Black, xPos(0), yPos, New StringFormat())  'Crewanzahl
             zeile += 1
             yPos = topMargin + zeile * printFont.GetHeight(ev.Graphics)
-            If drucksteuerung.Substring(1, 3) > "000" Then
+            If SafeData.SafeSubstring(drucksteuerung, 1, 3, "000") > "000" Then
                 ev.Graphics.DrawString("+ Skipper = " + Str(row(10) + 1), printFont, Brushes.Black, xPos(0), yPos, New StringFormat())
             Else
                 ev.Graphics.DrawString("Skipper ist frei ", printFont, Brushes.Black, xPos(0), yPos, New StringFormat())

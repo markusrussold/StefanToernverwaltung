@@ -412,7 +412,7 @@ Gefunden:
         DsAusbildung.VeranstalTeilnehmer.Rows(ij)("vzname") = TextBox5.Text
         DsAusbildung.VeranstalTeilnehmer.Rows(ij)("Veranstaltung") = VeranstaltungNeu
         TextBox7.Text = Date.Now
-        DsAusbildung.VeranstalTeilnehmer.Rows(ij)("Anmeldedatum") = TextBox7.Text.Substring(0, 10)
+        DsAusbildung.VeranstalTeilnehmer.Rows(ij)("Anmeldedatum") = SafeData.FormatDateDe(TextBox7.Text)
         DsAusbildung.VeranstalTeilnehmer.Rows(ij)("Bemerkung") = RichTextBox2.Text
         DsAusbildung.VeranstalTeilnehmer.Rows(ij)("Veranstaltungsdatum") = VDatumneu
         taVeranstalTeilnehmer.Update(DsAusbildung.VeranstalTeilnehmer)
@@ -530,8 +530,8 @@ Gefunden:
                 tAdapter.SelectCommand.CommandText = "Select * from VeranstalTeilnehmer where vzname like '" & aaa & "' and veranstaltung like '" & TextBox13.Text & "'  "
                 DsAusbildung.VeranstalTeilnehmer.Clear()
                 tAdapter.Fill(DsAusbildung.VeranstalTeilnehmer)
-                VerDatum = DsAusbildung.VeranstalTeilnehmer.Rows(0)("Veranstaltungsdatum").ToString.Substring(0, 10)
-                AnmDatum = DsAusbildung.VeranstalTeilnehmer.Rows(0)("Anmeldedatum").ToString.Substring(0, 10)
+                VerDatum = SafeData.FormatDateDe(DsAusbildung.VeranstalTeilnehmer.Rows(0)("Veranstaltungsdatum"))
+                AnmDatum = SafeData.FormatDateDe(DsAusbildung.VeranstalTeilnehmer.Rows(0)("Anmeldedatum"))
                 BeitragK = DsAusbildung.VeranstalTeilnehmer.Rows(0)("Beitrag").ToString
                 Bemerkung = DsAusbildung.VeranstalTeilnehmer.Rows(0)("Bemerkung").ToString
                 Druckbereiten()

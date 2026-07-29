@@ -618,12 +618,12 @@ weiter:
             If Not DBNull.Value.Equals(TextBox40.Text) Then TextBox45.Text = TextBox40.Text ' Rückreise
             If Not DBNull.Value.Equals(TextBox43.Text) Then TextBox17.Text = TextBox43.Text ' Kenntnise
             If Not DBNull.Value.Equals(TextBox41.Text) Then '                                 Ankunftszeit
-                If Len(TextBox41.Text) > 9 Then MaskedTextBox1.Text = TextBox41.Text.Substring(0, 10)
-                If Len(TextBox41.Text) > 15 Then MaskedTextBox2.Text = TextBox41.Text.Substring(11, 5)
+                MaskedTextBox1.Text = SafeData.FormatDateDe(TextBox41.Text)
+                MaskedTextBox2.Text = SafeData.FormatTimeHm(TextBox41.Text)
             End If
             If Not DBNull.Value.Equals(TextBox44.Text) Then '                                 Ankunftszeit
-                If Len(TextBox44.Text) > 9 Then MaskedTextBox18.Text = TextBox44.Text.Substring(0, 10)
-                If Len(TextBox44.Text) > 15 Then MaskedTextBox17.Text = TextBox44.Text.Substring(11, 5)
+                MaskedTextBox18.Text = SafeData.FormatDateDe(TextBox44.Text)
+                MaskedTextBox17.Text = SafeData.FormatTimeHm(TextBox44.Text)
             End If
         End If
     End Sub

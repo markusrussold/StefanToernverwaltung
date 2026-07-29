@@ -396,7 +396,7 @@ Gefunden:
                 TextBox18.Visible = True
                 If IsNumeric(TextBox19.Text) And IsNumeric(TextBox7.Text) Then
                     verbrauch = TextBox19.Text / TextBox7.Text
-                    verbrauch = CSng(verbrauch.ToString("N2"))
+                    verbrauch = CSng(Math.Round(CDbl(verbrauch), 2))
                     Label5.Text = verbrauch.ToString + " l/sm"
                 End If
                 aenderung = True
@@ -644,12 +644,16 @@ Gefunden:
         '        dsToernverwaltung.Toernname.Rows(0)("Bootsname") = ComboBox1.Text
         '        dsToernverwaltung.Toernname.Rows(0)("letzterSegeltag") = CheckletzterTag.Checked
         '       If DBNull.Value.Equals(MaskedTextBox1.Text) Or DBNull.Value.Equals(MaskedTextBox2.Text) Then
-        If MaskedTextBox1.Text = "  ,  ," Or MaskedTextBox2.Text = "  ,  ," Then
+        If SafeData.IsBlankOrMask(MaskedTextBox1.Text) OrElse SafeData.IsBlankOrMask(MaskedTextBox2.Text) Then
             MsgBox("Datum von oder Datum bis ist nicht ausgefüllt! Speichern ist nicht möglich.")
             GoTo endeSpeichern
         End If
-        Dim d1 As Date = MaskedTextBox1.Text
-        Dim d2 As Date = MaskedTextBox2.Text
+        Dim d1 As Date
+        Dim d2 As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox1.Text, d1) OrElse Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, d2) Then
+            MsgBox("Datum von oder Datum bis hat ein falsches Format! Speichern ist nicht möglich.")
+            GoTo endeSpeichern
+        End If
         Dim diff As TimeSpan = d2 - d1
         If diff.Days < 0 Then
             MsgBox("--Datum bis--  liegt vor dem --Datum von--.")
@@ -852,17 +856,11 @@ endeSpeichern:
                 dAlter = 0
             End If
         Next
-        aaa = dAlter / bsTC.Count
-         If dAlter > 0 And bsTC.Count > 0 Then
-            If aaa > "0" Then
-                If aaa.Length > 2 Then
-                    GroupBox4.Text = "Crew      Durchschnittsalter: " + aaa.Substring(0, 4)
-                Else
-                    GroupBox4.Text = "Crew      Durchschnittsalter: " + aaa.Substring(0, 2)
-                End If
-            Else
-                GroupBox4.Text = "Crew"
-            End If
+        If dAlter > 0 AndAlso bsTC.Count > 0 Then
+            Dim durchschnitt As Double = CDbl(dAlter) / CDbl(bsTC.Count)
+            GroupBox4.Text = "Crew      Durchschnittsalter: " & durchschnitt.ToString("0.0")
+        Else
+            GroupBox4.Text = "Crew"
         End If
     End Sub
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
@@ -1090,13 +1088,20 @@ subende:
 
     Private Sub MaskedTextBox2_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox2.LostFocus
         Dim tage As Single
-        If CDate(MaskedTextBox2.Text) < Begruessung.anfang Or CDate(MaskedTextBox2.Text) > Begruessung.ende Then
+        Dim d2 As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, d2) Then
+            MsgBox("Datum hat falsches Format")
+            MaskedTextBox2.Text = vbNullString
+            MaskedTextBox2.Focus()
+            Exit Sub
+        End If
+        If d2 < Begruessung.anfang OrElse d2 > Begruessung.ende Then
             MsgBox("Datum hat falsches Format")
             MaskedTextBox2.Text = vbNullString
             MaskedTextBox2.Focus()
         Else
-            Dim d1 As Date = MaskedTextBox1.Text
-            Dim d2 As Date = MaskedTextBox2.Text
+            Dim d1 As Date
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox1.Text, d1) Then Exit Sub
             Dim diff As TimeSpan = d2 - d1
             tage = diff.Days
             TextBox4.Text = tage.ToString("#")
@@ -1104,9 +1109,10 @@ subende:
     End Sub
     Private Sub BordtageRechnung()
         Dim tage As Single
-        If MaskedTextBox1.Text > "  ,  ,    " Then
-            Dim d1 As Date = MaskedTextBox1.Text
-            Dim d2 As Date = MaskedTextBox2.Text
+        If Not SafeData.IsBlankOrMask(MaskedTextBox1.Text) Then
+            Dim d1 As Date
+            Dim d2 As Date
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox1.Text, d1) OrElse Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, d2) Then Exit Sub
             Dim diff As TimeSpan = d2 - d1
             tage = diff.Days
             If CheckletzterTag.Checked Then
@@ -1275,7 +1281,14 @@ ok:
         End If
     End Sub
     Private Sub MaskedTextBox1_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MaskedTextBox1.LostFocus
-        If CDate(MaskedTextBox1.Text) < Begruessung.anfang Or CDate(MaskedTextBox1.Text) > Begruessung.ende Then
+        Dim datum As Date
+        If Not SafeData.TryParseMaskedDate(MaskedTextBox1.Text, datum) Then
+            MsgBox("Datum hat falsches Format")
+            MaskedTextBox1.Text = vbNullString
+            MaskedTextBox1.Focus()
+            Exit Sub
+        End If
+        If datum < Begruessung.anfang OrElse datum > Begruessung.ende Then
             MsgBox("Datum hat falsches Format")
             MaskedTextBox1.Text = vbNullString
             MaskedTextBox1.Focus()
@@ -1397,10 +1410,16 @@ ok:
     Private Sub Nachtfahrten()
         If TextBox23.Text > "" Then
             Dim zwitage As Single
-            TextBox5.Text = MaskedTextBox8.Text.Substring(0, 2) - MaskedTextBox7.Text.Substring(0, 2)
+            Dim von1 As Date
+            Dim bis1 As Date
+            If Not SafeData.TryParseMaskedDate(MaskedTextBox7.Text, von1) OrElse Not SafeData.TryParseMaskedDate(MaskedTextBox8.Text, bis1) Then Exit Sub
+            TextBox5.Text = bis1.Day - von1.Day
             If TextBox36.Text > "" Then
                 zwitage = TextBox5.Text
-                TextBox5.Text = zwitage + MaskedTextBox10.Text.Substring(0, 2) - MaskedTextBox9.Text.Substring(0, 2)
+                Dim von2 As Date
+                Dim bis2 As Date
+                If Not SafeData.TryParseMaskedDate(MaskedTextBox9.Text, von2) OrElse Not SafeData.TryParseMaskedDate(MaskedTextBox10.Text, bis2) Then Exit Sub
+                TextBox5.Text = zwitage + bis2.Day - von2.Day
                 nachtfahrtenzaehler = 2
             Else
                 nachtfahrtenzaehler = 1
@@ -1490,9 +1509,11 @@ ok:
     Private Sub NachtansteuerungSpeichern()
         iii = DataGridView4.RowCount
         For i = 0 To iii - 2
-            If Not IsDBNull(DataGridView4.Rows(i).Cells(3).Value.ToString) Then
-                If DataGridView4.Rows(i).Cells(3).Value.ToString > "" Then
-                    SpeichernTC(DataGridView4.Rows(i).Cells(0).Value.ToString, DataGridView4.Rows(i).Cells(1).Value.ToString.Substring(0, 10), DataGridView4.Rows(i).Cells(2).Value.ToString, DataGridView4.Rows(i).Cells(3).Value.ToString, DataGridView4.Rows(i).Cells(4).Value.ToString)
+            Dim hafenValue As Object = DataGridView4.Rows(i).Cells(3).Value
+            If Not SafeData.IsNullOrEmptyValue(hafenValue) Then
+                Dim datumText As String = SafeData.FormatDateDe(DataGridView4.Rows(i).Cells(1).Value)
+                If datumText > "" Then
+                    SpeichernTC(SafeData.CoalesceString(DataGridView4.Rows(i).Cells(0).Value), datumText, SafeData.CoalesceString(DataGridView4.Rows(i).Cells(2).Value), SafeData.CoalesceString(hafenValue), SafeData.CoalesceString(DataGridView4.Rows(i).Cells(4).Value))
                 End If
             End If
         Next
@@ -1661,7 +1682,7 @@ ok:
     Private Sub TextBox19_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox19.TextChanged
         If IsNumeric(TextBox19.Text) And IsNumeric(TextBox7.Text) Then
             verbrauch = TextBox19.Text / TextBox7.Text
-            verbrauch = CSng(verbrauch.ToString("N2"))
+            verbrauch = CSng(Math.Round(CDbl(verbrauch), 2))
             Label5.Text = verbrauch.ToString + " l/sm"
         Else
             verbrauch = 0
@@ -1802,7 +1823,7 @@ Gefunden:
         For Each oFile In oFiles
             aaa = oFile.Name
             anz = Len(oFile.Name)
-            If (aaa.Substring(anz - 4, 4)).ToUpper = ".JPG" Or (aaa.Substring(anz - 5, 5)).ToUpper = ".JPEG" Then
+            If aaa.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) OrElse aaa.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) Then
                 ListBox4.Items.Add(oFile.Name)
             End If
         Next

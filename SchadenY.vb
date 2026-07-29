@@ -95,8 +95,8 @@
                 tAdapter.Fill(dsVersicherung.Versicherter)
                 Fenster("v")
             Case 1
-                bbb = dsVersicherung.Versicherter.Rows(0)("Abschlussdatum").ToString.Substring(0, 10)
-                aaa = dsVersicherung.Versicherter.Rows(0)("Gueltigbis").ToString.Substring(0, 10)
+                bbb = SafeData.FormatDateDe(dsVersicherung.Versicherter.Rows(0)("Abschlussdatum"))
+                aaa = SafeData.FormatDateDe(dsVersicherung.Versicherter.Rows(0)("Gueltigbis"))
                 Label21.Text = bbb + " bis " + aaa
                 Fenster("b")
                 TextBox34.Focus()

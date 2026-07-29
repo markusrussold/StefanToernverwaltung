@@ -155,7 +155,7 @@ Public Class Bordkassa
                 TextBox1.Text = TextBox22.Text
                 TextBox16.Text = TextBox1.Text      'Törnname
                 Bootsname = dsToernverwaltung.Toernname.Rows(0)("bootsname").ToString
-                Termin = dsToernverwaltung.Toernname.Rows(0)("datumvon").ToString.Substring(0, 10) + " bis " + dsToernverwaltung.Toernname.Rows(0)("datumbis").ToString.Substring(0, 10)
+                Termin = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon")) + " bis " + SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))
                 '           CrewlisteAnzeigen()
                 MaskedTextBox1.Text = Today
                 Dim rB As System.Data.DataRowView = bsBordkassa.Current
@@ -615,7 +615,7 @@ ende:
                     dsToernverwaltung.Temp.Rows(T_index)("Feld1") = dsToernverwaltung.Bordkassa.Rows(pi)("VZname").ToString
                     dsToernverwaltung.Temp.Rows(T_index)("Feld2") = dsToernverwaltung.Bordkassa.Rows(pi)("Betrag").ToString
                     dsToernverwaltung.Temp.Rows(T_index)("Feld3") = dsToernverwaltung.Bordkassa.Rows(pi)("Kategorie").ToString
-                    dsToernverwaltung.Temp.Rows(T_index)("Feld22") = dsToernverwaltung.Bordkassa.Rows(pi)("Datum").ToString.Substring(0, 10)
+                    dsToernverwaltung.Temp.Rows(T_index)("Feld22") = SafeData.FormatDateDe(dsToernverwaltung.Bordkassa.Rows(pi)("Datum"))
                     dsToernverwaltung.Temp.Rows(T_index)("Feld5") = dsToernverwaltung.Bordkassa.Rows(pi)("Verwendung").ToString
                     dsToernverwaltung.Temp.Rows(T_index)("Feld23") = dsToernverwaltung.Bordkassa.Rows(pi)("Bemerkung").ToString
                     taTemp.Update(dsToernverwaltung)
@@ -630,7 +630,7 @@ ende:
                         dsToernverwaltung.Temp.Rows(T_index)("Feld1") = dsToernverwaltung.Bordkassa.Rows(pi)("Waehrung").ToString
                         dsToernverwaltung.Temp.Rows(T_index)("Feld2") = dsToernverwaltung.Bordkassa.Rows(pi)("Betrag").ToString
                         dsToernverwaltung.Temp.Rows(T_index)("Feld3") = dsToernverwaltung.Bordkassa.Rows(pi)("W-Betrag").ToString
-                        dsToernverwaltung.Temp.Rows(T_index)("Feld22") = dsToernverwaltung.Bordkassa.Rows(pi)("Datum").ToString.Substring(0, 10)
+                        dsToernverwaltung.Temp.Rows(T_index)("Feld22") = SafeData.FormatDateDe(dsToernverwaltung.Bordkassa.Rows(pi)("Datum"))
                         dsToernverwaltung.Temp.Rows(T_index)("Feld5") = dsToernverwaltung.Bordkassa.Rows(pi)("Verwendung").ToString
                         taTemp.Update(dsToernverwaltung)
                         T_index += 1
@@ -642,7 +642,7 @@ ende:
                     dsToernverwaltung.Temp.Rows(T_index)("Feld0") = "4"                     ' Kategorie Buchungen
                     dsToernverwaltung.Temp.Rows(T_index)("Feld1") = kat
                     dsToernverwaltung.Temp.Rows(T_index)("Feld2") = vSaldo
-                    dsToernverwaltung.Temp.Rows(T_index)("Feld22") = dsToernverwaltung.Bordkassa.Rows(pi)("Datum").ToString.Substring(0, 10)
+                    dsToernverwaltung.Temp.Rows(T_index)("Feld22") = SafeData.FormatDateDe(dsToernverwaltung.Bordkassa.Rows(pi)("Datum"))
                     taTemp.Update(dsToernverwaltung)
                     T_index += 1
                     aaa = dsToernverwaltung.Bordkassa.Rows(pi)("Betrag").ToString
@@ -657,7 +657,7 @@ ende:
             dsToernverwaltung.Temp.Rows(T_index)("Feld0") = "4"                     ' Kategorie Buchungen
             dsToernverwaltung.Temp.Rows(T_index)("Feld1") = kat
             dsToernverwaltung.Temp.Rows(T_index)("Feld2") = vSaldo
-            dsToernverwaltung.Temp.Rows(T_index)("Feld22") = Today.ToString.Substring(0, 10)
+            dsToernverwaltung.Temp.Rows(T_index)("Feld22") = SafeData.FormatDateDe(Today)
             taTemp.Update(dsToernverwaltung)
             T_index += 1
         End If
@@ -674,7 +674,7 @@ ende:
             dsToernverwaltung.Temp.Rows(T_index)("Feld4") = ComboBox1.Items.Item(pii)
             dsToernverwaltung.Temp.Rows(T_index)("Feld5") = kauf
             dsToernverwaltung.Temp.Rows(T_index)("Feld6") = kassa
-            dsToernverwaltung.Temp.Rows(T_index)("Feld22") = Today.ToString.Substring(0, 10)
+            dsToernverwaltung.Temp.Rows(T_index)("Feld22") = SafeData.FormatDateDe(Today)
             taTemp.Update(dsToernverwaltung)
             T_index += 1
         Next
@@ -690,7 +690,7 @@ ende:
             dsToernverwaltung.Temp.Rows(T_index)("Feld4") = ComboBox1.Items.Item(pii)
             dsToernverwaltung.Temp.Rows(T_index)("Feld5") = kauf
             dsToernverwaltung.Temp.Rows(T_index)("Feld6") = kassa
-            dsToernverwaltung.Temp.Rows(T_index)("Feld22") = Today.ToString.Substring(0, 10)
+            dsToernverwaltung.Temp.Rows(T_index)("Feld22") = SafeData.FormatDateDe(Today)
             taTemp.Update(dsToernverwaltung)
             T_index += 1
         Next

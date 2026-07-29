@@ -79,8 +79,8 @@ Public Class SchadenYDruck
     End Sub
     Private Sub EinKunde()
         bsVersicherter.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
-        bbb = dsVersicherung.Versicherter.Rows(0)("Abschlussdatum").ToString.Substring(0, 10)
-        aaa = dsVersicherung.Versicherter.Rows(0)("Gueltigbis").ToString.Substring(0, 10)
+        bbb = SafeData.FormatDateDe(dsVersicherung.Versicherter.Rows(0)("Abschlussdatum"))
+        aaa = SafeData.FormatDateDe(dsVersicherung.Versicherter.Rows(0)("Gueltigbis"))
         Label21.Text = bbb + " bis " + aaa
         TextBox13.Focus()
     End Sub

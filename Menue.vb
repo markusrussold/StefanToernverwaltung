@@ -56,13 +56,13 @@
         Me.Text = "Törnverwaltung Version 13.02.04"
         '
         '
-        SaveSetting("Datenbank", "neu", "T", Text.Substring(23, 8))
+        SaveSetting("Datenbank", "neu", "T", SafeData.ExtractVersionStamp(Me.Text))
         version(Me.Text)
-        If Me.Text.Substring(0, 6) = "Falsch" Then
+        If Me.Text.StartsWith("Falsch") Then
             Application.Exit()
             End
         End If
-        SaveSetting("Datenbank", "alt", "T", Text.Substring(23, 8))
+        SaveSetting("Datenbank", "alt", "T", SafeData.ExtractVersionStamp(Me.Text))
 
 
         '   FreischaltZiffer:
@@ -200,56 +200,28 @@
             For i = 0 To bsBootKalkulation.Count - 1
                 leer = "Fällige Törnkosten:            "
                 saldo = False
-                faellig = Now
-                If dsToernverwaltung.BootKalkulation.Rows(i)("datumanzahlung").ToString > "" Then
-                    datum2 = dsToernverwaltung.BootKalkulation.Rows(i)("datumanzahlung").ToString
-                    datum4 = New System.DateTime(datum2.ToString.Substring(6, 4), datum2.ToString.Substring(3, 2), datum2.ToString.Substring(0, 2))
+                faellig = FormatDateDe(Now)
+                Dim dueAnzahlung As Date
+                If SafeData.TryParseDate(dsToernverwaltung.BootKalkulation.Rows(i)("datumanzahlung"), dueAnzahlung) Then
+                    datum4 = dueAnzahlung
                     If datum1 > datum4 Then
-                        '           End If
-                        '                        If datum1.ToString.Substring(0, 2) >= datum2.ToString.Substring(0, 2) And datum1.ToString.Substring(3, 2) >= datum2.ToString.Substring(3, 2) And datum1.ToString.Substring(6, 4) >= datum2.ToString.Substring(6, 4) Then
-                        '                 If dsToernverwaltung.BootKalkulation.Rows(i)("datumanzahlung").ToString > Now Then
-                        If dsToernverwaltung.BootKalkulation.Rows(i)("r1").ToString > "" Then
-                            btrgr1 = dsToernverwaltung.BootKalkulation.Rows(i)("r1").ToString
-                        Else
-                            btrgr1 = 0
-                        End If
-                        If dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString > "" Then
-                            btrgbe = dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString
-                        Else
-                            btrgbe = 0
-                        End If
-                        If Now > dsToernverwaltung.BootKalkulation.Rows(i)("datumanzahlung").ToString And btrgbe < btrgr1 Then
-                            If dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString > " " Then
-                                saldobetrag = dsToernverwaltung.BootKalkulation.Rows(i)("r1").ToString - dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString
-                            Else
-                                saldobetrag = dsToernverwaltung.BootKalkulation.Rows(i)("r1").ToString
-                            End If
+                        btrgr1 = SafeData.ParseNumberOrZero(dsToernverwaltung.BootKalkulation.Rows(i)("r1"))
+                        btrgbe = SafeData.ParseNumberOrZero(dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt"))
+                        If Now.Date > dueAnzahlung.Date And btrgbe < btrgr1 Then
+                            saldobetrag = CSng(btrgr1 - btrgbe)
                             saldo = True
-                            faellig = dsToernverwaltung.BootKalkulation.Rows(i)("datumanzahlung").ToString
+                            faellig = FormatDateDe(dueAnzahlung)
                         End If
                     End If
                 End If
-                ' 
-                If dsToernverwaltung.BootKalkulation.Rows(i)("datumrest").ToString > "" Then
-                    datum2 = dsToernverwaltung.BootKalkulation.Rows(i)("datumrest").ToString
-                    datum4 = New System.DateTime(datum2.ToString.Substring(6, 4), datum2.ToString.Substring(3, 2), datum2.ToString.Substring(0, 2))
+                Dim dueRest As Date
+                If SafeData.TryParseDate(dsToernverwaltung.BootKalkulation.Rows(i)("datumrest"), dueRest) Then
+                    datum4 = dueRest
                     If datum1 > datum4 Then
-                        If dsToernverwaltung.BootKalkulation.Rows(i)("anteil").ToString > "" Then
-                            btrgre = dsToernverwaltung.BootKalkulation.Rows(i)("anteil").ToString
-                        Else
-                            btrgre = 0
-                        End If
-                        If dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString > "" Then
-                            btrgbe = dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString
-                        Else
-                            btrgbe = 0
-                        End If
-                        If Now > dsToernverwaltung.BootKalkulation.Rows(i)("datumrest").ToString And btrgbe < btrgre Then
-                            If dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString > " " Then
-                                saldobetrag = dsToernverwaltung.BootKalkulation.Rows(i)("anteil").ToString - dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt").ToString
-                            Else
-                                saldobetrag = dsToernverwaltung.BootKalkulation.Rows(i)("anteil").ToString
-                            End If
+                        btrgre = SafeData.ParseNumberOrZero(dsToernverwaltung.BootKalkulation.Rows(i)("anteil"))
+                        btrgbe = SafeData.ParseNumberOrZero(dsToernverwaltung.BootKalkulation.Rows(i)("bezahlt"))
+                        If Now.Date > dueRest.Date And btrgbe < btrgre Then
+                            saldobetrag = CSng(btrgre - btrgbe)
                             Select Case Len(Format(saldobetrag, "0.00"))
                                 Case 4
                                     rechts = "     "
@@ -261,7 +233,7 @@
                             If saldobetrag > 0 Then
                                 saldo = True
                             End If
-                            faellig = dsToernverwaltung.BootKalkulation.Rows(i)("datumrest").ToString
+                            faellig = FormatDateDe(dueRest)
                         End If
                     End If
                 End If
@@ -269,11 +241,11 @@
                 schuldner = dsToernverwaltung.BootKalkulation.Rows(i)("vzname").ToString + "/" + dsToernverwaltung.BootKalkulation.Rows(i)("toern").ToString
                 If j > 0 Then
                     If Len(schuldner) > 70 Then
-                        schuldner = schuldner.Substring(0, 70)
+                        schuldner = SafeData.LeftSafe(schuldner, 70)
                     End If
                 Else
                     If Len(schuldner) > 55 Then
-                        schuldner = schuldner.Substring(0, 55) + "..."
+                        schuldner = SafeData.LeftSafe(schuldner, 55) + "..."
                     End If
                 End If
                 SaldoZeigen(rechts, saldobetrag, saldo, schuldner)
@@ -301,9 +273,13 @@
                         GoTo weiter
                     End If
                 End If
-                    geburtstag = dsToernverwaltung.CrewAdressen.Rows(i)("gebdatum").ToString.Substring(0, 10)
-                    alter = Year(Today) - geburtstag.Substring(6, 4)
-                    If geburtstag.Substring(0, 2) = ttag Then
+                    Dim gebDat As Date
+                    If Not SafeData.TryParseDate(dsToernverwaltung.CrewAdressen.Rows(i)("gebdatum"), gebDat) Then
+                        GoTo weiter
+                    End If
+                    geburtstag = FormatDateDe(gebDat)
+                    alter = Year(Today) - Year(gebDat)
+                    If gebDat.Day = ttag Then
                         If leerJN Then
                             leer = "Geburtstage heute:            "
                             leerJN = False
@@ -312,7 +288,7 @@
                         End If
                         geburtstag = geburtstag + "    ist " + Str(alter)
                     End If
-                    If geburtstag.Substring(0, 2) > ttag Then
+                    If gebDat.Day > ttag Then
                         If leerJN1 Then
                             leer = "Geburtstage demnächst:  "
                             leerJN1 = False
@@ -473,72 +449,72 @@ weiter:
                 Case 0
                     Label11.Visible = True
                     Label11.Text = leer + Name
-                    Label25.Text = faellig.Substring(0, 10)
+                    Label25.Text = SafeData.LeftSafe(faellig, 10)
                     Label40.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 1
                     Label12.Visible = True
                     Label12.Text = leer + Name
-                    Label27.Text = faellig.Substring(0, 10)
+                    Label27.Text = SafeData.LeftSafe(faellig, 10)
                     Label41.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 2
                     Label13.Visible = True
                     Label13.Text = leer + Name
-                    Label28.Text = faellig.Substring(0, 10)
+                    Label28.Text = SafeData.LeftSafe(faellig, 10)
                     Label42.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 3
                     Label14.Visible = True
                     Label14.Text = leer + Name
-                    Label29.Text = faellig.Substring(0, 10)
+                    Label29.Text = SafeData.LeftSafe(faellig, 10)
                     Label43.Text = Format(saldobetrag, "  0.00") + " €"
                 Case 4
                     Label15.Visible = True
                     Label15.Text = leer + Name
-                    Label30.Text = faellig.Substring(0, 10)
+                    Label30.Text = SafeData.LeftSafe(faellig, 10)
                     Label44.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 5
                     Label16.Visible = True
                     Label16.Text = leer + Name
-                    Label31.Text = faellig.Substring(0, 10)
+                    Label31.Text = SafeData.LeftSafe(faellig, 10)
                     Label45.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 6
                     Label17.Visible = True
                     Label17.Text = leer + Name
-                    Label32.Text = faellig.Substring(0, 10)
+                    Label32.Text = SafeData.LeftSafe(faellig, 10)
                     Label46.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 7
                     Label18.Visible = True
                     Label18.Text = leer + Name
-                    Label33.Text = faellig.Substring(0, 10)
+                    Label33.Text = SafeData.LeftSafe(faellig, 10)
                     Label47.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 8
                     Label19.Visible = True
                     Label19.Text = leer + Name
-                    Label34.Text = faellig.Substring(0, 10)
+                    Label34.Text = SafeData.LeftSafe(faellig, 10)
                     Label48.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 9
                     Label20.Visible = True
                     Label20.Text = leer + Name
-                    Label35.Text = faellig.Substring(0, 10)
+                    Label35.Text = SafeData.LeftSafe(faellig, 10)
                     Label49.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 10
                     Label21.Visible = True
                     Label21.Text = leer + Name
-                    Label36.Text = faellig.Substring(0, 10)
+                    Label36.Text = SafeData.LeftSafe(faellig, 10)
                     Label50.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 11
                     Label22.Visible = True
                     Label22.Text = leer + Name
-                    Label37.Text = faellig.Substring(0, 10)
+                    Label37.Text = SafeData.LeftSafe(faellig, 10)
                     Label51.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 12
                     Label23.Visible = True
                     Label23.Text = leer + Name
-                    Label38.Text = faellig.Substring(0, 10)
+                    Label38.Text = SafeData.LeftSafe(faellig, 10)
                     Label52.Text = rechts + Format(saldobetrag, "  0.00") + " €"
                 Case 13
                     Label24.Visible = True
                     Label24.Text = leer + Name
-                    Label39.Text = faellig.Substring(0, 10)
+                    Label39.Text = SafeData.LeftSafe(faellig, 10)
                     Label53.Text = rechts + Format(saldobetrag, "  0.00") + " €"
             End Select
             MeldungsZeile += 1
@@ -739,10 +715,11 @@ weiter:
             dsToernverwaltung.Steuerdaten.Clear()
             sAdapter.Fill(dsToernverwaltung.Steuerdaten)
         End If
-        If dsToernverwaltung.Steuerdaten.Rows(0)("bezeichnung").ToString = "Version" And dsToernverwaltung.Steuerdaten.Rows(0)("feld1").ToString >= Vers.ToString.Substring(23, 2) Then
+        Dim requiredMajor As Integer = SafeData.ExtractVersionMajor(Convert.ToString(Vers))
+        If dsToernverwaltung.Steuerdaten.Rows(0)("bezeichnung").ToString = "Version" AndAlso SafeData.VersionAtLeast(dsToernverwaltung.Steuerdaten.Rows(0)("feld1"), requiredMajor) Then
         Else
             If My.Computer.FileSystem.FileExists("Toernverwaltung.mdb") And My.Computer.FileSystem.FileExists("update.exe") Then
-                SaveSetting("Datenbank", "vorhanden", "T", Text.Substring(23, 8))
+                SaveSetting("Datenbank", "vorhanden", "T", SafeData.ExtractVersionStamp(Me.Text))
                 Process.Start("Update.exe")
             End If
             ' Schema/Version werden von DatabaseBootstrap sichergestellt; Stempel hier aktualisieren.
@@ -750,7 +727,7 @@ weiter:
                 bsSteuerdaten.AddNew()
             End If
             dsToernverwaltung.Steuerdaten.Rows(0)("Bezeichnung") = "Version"
-            dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = Vers.ToString.Substring(23, 2)
+            dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = requiredMajor.ToString(Globalization.CultureInfo.InvariantCulture)
             bsSteuerdaten.EndEdit()
             taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
         End If
