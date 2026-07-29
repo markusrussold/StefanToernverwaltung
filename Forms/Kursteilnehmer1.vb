@@ -1,4 +1,4 @@
-﻿Public Class Kursteilnehmer1
+Public Class Kursteilnehmer1
     Dim aenderung As Boolean
     Dim VNaenderung As Boolean
     Dim kostendatum As Boolean
@@ -33,7 +33,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         bsCrewAdressen.AddNew()
 
         Dim t As System.Data.DataRowView = bsTeilnehmer.Current
@@ -54,7 +54,7 @@
         kAdapter.SelectCommand.CommandText = "Select * from Kurse  order by Kursbezeichnung,Fahrtbereich"
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
         bsKurse.AddNew()
 
         Dim mk As System.Data.DataRowView = bsMaterialKurs.Current
@@ -136,7 +136,7 @@
                 '               Formularloeschen()
             Case 1
                 bsTeilnehmer.AddNew()
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 If dsToernverwaltung.CrewAdressen.Rows(0)("Clubmitglied").ToString Then
                     Label10.Visible = True
                 End If
@@ -179,7 +179,7 @@
                 DsAusbildung.Kurse.Clear()
                 kAdapter.Fill(DsAusbildung.Kurse)
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis1").ToString)
                 ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis2").ToString)
                 ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis3").ToString)

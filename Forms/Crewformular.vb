@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports System.Text
 Public Class Crewformular
     Dim aaa As String
@@ -23,7 +23,7 @@ Public Class Crewformular
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         bsCrewAdressen.AddNew()
         bsCrewAdressen.AddNew()
         If RadioButton2.Checked Then
@@ -282,7 +282,7 @@ Public Class Crewformular
                 DataGridView1.Visible = True
                 DataGridView1.Location = New Point(10, 20)
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
             Case Else
                 position = 0

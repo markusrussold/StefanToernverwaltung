@@ -1,4 +1,4 @@
-﻿Imports System.Data.OleDb
+Imports System.Data.OleDb
 Imports System.Data
 Public Class ImportNeu
     Dim aaa As String
@@ -71,13 +71,14 @@ Public Class ImportNeu
         ImportStart.Enabled = False
     End Sub
     Private Sub ToernameImport()
-        loeschenVerw("DELETE * FROM Toernname where Toernbezeichnung = '" & TextBox1.Text & "' ")
+        loeschenVerw("DELETE * FROM Toernname where Toernbezeichnung = ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM ToernnameE WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM ToernnameE WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -159,13 +160,14 @@ Public Class ImportNeu
         connZiel.Close()
     End Sub
     Private Sub TCEImport()
-        loeschenVerw("DELETE * FROM TC where Toern = '" & TextBox1.Text & "' ")
+        loeschenVerw("DELETE * FROM TC where Toern = ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM TCE WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM TCE WHERE Toern = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -204,13 +206,14 @@ Public Class ImportNeu
         connZiel.Close()
     End Sub
     Private Sub BootImport()
-        loeschenVerw("DELETE * FROM Boot where Bootname = '" & TextBox4.Text & "' ")
+        loeschenVerw("DELETE * FROM Boot where Bootname = ?", TextBox4.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM BootE WHERE Bootname = '" & SafeData.SqlQuote(TextBox4.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM BootE WHERE Bootname = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox4.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -281,13 +284,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub Charterimport()
-        loeschenVerw("DELETE * FROM Charter where Charterfirma = '" & TextBox6.Text & "' ")
+        loeschenVerw("DELETE * FROM Charter where Charterfirma = ?", TextBox6.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM CharterE WHERE Charterfirma = '" & SafeData.SqlQuote(TextBox6.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM CharterE WHERE Charterfirma = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox6.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -327,13 +331,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub AgenturImport()
-        loeschenVerw("DELETE * FROM Agentur where Agentur = '" & TextBox5.Text & "' ")
+        loeschenVerw("DELETE * FROM Agentur where Agentur = ?", TextBox5.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM AgenturE WHERE Agentur = '" & SafeData.SqlQuote(TextBox5.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM AgenturE WHERE Agentur = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox5.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -368,13 +373,14 @@ Public Class ImportNeu
         connZiel.Close()
     End Sub
     Private Sub Wacheplanimport()
-        loeschenVerw("DELETE * FROM Wacheplan where toern= '" & TextBox1.Text & "' ")
+        loeschenVerw("DELETE * FROM Wacheplan where toern= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Wacheplan WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Wacheplan WHERE Toern = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -410,13 +416,14 @@ Public Class ImportNeu
         connZiel.Close()
     End Sub
     Private Sub bordkassaimport()
-        loeschenVerw("DELETE * FROM Bordkassa where toern= '" & TextBox1.Text & "' ")
+        loeschenVerw("DELETE * FROM Bordkassa where toern= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Bordkassa WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Bordkassa WHERE Toern = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -451,13 +458,14 @@ Public Class ImportNeu
 
 
     Private Sub BootLogimport()
-        loeschendat("DELETE * FROM Bootlog where Bootname= '" & TextBox4.Text & "' ")
+        loeschendat("DELETE * FROM Bootlog where Bootname= ?", TextBox4.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Bootlog WHERE Bootname = '" & SafeData.SqlQuote(TextBox4.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Bootlog WHERE Bootname = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox4.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -486,13 +494,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub sicherimport()
-        loeschendat("DELETE * FROM Sicherheitseinweisung where toernbezeichnung= '" & TextBox1.Text & "' ")
+        loeschendat("DELETE * FROM Sicherheitseinweisung where toernbezeichnung= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Sicherheitseinweisung WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Sicherheitseinweisung WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -536,13 +545,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub Toerndatenimport()
-        loeschendat("DELETE * FROM Toerndaten where toernbezeichnung= '" & TextBox1.Text & "' ")
+        loeschendat("DELETE * FROM Toerndaten where toernbezeichnung= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Toerndaten WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Toerndaten WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -588,13 +598,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub DokumentationImport()
-        loeschendat("DELETE * FROM Dokumentation where toernbezeichnung= '" & TextBox1.Text & "' ")
+        loeschendat("DELETE * FROM Dokumentation where toernbezeichnung= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Dokumentation WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Dokumentation WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -639,13 +650,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub LogDatenimport()
-        loeschendat("DELETE * FROM Logdaten where toerbezeichnung= '" & TextBox1.Text & "' ")
+        loeschendat("DELETE * FROM Logdaten where toerbezeichnung= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM LogDaten WHERE Toerbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM LogDaten WHERE Toerbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -683,13 +695,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub Maengelimport()
-        loeschendat("DELETE * FROM Maengel where toernbezeichnung= '" & TextBox1.Text & "' ")
+        loeschendat("DELETE * FROM Maengel where toernbezeichnung= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Maengel WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Maengel WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -717,12 +730,13 @@ Public Class ImportNeu
         connZiel.Close()
     End Sub
     Private Sub Zusammenfassung2Import()
-        loeschendat("DELETE * FROM Zusammenfassung2 where toernbezeichnung= '" & TextBox1.Text & "' ")
+        loeschendat("DELETE * FROM Zusammenfassung2 where toernbezeichnung= ?", TextBox1.Text)
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Zusammenfassung2 WHERE Toernbezeichnung = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM Zusammenfassung2 WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -761,13 +775,14 @@ Public Class ImportNeu
 
     End Sub
     Private Sub LogWacheplanimport()
-        loeschendat("DELETE * FROM LogWacheplan where toern= '" & TextBox1.Text & "' ")
+        loeschendat("DELETE * FROM LogWacheplan where toern= ?", TextBox1.Text)
 
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM LogWacheplan WHERE Toern = '" & SafeData.SqlQuote(TextBox1.Text) & "' "
+        Dim sqlSelect As String = "SELECT * FROM LogWacheplan WHERE Toern = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", TextBox1.Text)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -802,30 +817,42 @@ Public Class ImportNeu
         connZiel.Close()
     End Sub
 
-    Private Sub loeschenVerw(ByVal sql)
+    Private Sub loeschenVerw(ByVal sql As String, Optional ByVal paramValue As Object = Nothing)
         Dim conn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb;")
         Dim cmd As New OleDbCommand(sql, conn)
+        If paramValue IsNot Nothing Then
+            cmd.Parameters.AddWithValue("@p1", paramValue)
+        End If
 
         Try
-            conn.Open()
-            Dim anzahl As Integer = cmd.ExecuteNonQuery()
-            Console.WriteLine("Es wurden " & anzahl & " Datensätze gelöscht.")
+            DbAccess.WithRetry(Sub()
+                                   If conn.State <> ConnectionState.Open Then conn.Open()
+                                   Dim anzahl As Integer = cmd.ExecuteNonQuery()
+                                   Console.WriteLine("Es wurden " & anzahl & " Datensätze gelöscht.")
+                               End Sub)
         Catch ex As Exception
+            AppLog.ErrorLog("loeschenVerw: " & sql, ex)
             Console.WriteLine("Fehler: " & ex.Message)
         Finally
             conn.Close()
         End Try
 
     End Sub
-    Private Sub loeschendat(ByVal sql)
+    Private Sub loeschendat(ByVal sql As String, Optional ByVal paramValue As Object = Nothing)
         Dim conn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb;")
         Dim cmd As New OleDbCommand(sql, conn)
+        If paramValue IsNot Nothing Then
+            cmd.Parameters.AddWithValue("@p1", paramValue)
+        End If
 
         Try
-            conn.Open()
-            Dim anzahl As Integer = cmd.ExecuteNonQuery()
-            Console.WriteLine("Es wurden " & anzahl & " Datensätze gelöscht.")
+            DbAccess.WithRetry(Sub()
+                                   If conn.State <> ConnectionState.Open Then conn.Open()
+                                   Dim anzahl As Integer = cmd.ExecuteNonQuery()
+                                   Console.WriteLine("Es wurden " & anzahl & " Datensätze gelöscht.")
+                               End Sub)
         Catch ex As Exception
+            AppLog.ErrorLog("loeschendat: " & sql, ex)
             Console.WriteLine("Fehler: " & ex.Message)
         Finally
             conn.Close()

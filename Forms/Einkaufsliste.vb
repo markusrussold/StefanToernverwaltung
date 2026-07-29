@@ -1,4 +1,4 @@
-﻿Public Class Einkaufsliste
+Public Class Einkaufsliste
     Dim fbreite As Integer
     Dim fhoehe As Integer
     Public iii As Integer
@@ -88,7 +88,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 '                Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label2.Text = "Bootsname: " + dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 Label1.Text = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon")) + " - " + SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))
                 gbArbeitsbox.Location = New Point(12000, 94)

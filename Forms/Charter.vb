@@ -27,7 +27,7 @@ Public Class Charter
         bsCharter.CancelEdit()
         dsToernverwaltung.Charter.Clear()
         pAdapter.Fill(dsToernverwaltung.Charter)
-        bsCharter.Position = 0
+        DbAccess.SafePosition(bsCharter)
         aaa = bsCharter.Count
         Label13.Text = "Anzahl der gespeicherten Charterfirmen: " + aaa
         bsCharter.AddNew()
@@ -46,7 +46,7 @@ Public Class Charter
         bsAgentur.CancelEdit()
         dsToernverwaltung.Agentur.Clear()
         pAdapter.Fill(dsToernverwaltung.Agentur)
-        bsAgentur.Position = 0
+        DbAccess.SafePosition(bsAgentur)
         For i = 0 To bsAgentur.Count - 1
             ComboBox1.Items.Add(dsToernverwaltung.Agentur.Rows(i)("Agentur").ToString)
         Next
@@ -161,7 +161,7 @@ Public Class Charter
                 xAdapter.Fill(dsToernverwaltung.Charter)
                 Formularloeschen()
             Case 1
-                bsCharter.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCharter)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 GroupBox2.Text = "Bemerkung"
                 GroupBox1.Enabled = True

@@ -1,4 +1,4 @@
-﻿Public Class ErsterTag
+Public Class ErsterTag
     Dim fbreite As Integer
     Dim fhoehe As Integer
     Public iii As Integer
@@ -46,7 +46,7 @@
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen1(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen1(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -130,7 +130,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 '                Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label2.Text = "Bootsname: " + dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 lbCrew.Items.Add(dsToernverwaltung.Toernname.Rows(0)("skipper").ToString)
                 Label1.Text = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon")) + " - " + SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))

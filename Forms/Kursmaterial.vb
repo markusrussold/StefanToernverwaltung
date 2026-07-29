@@ -1,4 +1,4 @@
-﻿Public Class Kursmaterial
+Public Class Kursmaterial
     Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -22,7 +22,7 @@
         bsKursmaterial.CancelEdit()
         DsAusbildung.Kursmaterial.Clear()
         pAdapter.Fill(DsAusbildung.Kursmaterial)
-        bsKursmaterial.Position = 0
+        DbAccess.SafePosition(bsKursmaterial)
         bsKursmaterial.AddNew()
         If Menü.FreischaltZiffer = "2" Or Menü.FreischaltZiffer = "3" Then
             MsgBox("Die freie Kursverwaltung ist auf 3 Sätze eingeschränkt.")
@@ -114,7 +114,7 @@
                 pAdapter.Fill(DsAusbildung.Kursmaterial)
                 Formularloeschen()
             Case 1
-                bsKursmaterial.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKursmaterial)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
             Case Else
                 DataGridView1.Columns(0).Frozen = True

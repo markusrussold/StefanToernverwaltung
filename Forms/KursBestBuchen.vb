@@ -1,4 +1,4 @@
-﻿Public Class KursBestBuchen
+Public Class KursBestBuchen
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kmAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim mkAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -44,7 +44,7 @@
         bsMaterialKurs.CancelEdit()
         DsAusbildung.MaterialKurs.Clear()
         mkAdapter.Fill(DsAusbildung.MaterialKurs)
-        bsMaterialKurs.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsMaterialKurs)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         bsMaterialKurs.AddNew()
 
         Dim km As System.Data.DataRowView = bsKursmaterial.Current
@@ -54,7 +54,7 @@
         bsKursmaterial.CancelEdit()
         DsAusbildung.Kursmaterial.Clear()
         mkAdapter.Fill(DsAusbildung.Kursmaterial)
-        bsKursmaterial.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsKursmaterial)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
     End Sub
     Private Sub SuchenTeilnehmer()
         If TextBox12.Text > "  " And TextBox11.Text > "  " And TextBox23.Text = "" Then
@@ -111,7 +111,7 @@
                 DsAusbildung.Kurse.Clear()
                 kAdapter.Fill(DsAusbildung.Kurse)
             Case 1
-                '               bsMaterialKurs.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                '               DbAccess.SafePosition(bsMaterialKurs)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView4.Visible = False
                 GroupBox2.Location = New Point(12, 155)
                 SuchenTeilnehmer()

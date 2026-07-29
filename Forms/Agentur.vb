@@ -26,7 +26,7 @@ Public Class Agentur
         bsAgentur.CancelEdit()
         dsToernverwaltung.Agentur.Clear()
         pAdapter.Fill(dsToernverwaltung.Agentur)
-        bsAgentur.Position = 0
+        DbAccess.SafePosition(bsAgentur)
         aaa = bsAgentur.Count
         aaa = pAdapter.SelectCommand.CommandText = "Select count from Agentur"
 
@@ -151,7 +151,7 @@ Public Class Agentur
                 xAdapter.Fill(dsToernverwaltung.Agentur)
                 Formularloeschen()
             Case 1
-                bsAgentur.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsAgentur)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 GroupBox2.Text = "Bemerkung"
                 GroupBox1.Enabled = True

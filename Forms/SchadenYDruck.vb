@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Public Class SchadenYDruck
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim sAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -74,11 +74,11 @@ Public Class SchadenYDruck
             Case 1
                 EinKunde()
             Case Else
-                bsVersicherter.Position = 0
+                DbAccess.SafePosition(bsVersicherter)
         End Select
     End Sub
     Private Sub EinKunde()
-        bsVersicherter.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsVersicherter)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         bbb = SafeData.FormatDateDe(dsVersicherung.Versicherter.Rows(0)("Abschlussdatum"))
         aaa = SafeData.FormatDateDe(dsVersicherung.Versicherter.Rows(0)("Gueltigbis"))
         Label21.Text = bbb + " bis " + aaa
@@ -117,7 +117,7 @@ Public Class SchadenYDruck
                 dsToernverwaltung.Toernname.Clear()
                 xAdapter.Fill(dsToernverwaltung.Toernname)
             Case 1
-                bsToernname.Position = 0
+                DbAccess.SafePosition(bsToernname)
                 sucheSchaden()
             Case Else
         End Select
@@ -144,7 +144,7 @@ Public Class SchadenYDruck
                         Label2.Text = "Rücktritt Versicherung"
                 End Select
             Case Else
-                bsSchaden.Position = 0
+                DbAccess.SafePosition(bsSchaden)
                 MsgBox("Von dem Törn  " & Convert.ToString(TextBox13.Text) & " ist noch kein Schaden erfasst.")
         End Select
         TextBox13.Focus()

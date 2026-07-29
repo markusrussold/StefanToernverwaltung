@@ -1,4 +1,4 @@
-﻿Public Class ComboMarketing
+Public Class ComboMarketing
     Public aaa As String
     Public zz As String = 0
     Public iii As Integer
@@ -21,7 +21,7 @@
         bsListbox.CancelEdit()
         dsausbildung.Listbox.Clear()
         pAdapter.Fill(dsausbildung.Listbox)
-        bsListbox.Position = 0
+        DbAccess.SafePosition(bsListbox)
         iii = bsListbox.Count - 1
         For i = 0 To iii
             aaa = DsAusbildung.Listbox.Rows(i)("FormularName").ToString
@@ -43,7 +43,7 @@
         dsausbildung.Listbox.Clear()
         pAdapter.Fill(dsausbildung.Listbox)
         If bsListbox.Count = 1 Then
-            bsListbox.Position = 0
+            DbAccess.SafePosition(bsListbox)
             zz = 0
             listboxFuellen(dsausbildung.Listbox.Rows(0)("Feld1").ToString)
             listboxFuellen(dsausbildung.Listbox.Rows(0)("Feld2").ToString)

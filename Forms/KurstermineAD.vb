@@ -1,4 +1,4 @@
-﻿Public Class KurstermineAD
+Public Class KurstermineAD
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim teAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -20,7 +20,7 @@
         kAdapter.SelectCommand.CommandText = "Select * from Kurse  order by Kursbeginn desc "
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
     End Sub
 
     Private Sub PictureBox3_Click(sender As System.Object, e As System.EventArgs) Handles PictureBox3.Click
@@ -40,7 +40,7 @@
                 MsgBox("Keine Kurskurse mit gesuchtem Kurs vorhanden.")
                 DataGridView2.Visible = True
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView2.Visible = False
                 '               ku = TextBox7.Text
                 '              fa = TextBox6.Text

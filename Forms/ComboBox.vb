@@ -1,4 +1,4 @@
-﻿Public Class ComboBox
+Public Class ComboBox
     Public aaa As String
     Public zz As String = 0
     Public iii As Integer
@@ -42,7 +42,7 @@
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         iii = bsListdaten.Count - 1
         For i = 0 To iii
             aaa = dsToernverwaltung.Listdaten.Rows(i)("Bezeichnung").ToString
@@ -64,7 +64,7 @@
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
         If bsListdaten.Count = 1 Then
-            bsListdaten.Position = 0
+            DbAccess.SafePosition(bsListdaten)
             zz = 0
             listboxFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             listboxFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)

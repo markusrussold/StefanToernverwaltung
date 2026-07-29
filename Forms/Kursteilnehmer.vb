@@ -1,4 +1,4 @@
-﻿Public Class Kursteilnehmer
+Public Class Kursteilnehmer
     Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -37,7 +37,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         bsCrewAdressen.AddNew()
 
         Dim t As System.Data.DataRowView = bsTeilnehmer.Current
@@ -58,7 +58,7 @@
         kAdapter.SelectCommand.CommandText = "Select * from Kurse  order by Kursbezeichnung,Fahrtbereich"
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
         bsKurse.AddNew()
 
         Dim mk As System.Data.DataRowView = bsMaterialKurs.Current
@@ -181,7 +181,7 @@
                 GroupBox3.Location = New Point(25, 300)
             Case 1
                 bsTeilnehmer.AddNew()
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 GroupBox3.Visible = False
                 GroupBox2.Location = New Point(25, 300)
                 GroupBox2.Visible = True
@@ -249,7 +249,7 @@ Gefunden:
                 GroupBox6.Visible = True
                 GroupBox6.Location = New Point(25, 300)
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 GroupBox6.Visible = False
                 ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis1").ToString)
                 ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis2").ToString)
@@ -306,7 +306,7 @@ Gefunden:
                     tAdapter.Fill(DsAusbildung.Teilnehmer)
                 End If
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 GroupBox6.Visible = False
                 GroupBox7.Visible = False
                 GroupBox8.Enabled = True
@@ -563,7 +563,7 @@ Gefunden:
         kAdapter.SelectCommand.CommandText = "Select * from Kurse  order by Kursbezeichnung,Fahrtbereich"
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
         TextBox2.Text = ""
         TextBox3.Text = ""
         suchenKurs()

@@ -1,4 +1,4 @@
-﻿Public Class Veranstalltung
+Public Class Veranstalltung
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim aAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim vAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -176,7 +176,7 @@
                 vAdapter.Fill(DsAusbildung.Veranstaltungen)
                 '               Formularloeschen()
             Case 1
-                bsVeranstaltungen.Position = 0                 'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsVeranstaltungen)                 'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 ListBox1.Enabled = True
                 '               TextBox13.Text = TextBox1.Text
                 GroupBox2.Visible = False
@@ -260,7 +260,7 @@
             Case 0
                 msg = MsgBox("  Ist " & Convert.ToString(TextBox5.Text) & " ein in der Datenbank nicht gespeicherter Teilnehmer?", 1, "Teilnehmer übernehmen?")
                 If msg = vbOK Then
-                    bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                    DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                     '                  GroupBox3.Visible = False
                     '                 GroupBox1.Visible = True
                     TextBox2.Text = TextBox5.Text
@@ -277,7 +277,7 @@
                     DataGridView1.Location = New Point(10, 20)
                 End If
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 TextBox5.Text = TextBox18.Text
                 '              GroupBox3.Visible = False
                 '             GroupBox1.Visible = True
@@ -511,7 +511,7 @@ Gefunden:
                 bsCrewAdressen.CancelEdit()
                 dsToernverwaltung.CrewAdressen.Clear()
                 aAdapter.Fill(dsToernverwaltung.CrewAdressen)
-                bsCrewAdressen.Position = 0
+                DbAccess.SafePosition(bsCrewAdressen)
                 If bsCrewAdressen.Count = 1 Then
                     nm = dsToernverwaltung.CrewAdressen.Rows(0)("zuname").ToString
                     vnm = dsToernverwaltung.CrewAdressen.Rows(0)("vorname").ToString
@@ -684,7 +684,7 @@ Gefunden:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7", "Feld22", "Feld8")
         XLA.PrintAktion(t)
@@ -734,7 +734,7 @@ Gefunden:
                 xAdapter.Fill(DsAusbildung.Standort)
                 '              Formularloeschen()
             Case 1
-                bsStandort.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsStandort)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 TextBox19.Text = TextBox15.Text
                 TextBox16.Text = DsAusbildung.Standort.Rows(0)("Plz").ToString + " " + DsAusbildung.Standort.Rows(0)("Ort").ToString + ", " + DsAusbildung.Standort.Rows(0)("Strasse").ToString

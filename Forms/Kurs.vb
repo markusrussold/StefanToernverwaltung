@@ -1,4 +1,4 @@
-﻿Public Class Kurs
+Public Class Kurs
     Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -34,7 +34,7 @@
         bsKurse.CancelEdit()
         DsAusbildung.Kurse.Clear()
         pAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
         SatzAnzahl = bsKurse.Count
         Label8.Text = "Anzahl der gespeicherten Kurse: " + SatzAnzahl
         bsKurse.AddNew()
@@ -57,7 +57,7 @@
         bsListbox.CancelEdit()
         DsAusbildung.Listbox.Clear()
         pAdapter.Fill(DsAusbildung.Listbox)
-        bsListbox.Position = 0
+        DbAccess.SafePosition(bsListbox)
         If bsListbox.Count = 1 Then
             comboFuellen1(DsAusbildung.Listbox.Rows(0)("Feld1").ToString)
             comboFuellen1(DsAusbildung.Listbox.Rows(0)("Feld2").ToString)
@@ -181,7 +181,7 @@
                 xAdapter.Fill(dsausbildung.Kurse)
                 Formularloeschen()
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 Preise()
                 TextBox11.Text = TextBox13.Text
@@ -280,7 +280,7 @@
             bsTeilnehmer.CancelEdit()
             DsAusbildung.Teilnehmer.Clear()
             tAdapter.Fill(DsAusbildung.Teilnehmer)
-            bsTeilnehmer.Position = 0
+            DbAccess.SafePosition(bsTeilnehmer)
             SatzAnzahl = bsTeilnehmer.Count
             Label8.Text = "Anzahl der Teilnehmer des Kurses: " + SatzAnzahl
             TeilnehmerDGV.Location = New Point(25, 275)
@@ -346,7 +346,7 @@
                     TextBox10.Text = ort_temp
                 End If
             Case 1
-                bsStandort.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsStandort)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 DataGridView2.Location = New Point(10, 2500)
                 TextBox14.Text = TextBox10.Text
@@ -419,7 +419,7 @@ Gefunden:
             bsTeilnehmer.CancelEdit()
             DsAusbildung.Teilnehmer.Clear()
             tAdapter.Fill(DsAusbildung.Teilnehmer)
-            bsTeilnehmer.Position = 0
+            DbAccess.SafePosition(bsTeilnehmer)
             For i = 0 To bsTeilnehmer.Count - 1
                 bsTeilnehmer.RemoveCurrent()
                 taTeilnehmer.Update(DsAusbildung)

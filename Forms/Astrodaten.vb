@@ -1,4 +1,4 @@
-﻿Public Class Astrodaten
+Public Class Astrodaten
     Dim pAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter                ' Astrodaten
     Dim xAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter             ' Törn
     Dim aaa As String
@@ -68,7 +68,7 @@
                 GroupBox3.Location = New Point(1200, 110)
                 GroupBox2.Location = New Point(12, 90)
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 '              Label2.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 '       GroupBox3.Location = New Point(12, 90)
                 GroupBox2.Location = New Point(1200, 110)
@@ -104,7 +104,7 @@ Gefunden:
         bsAstrodaten.CancelEdit()
         DsLogbuch.Astrodaten.Clear()
         pAdapter.Fill(DsLogbuch.Astrodaten)
-        bsAstrodaten.Position = 0
+        DbAccess.SafePosition(bsAstrodaten)
         aaa = bsAstrodaten.Count
         If aaa = 0 Then
             bsAstrodaten.AddNew()

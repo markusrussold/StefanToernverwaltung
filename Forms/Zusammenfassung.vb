@@ -1,4 +1,4 @@
-﻿Public Class Zusammenfassung
+Public Class Zusammenfassung
     Dim aaa As String
     Dim buch1 As String
     Dim position As Integer
@@ -65,7 +65,7 @@
         bsZusammenfassung2.CancelEdit()
         DsLogbuch.Zusammenfassung2.Clear()
         zAdapter.Fill(DsLogbuch.Zusammenfassung2)
-        bsZusammenfassung2.Position = 0
+        DbAccess.SafePosition(bsZusammenfassung2)
         aaa = bsZusammenfassung2.Count
         bsZusammenfassung2.AddNew()
         Label4.Text = ""
@@ -125,7 +125,7 @@
                 TextBox9.Text = TextBox1.Text
                 Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 '              Label2.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 DataGridtoern.Location = New Point(1200, 110)
                 GroupBox2.Text = "Logbuch Auswertungen "
@@ -153,7 +153,7 @@
         bsZusammenfassung2.CancelEdit()
         DsLogbuch.Zusammenfassung2.Clear()
         pAdapter.Fill(DsLogbuch.Zusammenfassung2)
-        bsZusammenfassung2.Position = 0
+        DbAccess.SafePosition(bsZusammenfassung2)
         aaa = bsZusammenfassung2.Count
         For i = 0 To bsZusammenfassung2.Count - 1
             bsZusammenfassung2.RemoveCurrent()
@@ -170,7 +170,7 @@
         bsLogdaten.CancelEdit()
         DsLogbuch.Logdaten.Clear()
         yAdapter.Fill(DsLogbuch.Logdaten)
-        bsLogdaten.Position = 0
+        DbAccess.SafePosition(bsLogdaten)
         If bsLogdaten.Count = 0 Then
             MsgBox("Es sind noch keine Logdaten erfasst.")
             Exit Sub
@@ -270,7 +270,7 @@
         bsToerndaten.CancelEdit()
         DsLogbuch.Toerndaten.Clear()
         nAdapter.Fill(DsLogbuch.Toerndaten)
-        bsToerndaten.Position = 0
+        DbAccess.SafePosition(bsToerndaten)
         aaa = bsToerndaten.Count
         If aaa > 0 Then
             Label6.Text = summeGMotor
@@ -287,7 +287,7 @@
             bsDokumentation.CancelEdit()
             DsLogbuch.Dokumentation.Clear()
             dAdapter.Fill(DsLogbuch.Dokumentation)
-            bsDokumentation.Position = 0
+            DbAccess.SafePosition(bsDokumentation)
             aaa = bsDokumentation.Count
             TextBox36.Text = DsLogbuch.Dokumentation.Rows(0)("ausgangsort").ToString           '   gefahrene Route
             Dim ausgOrt As String = DsLogbuch.Dokumentation.Rows(0)("ausgangsort").ToString
@@ -353,7 +353,7 @@
         bsLogdaten.CancelEdit()
         DsLogbuch.Logdaten.Clear()
         yAdapter.Fill(DsLogbuch.Logdaten)
-        bsLogdaten.Position = 0
+        DbAccess.SafePosition(bsLogdaten)
         aaa = bsLogdaten.Count
         If aaa > "0" Then
             datumalt = DsLogbuch.Logdaten.Rows(0)("datum").ToString
@@ -511,7 +511,7 @@ schleife:
         bsLogWacheplan.CancelEdit()
         DsLogbuch.LogWacheplan.Clear()
         wAdapter.Fill(DsLogbuch.LogWacheplan)
-        bsLogWacheplan.Position = 0
+        DbAccess.SafePosition(bsLogWacheplan)
         aaa = bsLogWacheplan.Count
 
         If aaa > "0" Then
@@ -554,14 +554,14 @@ endesub:
         bsWacheplan.CancelEdit()
         dsToernverwaltung.Wacheplan.Clear()
         aAdapter.Fill(dsToernverwaltung.Wacheplan)
-        bsWacheplan.Position = 0
+        DbAccess.SafePosition(bsWacheplan)
         If bsWacheplan.Count = 0 Then
             aAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
             aAdapter.SelectCommand.CommandText = "Select * from Wacheplan where toern = '" & TextBox1.Text & "' and person2 = '" & crewname & "'  "
             bsWacheplan.CancelEdit()
             dsToernverwaltung.Wacheplan.Clear()
             aAdapter.Fill(dsToernverwaltung.Wacheplan)
-            bsWacheplan.Position = 0
+            DbAccess.SafePosition(bsWacheplan)
             If bsWacheplan.Count = 0 Then
                 MsgBox(" " & Convert.ToString(crewname) & " befindet sich nicht im Wachplan.")
                 Vzname = "NN"
@@ -602,7 +602,7 @@ endesub:
         bsLogdaten.CancelEdit()
         DsLogbuch.Logdaten.Clear()
         yAdapter.Fill(DsLogbuch.Logdaten)
-        bsLogdaten.Position = 0
+        DbAccess.SafePosition(bsLogdaten)
         If bsLogdaten.Count = 1 Then
             If dsToernverwaltung.TC.Rows(0)("Nachtahafen1").ToString = "" Then
                 TextBox27.Text = DsLogbuch.Logdaten.Rows(0)("Position").ToString
@@ -674,7 +674,7 @@ vorhanden2:
         bsDokumentation.CancelEdit()
         DsLogbuch.Dokumentation.Clear()
         dAdapter.Fill(DsLogbuch.Dokumentation)
-        bsDokumentation.Position = 0
+        DbAccess.SafePosition(bsDokumentation)
         TextBox4.Text = DsLogbuch.Dokumentation.Rows(0)("ausgangsort").ToString
         TextBox5.Text = DsLogbuch.Dokumentation.Rows(0)("zielort").ToString
     End Sub
@@ -851,7 +851,7 @@ Gefunden:
         bsLogdaten.CancelEdit()
         DsLogbuch.Logdaten.Clear()
         yAdapter.Fill(DsLogbuch.Logdaten)
-        bsLogdaten.Position = 0
+        DbAccess.SafePosition(bsLogdaten)
         If bsLogdaten.Count = 0 Then
             MsgBox("Es sind noch keine Logdaten erfasst.")
             Exit Sub

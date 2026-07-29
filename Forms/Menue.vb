@@ -1,4 +1,4 @@
-﻿Public Class Menü
+Public Class Menü
     Public screenwidth As Single = My.Computer.Screen.WorkingArea.Width.ToString
     Public screenheight As Single = My.Computer.Screen.WorkingArea.Height.ToString
     Public druckzeile As Integer
@@ -94,12 +94,11 @@
         Else
             druckzeile = 110
         End If
-        freischaltung = GetSetting("toern", "Pfad", "T")
-        If freischaltung Is Nothing Then
-        Else
-            ok = CheckKurs.keypruefen(freischaltung)
+        freischaltung = AppSettings.GetLicenseKey()
+        ok = AppSettings.IsLicenseValid()
+        If String.IsNullOrWhiteSpace(freischaltung) Then
+            freischaltung = AppSettings.GetString("Toern", "Pfad", "T", "")
         End If
-        freischaltung = GetSetting("Toern", "Pfad", "T")
         Dim r As System.Data.DataRowView = bsCrewAdressen.Current
         Dim pAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
         Dim rp As System.Data.DataRowView = bsCrewAdressen.Current
@@ -199,7 +198,7 @@
         dsToernverwaltung.BootKalkulation.Clear()
         kAdapter.Fill(dsToernverwaltung.BootKalkulation)
         If bsBootKalkulation.Count > 0 Then
-            bsBootKalkulation.Position = 0
+            DbAccess.SafePosition(bsBootKalkulation)
         End If
         '      j = bsCrewAdressen.Count + 1
         j = 1
@@ -271,7 +270,7 @@
         dsToernverwaltung.CrewAdressen.Clear()
         xAdapter.Fill(dsToernverwaltung.CrewAdressen)
         If bsCrewAdressen.Count > 0 Then
-            bsCrewAdressen.Position = 0
+            DbAccess.SafePosition(bsCrewAdressen)
         End If
         If bsCrewAdressen.Count > 0 Then
             For i = 0 To bsCrewAdressen.Count - 1
@@ -546,7 +545,7 @@ weiter:
         DsAusbildung.Teilnehmer.Clear()
         kAdapter.Fill(DsAusbildung.Teilnehmer)
         If bsTeilnehmer.Count > 0 Then
-            bsTeilnehmer.Position = 0
+            DbAccess.SafePosition(bsTeilnehmer)
         End If
         If bsTeilnehmer.Count > 0 Then
             For i = 0 To bsTeilnehmer.Count - 1
@@ -609,7 +608,7 @@ weiter:
         DsAusbildung.Teilnehmer.Clear()
         kAdapter.Fill(DsAusbildung.Teilnehmer)
         If bsTeilnehmer.Count > 0 Then
-            bsTeilnehmer.Position = 0
+            DbAccess.SafePosition(bsTeilnehmer)
         End If
         If bsTeilnehmer.Count > 0 Then
             For i = 0 To bsTeilnehmer.Count - 1
@@ -728,7 +727,7 @@ weiter:
             sAdapter.Fill(dsToernverwaltung.Steuerdaten)
         End If
         If bsSteuerdaten.Count > 0 Then
-            bsSteuerdaten.Position = 0
+            DbAccess.SafePosition(bsSteuerdaten)
         End If
         If dsToernverwaltung.Steuerdaten.Rows.Count = 0 Then
             Dim neu As DataRow = dsToernverwaltung.Steuerdaten.NewRow()
@@ -738,18 +737,22 @@ weiter:
         End If
 
         Dim requiredMajor As Integer = SafeData.ExtractVersionMajor(Convert.ToString(Vers))
-        Dim bezeichnung As String = SafeData.CoalesceString(dsToernverwaltung.Steuerdaten.Rows(0)("bezeichnung"))
-        Dim feld1 As Object = dsToernverwaltung.Steuerdaten.Rows(0)("feld1")
+        Dim versionRow As DataRow = Nothing
+        If Not DbAccess.TryGetRow(dsToernverwaltung.Steuerdaten, 0, versionRow) Then Return
+        Dim bezeichnung As String = SafeData.CoalesceString(versionRow("bezeichnung"))
+        Dim feld1 As Object = versionRow("feld1")
         If bezeichnung = "Version" AndAlso SafeData.VersionAtLeast(feld1, requiredMajor) Then
             Return
         End If
 
         If My.Computer.FileSystem.FileExists("Toernverwaltung.mdb") AndAlso My.Computer.FileSystem.FileExists("update.exe") Then
             SaveSetting("Datenbank", "vorhanden", "T", SafeData.ExtractVersionStamp(Me.Text))
-            Process.Start("Update.exe")
+            PathGuard.TryStartFile(IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Update.exe"))
         End If
-        dsToernverwaltung.Steuerdaten.Rows(0)("Bezeichnung") = "Version"
-        dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = requiredMajor.ToString(Globalization.CultureInfo.InvariantCulture)
+        Dim steuerRow As DataRow = Nothing
+        If Not DbAccess.TryGetRow(dsToernverwaltung.Steuerdaten, 0, steuerRow) Then Return
+        steuerRow("Bezeichnung") = "Version"
+        steuerRow("feld1") = requiredMajor.ToString(Globalization.CultureInfo.InvariantCulture)
         bsSteuerdaten.EndEdit()
         Try
             taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
@@ -905,7 +908,7 @@ weiter:
         FormUi.ShowChild(Bordkassa)
     End Sub
     Private Sub Label58_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Label58.MouseClick
-        Process.Start(AcrobatReader, pdfname)
+        PathGuard.TryStartPdf(AcrobatReader, pdfname)
     End Sub
     Private Sub LogbuchToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LogbuchToolStripMenuItem.Click
         FormUi.ShowChild(LogbuchDruck)

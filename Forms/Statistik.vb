@@ -1,4 +1,4 @@
-﻿Public Class Statistik
+Public Class Statistik
     Public Freischaltung As String
     Public aenderung As Boolean
     Public aaa As String
@@ -167,7 +167,7 @@ endeSub:
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         xAdapter.Fill(dsToernverwaltung.Toernname)
-        '     bsToernname.Position = 0    
+        '     DbAccess.SafePosition(bsToernname)    
         If bsToernname.Count = 0 Then
             MsgBox("Keine Törns in dieser Periode")
             GoTo ende
@@ -260,7 +260,7 @@ ende:
         bsBoot.CancelEdit()
         dsToernverwaltung.Boot.Clear()
         bAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
+        DbAccess.SafePosition(bsBoot)
         If bsBoot.Count > 0 Then
             ListBox3.Items.Add(dsToernverwaltung.Boot.Rows(0)("Marinaort").ToString + "§" + a)
         End If
@@ -329,7 +329,7 @@ ende:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         tAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         iic = bsTC.Count - 1
         bsTemp.AddNew()
         Dim crewm As Boolean = True
@@ -401,7 +401,7 @@ ende:
                     MsgBox(" Crewadresse ist nicht mehr vorhanden: " & Convert.ToString(nm))
                 End If
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 crew += 1
                 If dsToernverwaltung.CrewAdressen.Rows(0)("AlterersterToern").ToString > "" Then
                     If alter < dsToernverwaltung.CrewAdressen.Rows(0)("AlterersterToern").ToString Then
@@ -608,7 +608,7 @@ ende:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7", "Feld8", "Feld9", "Feld10", "Feld11", "Feld12", "Feld13", "Feld14", "Feld15")
         Xs.PrintStatistik(t)

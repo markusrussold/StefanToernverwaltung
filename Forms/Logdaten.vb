@@ -1,4 +1,4 @@
-﻿Public Class Logdaten
+Public Class Logdaten
     Dim toerna As String
     Dim aaa As String = 1
     Dim Wacheplanleer As Boolean = False
@@ -593,7 +593,7 @@ endesub:
         bsLogdaten.CancelEdit()
         DsLogbuch.Logdaten.Clear()
         xAdapter.Fill(DsLogbuch.Logdaten)
-        bsLogdaten.Position = 0
+        DbAccess.SafePosition(bsLogdaten)
         aaa = bsLogdaten.Count
         If TextBox22.Text = "" Then
             alt_distanz = 0

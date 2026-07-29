@@ -9,7 +9,7 @@ Imports System.IO
 ''' <summary>
 ''' Ensures required Access databases exist next to the EXE.
 ''' Creates empty MDBs when missing, adopts *Neu* files when present,
-''' and adds missing tables/columns from the typed DataSet schemas.
+''' backs up before schema changes, and adds missing tables/columns from typed DataSets.
 ''' </summary>
 Public Module DatabaseBootstrap
 
@@ -21,6 +21,9 @@ Public Module DatabaseBootstrap
             baseDirectory = Environment.CurrentDirectory
         End If
         Directory.SetCurrentDirectory(baseDirectory)
+
+        DbAccess.EnsureJetOrThrow()
+        AppLog.Info("DatabaseBootstrap start in " & baseDirectory)
 
         EnsureDatabase(
             Path.Combine(baseDirectory, "Toernverwaltung.mdb"),
@@ -53,6 +56,7 @@ Public Module DatabaseBootstrap
             New String() {})
 
         SeedToernverwaltungVersion(Path.Combine(baseDirectory, "Toernverwaltung.mdb"))
+        AppLog.Info("DatabaseBootstrap finished")
     End Sub
 
     Private Sub EnsureDatabase(ByVal targetPath As String, ByVal schemaFactory As Func(Of DataSet), ByVal convertFrom As String())
@@ -63,20 +67,76 @@ Public Module DatabaseBootstrap
                 Dim candidatePath As String = Path.Combine(dir, candidateName)
                 If File.Exists(candidatePath) Then
                     File.Copy(candidatePath, targetPath, False)
+                    AppLog.Info("Adopted " & candidateName & " -> " & Path.GetFileName(targetPath))
                     adopted = True
                     Exit For
                 End If
             Next
             If Not adopted Then
                 CreateEmptyMdb(targetPath)
+                AppLog.Info("Created empty " & Path.GetFileName(targetPath))
             End If
         End If
 
         Dim schema As DataSet = schemaFactory()
         Try
-            EnsureSchema(targetPath, schema)
+            If NeedsSchemaChange(targetPath, schema) Then
+                BackupMdb(targetPath)
+            End If
+            DbAccess.WithRetry(Sub() EnsureSchema(targetPath, schema))
         Finally
             schema.Dispose()
+        End Try
+    End Sub
+
+    Private Function NeedsSchemaChange(ByVal mdbPath As String, ByVal schema As DataSet) As Boolean
+        Try
+            Using conn As New OleDbConnection(JetProvider & mdbPath)
+                conn.Open()
+                Dim existingTables As HashSet(Of String) = GetTableNames(conn)
+                For Each table As DataTable In schema.Tables
+                    Dim tableName As String = table.TableName
+                    If String.IsNullOrEmpty(tableName) Then Continue For
+                    If Not existingTables.Contains(tableName.ToLowerInvariant()) Then Return True
+                    Dim existingColumns As HashSet(Of String) = GetColumnNames(conn, tableName)
+                    For Each column As DataColumn In table.Columns
+                        If Not existingColumns.Contains(column.ColumnName.ToLowerInvariant()) Then Return True
+                    Next
+                Next
+            End Using
+        Catch ex As Exception
+            AppLog.Warn("NeedsSchemaChange probe failed for " & Path.GetFileName(mdbPath) & ": " & ex.Message)
+            Return True
+        End Try
+        Return False
+    End Function
+
+    Private Sub BackupMdb(ByVal mdbPath As String)
+        If Not File.Exists(mdbPath) Then Return
+        Try
+            Dim backupDir As String = Path.Combine(Path.GetDirectoryName(mdbPath), "Backups")
+            Directory.CreateDirectory(backupDir)
+            Dim stamp As String = DateTime.Now.ToString("yyyyMMdd-HHmmss")
+            Dim dest As String = Path.Combine(backupDir, Path.GetFileNameWithoutExtension(mdbPath) & "-" & stamp & ".mdb")
+            File.Copy(mdbPath, dest, False)
+            AppLog.Info("Backup created: " & dest)
+            PruneOldBackups(backupDir, Path.GetFileNameWithoutExtension(mdbPath), keep:=10)
+        Catch ex As Exception
+            AppLog.Warn("Backup failed for " & Path.GetFileName(mdbPath) & ": " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub PruneOldBackups(ByVal backupDir As String, ByVal baseName As String, ByVal keep As Integer)
+        Try
+            Dim files = New DirectoryInfo(backupDir).GetFiles(baseName & "-*.mdb")
+            Array.Sort(files, Function(a, b) b.CreationTimeUtc.CompareTo(a.CreationTimeUtc))
+            For i As Integer = keep To files.Length - 1
+                Try
+                    files(i).Delete()
+                Catch
+                End Try
+            Next
+        Catch
         End Try
     End Sub
 
@@ -85,7 +145,6 @@ Public Module DatabaseBootstrap
 
         Dim connectionString As String = JetProvider & mdbPath
 
-        ' Prefer ADOX (ships with Jet/Access connectivity).
         Try
             Dim cat As Object = CreateObject("ADOX.Catalog")
             cat.Create(connectionString)
@@ -99,7 +158,6 @@ Public Module DatabaseBootstrap
         Catch
         End Try
 
-        ' Fallback: DAO.
         Try
             Dim engine As Object = CreateObject("DAO.DBEngine.36")
             Dim db As Object = engine.CreateDatabase(mdbPath, ";LANGID=0x0407;CP=1252;COUNTRY=0")
@@ -257,29 +315,34 @@ Public Module DatabaseBootstrap
     Private Sub SeedToernverwaltungVersion(ByVal mdbPath As String)
         If Not File.Exists(mdbPath) Then Return
 
-        Using conn As New OleDbConnection(JetProvider & mdbPath)
-            conn.Open()
+        DbAccess.WithRetry(Sub()
+                               Using conn As New OleDbConnection(JetProvider & mdbPath)
+                                   conn.Open()
 
-            Dim tables As HashSet(Of String) = GetTableNames(conn)
-            If Not tables.Contains("steuerdaten") Then Return
+                                   Dim tables As HashSet(Of String) = GetTableNames(conn)
+                                   If Not tables.Contains("steuerdaten") Then Return
 
-            Dim count As Integer
-            Using cmd As New OleDbCommand("SELECT COUNT(*) FROM [Steuerdaten] WHERE [Bezeichnung]='Version'", conn)
-                count = Convert.ToInt32(cmd.ExecuteScalar())
-            End Using
+                                   Dim count As Integer
+                                   Using cmd As New OleDbCommand("SELECT COUNT(*) FROM [Steuerdaten] WHERE [Bezeichnung]=?", conn)
+                                       cmd.Parameters.AddWithValue("@p1", "Version")
+                                       count = Convert.ToInt32(cmd.ExecuteScalar())
+                                   End Using
 
-            If count = 0 Then
-                Using cmd As New OleDbCommand("INSERT INTO [Steuerdaten] ([Bezeichnung], [Feld1]) VALUES ('Version', ?)", conn)
-                    cmd.Parameters.AddWithValue("@p1", AppMajorVersion)
-                    cmd.ExecuteNonQuery()
-                End Using
-            Else
-                Using cmd As New OleDbCommand("UPDATE [Steuerdaten] SET [Feld1]=? WHERE [Bezeichnung]='Version'", conn)
-                    cmd.Parameters.AddWithValue("@p1", AppMajorVersion)
-                    cmd.ExecuteNonQuery()
-                End Using
-            End If
-        End Using
+                                   If count = 0 Then
+                                       Using cmd As New OleDbCommand("INSERT INTO [Steuerdaten] ([Bezeichnung], [Feld1]) VALUES (?, ?)", conn)
+                                           cmd.Parameters.AddWithValue("@p1", "Version")
+                                           cmd.Parameters.AddWithValue("@p2", AppMajorVersion)
+                                           cmd.ExecuteNonQuery()
+                                       End Using
+                                   Else
+                                       Using cmd As New OleDbCommand("UPDATE [Steuerdaten] SET [Feld1]=? WHERE [Bezeichnung]=?", conn)
+                                           cmd.Parameters.AddWithValue("@p1", AppMajorVersion)
+                                           cmd.Parameters.AddWithValue("@p2", "Version")
+                                           cmd.ExecuteNonQuery()
+                                       End Using
+                                   End If
+                               End Using
+                           End Sub)
     End Sub
 
 End Module

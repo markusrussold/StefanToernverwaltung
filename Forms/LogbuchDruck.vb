@@ -1,4 +1,4 @@
-﻿Public Class LogbuchDruck
+Public Class LogbuchDruck
     Dim aaa As String
     Dim ToernN As String
     Dim BootN As String
@@ -68,7 +68,7 @@
         bsMaengel.CancelEdit()
         DsLogbuch.Maengel.Clear()
         pAdapter.Fill(DsLogbuch.Maengel)
-        bsMaengel.Position = 0
+        DbAccess.SafePosition(bsMaengel)
         aaa = bsMaengel.Count
         bsMaengel.AddNew()
         GroupBox2.Location = New Point(1200, 1100)
@@ -115,7 +115,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label2.Visible = True
                 Label2.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 Label2.Refresh()
@@ -175,7 +175,7 @@ Gefunden:
         bsMaengel.CancelEdit()
         DsLogbuch.Maengel.Clear()
         pAdapter.Fill(DsLogbuch.Maengel)
-        bsMaengel.Position = 0
+        DbAccess.SafePosition(bsMaengel)
         aaa = bsMaengel.Count
         If aaa > 0 Then
             For Me.iii = 0 To aaa - 1
@@ -214,7 +214,7 @@ Gefunden:
         bsBoot.CancelEdit()
         dsToernverwaltung.Boot.Clear()
         pAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
+        DbAccess.SafePosition(bsBoot)
         aaa = bsBoot.Count
         CheckBox23.Checked = True
         TextBox2.Text = "1"                                            '            Reihenfolge   Feld1
@@ -244,7 +244,7 @@ Gefunden:
         bsBootLog.CancelEdit()
         DsLogbuch.BootLog.Clear()
         pAdapter.Fill(DsLogbuch.BootLog)
-        bsBootLog.Position = 0
+        DbAccess.SafePosition(bsBootLog)
         aaa = bsBootLog.Count
         If aaa = 0 Then
             GoTo endeboot
@@ -262,7 +262,7 @@ Gefunden:
         bsToerndaten.CancelEdit()
         DsLogbuch.Toerndaten.Clear()
         pAdapter.Fill(DsLogbuch.Toerndaten)
-        bsToerndaten.Position = 0
+        DbAccess.SafePosition(bsToerndaten)
         aaa = bsToerndaten.Count
         If aaa = 0 Then
             GoTo endeboot
@@ -354,7 +354,7 @@ endeboot:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         pAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         aaa = bsTC.Count
         For Me.iii = 0 To aaa - 1
             ProgressBar3.Maximum = aaa - 1
@@ -380,7 +380,7 @@ endeboot:
         bsSicherheitseinweisung.CancelEdit()
         DsLogbuch.Sicherheitseinweisung.Clear()
         pAdapter.Fill(DsLogbuch.Sicherheitseinweisung)
-        bsSicherheitseinweisung.Position = 0
+        DbAccess.SafePosition(bsSicherheitseinweisung)
         aaa = bsSicherheitseinweisung.Count
         If aaa > 0 Then
             For Me.iii = 0 To aaa - 1
@@ -413,7 +413,7 @@ endeboot:
         bsDokumentation.CancelEdit()
         DsLogbuch.Dokumentation.Clear()
         pAdapter.Fill(DsLogbuch.Dokumentation)
-        bsDokumentation.Position = 0
+        DbAccess.SafePosition(bsDokumentation)
         aaa = bsDokumentation.Count
         If aaa > 0 Then
             If RadioButton2.Checked Then
@@ -473,7 +473,7 @@ endeboot:
         bsLogWacheplan.CancelEdit()
         DsLogbuch.LogWacheplan.Clear()
         pAdapter.Fill(DsLogbuch.LogWacheplan)
-        bsLogWacheplan.Position = 0
+        DbAccess.SafePosition(bsLogWacheplan)
         aaa = bsLogWacheplan.Count
         If aaa > 0 Then
             For Me.iii = 0 To aaa - 1
@@ -527,7 +527,7 @@ endeboot:
         bsLogdaten.CancelEdit()
         DsLogbuch.Logdaten.Clear()
         pAdapter.Fill(DsLogbuch.Logdaten)
-        bsLogdaten.Position = 0
+        DbAccess.SafePosition(bsLogdaten)
         aaa = bsLogdaten.Count
         For Me.iii = 0 To aaa - 1
             ProgressBar7.Maximum = aaa - 1
@@ -670,7 +670,7 @@ endeboot:
         bsZusammenfassung2.CancelEdit()
         DsLogbuch.Zusammenfassung2.Clear()
         pAdapter.Fill(DsLogbuch.Zusammenfassung2)
-        bsZusammenfassung2.Position = 0
+        DbAccess.SafePosition(bsZusammenfassung2)
         aaa = bsZusammenfassung2.Count
         For Me.iii = 0 To aaa - 1
             ProgressBar8.Maximum = aaa - 1
@@ -713,7 +713,7 @@ endeboot:
         bsWacheplan.CancelEdit()
         dsToernverwaltung.Wacheplan.Clear()
         pAdapter.Fill(dsToernverwaltung.Wacheplan)
-        bsWacheplan.Position = 0
+        DbAccess.SafePosition(bsWacheplan)
         aaa = bsWacheplan.Count
         CheckBox23.Checked = True
         For Me.iii = 0 To aaa - 2
@@ -750,7 +750,7 @@ endeboot:
         bsTemp.CancelEdit()
         DsLogbuch.Temp.Clear()
         pxAdapter.Fill(DsLogbuch.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7", "Feld8", "Feld9", "Feld10", "Feld11", "Feld12", "Feld13", "Feld14", "Feld15", "Feld16", "Feld17", "Feld18", "Feld19", "Feld20", "Feld21", "Feld22", "Feld23", "Feld24", "Feld25", "Feld26", "Feld27", "Feld28", "Feld29", "Feld30", "Feld31", "Feld32")
         XLB.Printlogbuch(t)

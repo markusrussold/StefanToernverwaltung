@@ -1,4 +1,4 @@
-﻿Public Class KalkToToern
+Public Class KalkToToern
     Public toernbez As String
     Public aaa As String
     Public iia As Integer
@@ -102,7 +102,7 @@
                 bsToernname.CancelEdit()
                 dsToernverwaltung.Toernname.Clear()
                 xAdapter.Fill(dsToernverwaltung.Toernname)
-                bsToernname.Position = 0
+                DbAccess.SafePosition(bsToernname)
                 '               TextBox6.Text = dsToernverwaltung.Toernname.Rows(0)("id")
                 bsToernname.EndEdit()
                 taToernname.Update(dsToernverwaltung.Toernname)
@@ -118,7 +118,7 @@
     End Sub
     Private Sub KopierenToern()
         Dim tage As Integer
-        bsToernname.Position = 0
+        DbAccess.SafePosition(bsToernname)
         bsToernname.AddNew()
         bsToernname.AddNew()
         dsToernverwaltung.Toernname.Rows(0)("DatumVon") = dsToernverwaltung.ToernKalkulation.Rows(0)("Toernanfang").ToString()

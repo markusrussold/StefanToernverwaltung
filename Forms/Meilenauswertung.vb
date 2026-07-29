@@ -1,4 +1,4 @@
-﻿Public Class Meilenauswertung
+Public Class Meilenauswertung
     Public Freischaltung As String
     Public aenderung As Boolean
     Public logbuch As String
@@ -72,7 +72,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         bsCrewAdressen.AddNew()
         DataGridTemp.Columns(0).HeaderText = "Törnbezeichnung"
         DataGridTemp.Columns(0).Width = 130
@@ -145,7 +145,7 @@
                 dsToernverwaltung.Temp.Clear()
                 xtAdapter.Fill(dsToernverwaltung.Temp)
                 ListBox3.Items.Clear()
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridcrew.Visible = False
                 DataGridTemp.Visible = True
                  Me.Cursor = Cursors.WaitCursor
@@ -272,7 +272,7 @@ Gefunden:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         tAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         ij = 0
         iitc = bsTC.Count - 1
         Nachtans = 0
@@ -319,7 +319,7 @@ Gefunden:
         bsTeilnehmer.CancelEdit()
         DsAusbildung.Teilnehmer.Clear()
         tAdapter.Fill(DsAusbildung.Teilnehmer)
-        bsTeilnehmer.Position = 0
+        DbAccess.SafePosition(bsTeilnehmer)
         bsTemp.AddNew()
         For i = 0 To bsTeilnehmer.Count - 1
             kurs = DsAusbildung.Teilnehmer.Rows(i)("Kurs").ToString
@@ -329,7 +329,7 @@ Gefunden:
             bsKurse.CancelEdit()
             DsAusbildung.Kurse.Clear()
             pAdapter.Fill(DsAusbildung.Kurse)
-            bsKurse.Position = 0
+            DbAccess.SafePosition(bsKurse)
             If DsAusbildung.Kurse.Rows(0)("Kursart").ToString = "Theorie" Then
                 bsTemp.AddNew()
                 dsToernverwaltung.Temp.Rows(ij + ki + i + ink)("Feld0") = "5"
@@ -369,7 +369,7 @@ Gefunden:
         xAdapter.Fill(dsToernverwaltung.Toernname)
         Select Case bsToernname.Count
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 If IsDBNull(dsToernverwaltung.Toernname.Rows(0)("smGesamt").ToString) Then
                 Else
                     If dsToernverwaltung.Toernname.Rows(0)("smGesamt").ToString > "0" Then
@@ -466,7 +466,7 @@ Gefunden:
         xAdapter.Fill(dsToernverwaltung.Toernname)
         ij = ik
         If bsToernname.Count > 0 Then
-            bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+            DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
             iis = bsToernname.Count - 1
             For Me.ki = 0 To iis
                 ProgressBar1.Value = ij + ki + 1
@@ -645,7 +645,7 @@ Gefunden:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7", "Feld8", "Feld9", "Feld10", "Feld11", "Feld12", "Feld13", "Feld22", "Feld21", "Feld23", "Feld14", "Feld15")
         XL.PrintMeilen(t)

@@ -1,4 +1,4 @@
-﻿
+
 Imports System.Data.OleDb
 Imports System.Data
 Class ExpoNeu
@@ -289,97 +289,101 @@ Class ExpoNeu
         Dim r As System.Data.DataRowView = bsToernname.Current
         xAdapter.SelectCommand = New OleDb.OleDbCommand
         xAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-        xAdapter.SelectCommand.CommandText = "Select * from Toernname where toernbezeichnung = '" & SafeData.SqlQuote(aaa) & "'"
+        xAdapter.SelectCommand.Parameters.Clear()
+        xAdapter.SelectCommand.CommandText = "Select * from Toernname where toernbezeichnung = ?"
+        xAdapter.SelectCommand.Parameters.AddWithValue("@p1", aaa)
         dsToernverwaltung.Toernname.Clear()
         xAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0
+        DbAccess.SafePosition(bsToernname)
+        If Not DbAccess.HasRows(dsToernverwaltung.Toernname) Then Return
         ip = bsToernname.Count
         ip = bsToernnameE.Count
-        bsToernnameE.Position = 0
+        DbAccess.SafePosition(bsToernnameE)
         bsToernnameE.AddNew()
-        dsExport.ToernnameE.Rows(ij)("DatumVon") = dsToernverwaltung.Toernname.Rows(0)("DatumVon").ToString()
-        dsExport.ToernnameE.Rows(ij)("DatumBis") = dsToernverwaltung.Toernname.Rows(0)("DatumBis").ToString()
-        dsExport.ToernnameE.Rows(ij)("Ausgangsmarina") = dsToernverwaltung.Toernname.Rows(0)("Ausgangsmarina").ToString()
-        dsExport.ToernnameE.Rows(ij)("EndeMarina") = dsToernverwaltung.Toernname.Rows(0)("EndeMarina").ToString()
-        dsExport.ToernnameE.Rows(ij)("toernbezeichnung") = dsToernverwaltung.Toernname.Rows(0)("toernbezeichnung").ToString()
-        dsExport.ToernnameE.Rows(ij)("smSegel") = dsToernverwaltung.Toernname.Rows(0)("smSegel").ToString()
-        dsExport.ToernnameE.Rows(ij)("smMotor") = dsToernverwaltung.Toernname.Rows(0)("smMotor").ToString()
-        dsExport.ToernnameE.Rows(ij)("smGesamt") = dsToernverwaltung.Toernname.Rows(0)("smGesamt").ToString()
-        dsExport.ToernnameE.Rows(ij)("Nachtfahrten") = dsToernverwaltung.Toernname.Rows(0)("Nachtfahrten").ToString()
-        dsExport.ToernnameE.Rows(ij)("Nachtansteuerungen") = dsToernverwaltung.Toernname.Rows(0)("Nachtansteuerungen").ToString()
-        dsExport.ToernnameE.Rows(ij)("Bordtage") = dsToernverwaltung.Toernname.Rows(0)("Bordtage").ToString()
-        dsExport.ToernnameE.Rows(ij)("ausserhalbFB2") = dsToernverwaltung.Toernname.Rows(0)("ausserhalbFB2").ToString()
-        dsExport.ToernnameE.Rows(ij)("ausserhalbFB3") = dsToernverwaltung.Toernname.Rows(0)("ausserhalbFB3").ToString()
-        dsExport.ToernnameE.Rows(ij)("Tornbericht") = dsToernverwaltung.Toernname.Rows(0)("Tornbericht").ToString()
-        dsExport.ToernnameE.Rows(ij)("Bootsname") = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString()
-        dsExport.ToernnameE.Rows(ij)("Skipper") = dsToernverwaltung.Toernname.Rows(0)("Skipper").ToString()
-        dsExport.ToernnameE.Rows(ij)("letzterSegeltag") = dsToernverwaltung.Toernname.Rows(0)("letzterSegeltag").ToString()
-        dsExport.ToernnameE.Rows(ij)("Bemerkung") = dsToernverwaltung.Toernname.Rows(0)("Bemerkung").ToString()
-        dsExport.ToernnameE.Rows(ij)("Bordkassa") = dsToernverwaltung.Toernname.Rows(0)("Bordkassa").ToString()
-        dsExport.ToernnameE.Rows(ij)("Route") = dsToernverwaltung.Toernname.Rows(0)("Route").ToString()
-        dsExport.ToernnameE.Rows(ij)("Logbuch") = dsToernverwaltung.Toernname.Rows(0)("Logbuch").ToString()
-        dsExport.ToernnameE.Rows(ij)("Nachtfahrtvon1") = dsToernverwaltung.Toernname.Rows(0)("Nachtfahrtvon1").ToString()
-        dsExport.ToernnameE.Rows(ij)("Nachtfahrtbis1") = dsToernverwaltung.Toernname.Rows(0)("Nachtfahrtbis1").ToString()
-        dsExport.ToernnameE.Rows(ij)("Sm1") = dsToernverwaltung.Toernname.Rows(0)("Sm1").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("NachtfDatumvon1").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("NachtfDatumvon1") = dsToernverwaltung.Toernname.Rows(0)("NachtfDatumvon1").ToString()
+        Dim src As DataRow = dsToernverwaltung.Toernname.Rows(0)
+        dsExport.ToernnameE.Rows(ij)("DatumVon") = src("DatumVon").ToString()
+        dsExport.ToernnameE.Rows(ij)("DatumBis") = src("DatumBis").ToString()
+        dsExport.ToernnameE.Rows(ij)("Ausgangsmarina") = src("Ausgangsmarina").ToString()
+        dsExport.ToernnameE.Rows(ij)("EndeMarina") = src("EndeMarina").ToString()
+        dsExport.ToernnameE.Rows(ij)("toernbezeichnung") = src("toernbezeichnung").ToString()
+        dsExport.ToernnameE.Rows(ij)("smSegel") = src("smSegel").ToString()
+        dsExport.ToernnameE.Rows(ij)("smMotor") = src("smMotor").ToString()
+        dsExport.ToernnameE.Rows(ij)("smGesamt") = src("smGesamt").ToString()
+        dsExport.ToernnameE.Rows(ij)("Nachtfahrten") = src("Nachtfahrten").ToString()
+        dsExport.ToernnameE.Rows(ij)("Nachtansteuerungen") = src("Nachtansteuerungen").ToString()
+        dsExport.ToernnameE.Rows(ij)("Bordtage") = src("Bordtage").ToString()
+        dsExport.ToernnameE.Rows(ij)("ausserhalbFB2") = src("ausserhalbFB2").ToString()
+        dsExport.ToernnameE.Rows(ij)("ausserhalbFB3") = src("ausserhalbFB3").ToString()
+        dsExport.ToernnameE.Rows(ij)("Tornbericht") = src("Tornbericht").ToString()
+        dsExport.ToernnameE.Rows(ij)("Bootsname") = src("Bootsname").ToString()
+        dsExport.ToernnameE.Rows(ij)("Skipper") = src("Skipper").ToString()
+        dsExport.ToernnameE.Rows(ij)("letzterSegeltag") = src("letzterSegeltag").ToString()
+        dsExport.ToernnameE.Rows(ij)("Bemerkung") = src("Bemerkung").ToString()
+        dsExport.ToernnameE.Rows(ij)("Bordkassa") = src("Bordkassa").ToString()
+        dsExport.ToernnameE.Rows(ij)("Route") = src("Route").ToString()
+        dsExport.ToernnameE.Rows(ij)("Logbuch") = src("Logbuch").ToString()
+        dsExport.ToernnameE.Rows(ij)("Nachtfahrtvon1") = src("Nachtfahrtvon1").ToString()
+        dsExport.ToernnameE.Rows(ij)("Nachtfahrtbis1") = src("Nachtfahrtbis1").ToString()
+        dsExport.ToernnameE.Rows(ij)("Sm1") = src("Sm1").ToString()
+        If IsDate(src("NachtfDatumvon1").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("NachtfDatumvon1") = src("NachtfDatumvon1").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("NachtZeitvon1") = dsToernverwaltung.Toernname.Rows(0)("NachtZeitvon1").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("NachtfDatumbis1").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("NachtfDatumbis1") = dsToernverwaltung.Toernname.Rows(0)("NachtfDatumbis1").ToString()
+        dsExport.ToernnameE.Rows(ij)("NachtZeitvon1") = src("NachtZeitvon1").ToString()
+        If IsDate(src("NachtfDatumbis1").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("NachtfDatumbis1") = src("NachtfDatumbis1").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("NachtZeitbis1") = dsToernverwaltung.Toernname.Rows(0)("NachtZeitbis1").ToString()
-        dsExport.ToernnameE.Rows(ij)("NachtFahrtvon2") = dsToernverwaltung.Toernname.Rows(0)("NachtFahrtvon2").ToString()
-        dsExport.ToernnameE.Rows(ij)("NachtFahrtbis2") = dsToernverwaltung.Toernname.Rows(0)("NachtFahrtbis2").ToString()
-        dsExport.ToernnameE.Rows(ij)("SM2") = dsToernverwaltung.Toernname.Rows(0)("SM2").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("NachtDatumvon2").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("NachtDatumvon2") = dsToernverwaltung.Toernname.Rows(0)("NachtDatumvon2").ToString()
+        dsExport.ToernnameE.Rows(ij)("NachtZeitbis1") = src("NachtZeitbis1").ToString()
+        dsExport.ToernnameE.Rows(ij)("NachtFahrtvon2") = src("NachtFahrtvon2").ToString()
+        dsExport.ToernnameE.Rows(ij)("NachtFahrtbis2") = src("NachtFahrtbis2").ToString()
+        dsExport.ToernnameE.Rows(ij)("SM2") = src("SM2").ToString()
+        If IsDate(src("NachtDatumvon2").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("NachtDatumvon2") = src("NachtDatumvon2").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("NachtZeitvon2") = dsToernverwaltung.Toernname.Rows(0)("NachtZeitvon2").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("NachtDatumbis2").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("NachtDatumbis2") = dsToernverwaltung.Toernname.Rows(0)("NachtDatumbis2").ToString()
+        dsExport.ToernnameE.Rows(ij)("NachtZeitvon2") = src("NachtZeitvon2").ToString()
+        If IsDate(src("NachtDatumbis2").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("NachtDatumbis2") = src("NachtDatumbis2").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("NachtZeitbis2") = dsToernverwaltung.Toernname.Rows(0)("NachtZeitbis2").ToString()
-        dsExport.ToernnameE.Rows(ij)("Std50Start") = dsToernverwaltung.Toernname.Rows(0)("Std50Start").ToString()
-        dsExport.ToernnameE.Rows(ij)("Std50Ziel") = dsToernverwaltung.Toernname.Rows(0)("Std50Ziel").ToString()
-        dsExport.ToernnameE.Rows(ij)("Std50SmGes") = dsToernverwaltung.Toernname.Rows(0)("Std50SmGes").ToString()
-        dsExport.ToernnameE.Rows(ij)("Std50smFB2") = dsToernverwaltung.Toernname.Rows(0)("Std50smFB2").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("Std50DatumStart").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("Std50DatumStart") = dsToernverwaltung.Toernname.Rows(0)("Std50DatumStart").ToString()
+        dsExport.ToernnameE.Rows(ij)("NachtZeitbis2") = src("NachtZeitbis2").ToString()
+        dsExport.ToernnameE.Rows(ij)("Std50Start") = src("Std50Start").ToString()
+        dsExport.ToernnameE.Rows(ij)("Std50Ziel") = src("Std50Ziel").ToString()
+        dsExport.ToernnameE.Rows(ij)("Std50SmGes") = src("Std50SmGes").ToString()
+        dsExport.ToernnameE.Rows(ij)("Std50smFB2") = src("Std50smFB2").ToString()
+        If IsDate(src("Std50DatumStart").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("Std50DatumStart") = src("Std50DatumStart").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("Std50ZeitStart") = dsToernverwaltung.Toernname.Rows(0)("Std50ZeitStart").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("Std50DatumZiel").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("Std50DatumZiel") = dsToernverwaltung.Toernname.Rows(0)("Std50DatumZiel").ToString()
+        dsExport.ToernnameE.Rows(ij)("Std50ZeitStart") = src("Std50ZeitStart").ToString()
+        If IsDate(src("Std50DatumZiel").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("Std50DatumZiel") = src("Std50DatumZiel").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("Std50ZeitZiel") = dsToernverwaltung.Toernname.Rows(0)("Std50ZeitZiel").ToString()
-        dsExport.ToernnameE.Rows(ij)("GezHafen1") = dsToernverwaltung.Toernname.Rows(0)("GezHafen1").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("GezDatum1").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("GezDatum1") = dsToernverwaltung.Toernname.Rows(0)("GezDatum1").ToString()
+        dsExport.ToernnameE.Rows(ij)("Std50ZeitZiel") = src("Std50ZeitZiel").ToString()
+        dsExport.ToernnameE.Rows(ij)("GezHafen1") = src("GezHafen1").ToString()
+        If IsDate(src("GezDatum1").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("GezDatum1") = src("GezDatum1").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("GezZeit1") = dsToernverwaltung.Toernname.Rows(0)("GezZeit1").ToString()
-        dsExport.ToernnameE.Rows(ij)("GezHafen2") = dsToernverwaltung.Toernname.Rows(0)("GezHafen2").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("GezDatum2").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("GezDatum2") = dsToernverwaltung.Toernname.Rows(0)("GezDatum2").ToString()
+        dsExport.ToernnameE.Rows(ij)("GezZeit1") = src("GezZeit1").ToString()
+        dsExport.ToernnameE.Rows(ij)("GezHafen2") = src("GezHafen2").ToString()
+        If IsDate(src("GezDatum2").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("GezDatum2") = src("GezDatum2").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("GezZeit2") = dsToernverwaltung.Toernname.Rows(0)("GezZeit2").ToString()
-        dsExport.ToernnameE.Rows(ij)("FB4Start") = dsToernverwaltung.Toernname.Rows(0)("FB4Start").ToString()
-        dsExport.ToernnameE.Rows(ij)("FB4Ziel") = dsToernverwaltung.Toernname.Rows(0)("FB4Ziel").ToString()
-        dsExport.ToernnameE.Rows(ij)("FB4SmGes") = dsToernverwaltung.Toernname.Rows(0)("FB4SmGes").ToString()
-        dsExport.ToernnameE.Rows(ij)("FB4SmFb3") = dsToernverwaltung.Toernname.Rows(0)("FB4SmFb3").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("FB4DatumStart").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("FB4DatumStart") = dsToernverwaltung.Toernname.Rows(0)("FB4DatumStart").ToString()
+        dsExport.ToernnameE.Rows(ij)("GezZeit2") = src("GezZeit2").ToString()
+        dsExport.ToernnameE.Rows(ij)("FB4Start") = src("FB4Start").ToString()
+        dsExport.ToernnameE.Rows(ij)("FB4Ziel") = src("FB4Ziel").ToString()
+        dsExport.ToernnameE.Rows(ij)("FB4SmGes") = src("FB4SmGes").ToString()
+        dsExport.ToernnameE.Rows(ij)("FB4SmFb3") = src("FB4SmFb3").ToString()
+        If IsDate(src("FB4DatumStart").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("FB4DatumStart") = src("FB4DatumStart").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("FB4ZeitStart") = dsToernverwaltung.Toernname.Rows(0)("FB4ZeitStart").ToString()
-        If IsDate(dsToernverwaltung.Toernname.Rows(0)("FB4DatumZiel").ToString()) Then
-            dsExport.ToernnameE.Rows(ij)("FB4DatumZiel") = dsToernverwaltung.Toernname.Rows(0)("FB4DatumZiel").ToString()
+        dsExport.ToernnameE.Rows(ij)("FB4ZeitStart") = src("FB4ZeitStart").ToString()
+        If IsDate(src("FB4DatumZiel").ToString()) Then
+            dsExport.ToernnameE.Rows(ij)("FB4DatumZiel") = src("FB4DatumZiel").ToString()
         End If
-        dsExport.ToernnameE.Rows(ij)("FB4ZeitZiel") = dsToernverwaltung.Toernname.Rows(0)("FB4ZeitZiel").ToString()
-        dsExport.ToernnameE.Rows(ij)("Revier") = dsToernverwaltung.Toernname.Rows(0)("Revier").ToString()
+        dsExport.ToernnameE.Rows(ij)("FB4ZeitZiel") = src("FB4ZeitZiel").ToString()
+        dsExport.ToernnameE.Rows(ij)("Revier") = src("Revier").ToString()
         taToernnameE.Update(dsExport.ToernnameE)
-        skipper = dsToernverwaltung.Toernname.Rows(0)("Skipper").ToString()
-        boot = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString()
-        mrina(dsToernverwaltung.Toernname.Rows(0)("AusgangsMarina").ToString())
-        mrina(dsToernverwaltung.Toernname.Rows(0)("EndeMarina").ToString())
+        skipper = src("Skipper").ToString()
+        boot = src("Bootsname").ToString()
+        mrina(src("AusgangsMarina").ToString())
+        mrina(src("EndeMarina").ToString())
         ToernDir(aaa)
         crewDir(skipper)
         crewexp(skipper)
@@ -403,10 +407,12 @@ Class ExpoNeu
         Dim tr As System.Data.DataRowView = bsTC.Current
         xtAdapter.SelectCommand = New OleDb.OleDbCommand
         xtAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-        xtAdapter.SelectCommand.CommandText = "Select * from tc where toern = '" & SafeData.SqlQuote(aaa) & "'"
+        xtAdapter.SelectCommand.Parameters.Clear()
+        xtAdapter.SelectCommand.CommandText = "Select * from tc where toern = ?"
+        xtAdapter.SelectCommand.Parameters.AddWithValue("@p1", aaa)
         dsToernverwaltung.TC.Clear()
         xtAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         iip = bsTC.Count - 1
         it = bsTCE.Count - 1
         For Me.ip = 0 To iip
@@ -445,7 +451,9 @@ Class ExpoNeu
         Dim xd As System.Data.DataRowView = bsCrewAdressenE.Current
         xadapter.SelectCommand = New OleDb.OleDbCommand
         xadapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
-        xadapter.SelectCommand.CommandText = "Select * from crewadressenE where vzname = '" & SafeData.SqlQuote(crewname) & "'"
+        xadapter.SelectCommand.Parameters.Clear()
+        xadapter.SelectCommand.CommandText = "Select * from crewadressenE where vzname = ?"
+        xadapter.SelectCommand.Parameters.AddWithValue("@p1", crewname)
         bsCrewAdressenE.CancelEdit()
         dsExport.CrewAdressenE.Clear()
         xadapter.Fill(dsExport.CrewAdressenE)
@@ -456,10 +464,12 @@ Class ExpoNeu
             Dim heute As Date
             xcAdapter.SelectCommand = New OleDb.OleDbCommand
             xcAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-            xcAdapter.SelectCommand.CommandText = "Select * from CrewAdressen where vzname = '" & SafeData.SqlQuote(crewname) & "'"
+            xcAdapter.SelectCommand.Parameters.Clear()
+            xcAdapter.SelectCommand.CommandText = "Select * from CrewAdressen where vzname = ?"
+            xcAdapter.SelectCommand.Parameters.AddWithValue("@p1", crewname)
             dsToernverwaltung.CrewAdressen.Clear()
             xcAdapter.Fill(dsToernverwaltung.CrewAdressen)
-            bsCrewAdressen.Position = 0
+            DbAccess.SafePosition(bsCrewAdressen)
             heute = Today
             '       ic = bsCrewAdressenE.Count - 1
             If bsCrewAdressen.Count > 0 Then
@@ -516,7 +526,9 @@ Class ExpoNeu
         Dim xd As System.Data.DataRowView = bsBootE.Current
         xadapter.SelectCommand = New OleDb.OleDbCommand
         xadapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
-        xadapter.SelectCommand.CommandText = "Select * from bootE where bootname = '" & SafeData.SqlQuote(boot) & "'"
+        xadapter.SelectCommand.Parameters.Clear()
+        xadapter.SelectCommand.CommandText = "Select * from bootE where bootname = ?"
+        xadapter.SelectCommand.Parameters.AddWithValue("@p1", boot)
         bsBootE.CancelEdit()
         dsExport.BootE.Clear()
         xadapter.Fill(dsExport.BootE)
@@ -526,11 +538,13 @@ Class ExpoNeu
             Dim br As System.Data.DataRowView = bsBoot.Current
             xbAdapter.SelectCommand = New OleDb.OleDbCommand
             xbAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-            xbAdapter.SelectCommand.CommandText = "Select * from boot where bootname = '" & SafeData.SqlQuote(boot) & "'"
+            xbAdapter.SelectCommand.Parameters.Clear()
+            xbAdapter.SelectCommand.CommandText = "Select * from boot where bootname = ?"
+            xbAdapter.SelectCommand.Parameters.AddWithValue("@p1", boot)
             dsToernverwaltung.Boot.Clear()
             xbAdapter.Fill(dsToernverwaltung.Boot)
-            bsBoot.Position = 0
-            bsBootE.Position = 0
+            DbAccess.SafePosition(bsBoot)
+            DbAccess.SafePosition(bsBootE)
             bsBootE.AddNew()
             bsBootE.AddNew()
             dsExport.BootE.Rows(0)("Bootname") = dsToernverwaltung.Boot.Rows(0)("Bootname").ToString()
@@ -596,7 +610,9 @@ Class ExpoNeu
         Dim xd As System.Data.DataRowView = bsCharterE.Current
         xadapter.SelectCommand = New OleDb.OleDbCommand
         xadapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
-        xadapter.SelectCommand.CommandText = "Select * from charterE where charterfirma = '" & SafeData.SqlQuote(charter) & "'"
+        xadapter.SelectCommand.Parameters.Clear()
+        xadapter.SelectCommand.CommandText = "Select * from charterE where charterfirma = ?"
+        xadapter.SelectCommand.Parameters.AddWithValue("@p1", charter)
         bsCharterE.CancelEdit()
         dsExport.CharterE.Clear()
         xadapter.Fill(dsExport.CharterE)
@@ -606,11 +622,13 @@ Class ExpoNeu
             Dim br As System.Data.DataRowView = bsCharter.Current
             xcAdapter.SelectCommand = New OleDb.OleDbCommand
             xcAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-            xcAdapter.SelectCommand.CommandText = "Select * from charter where Charterfirma = '" & SafeData.SqlQuote(charter) & "'"
+            xcAdapter.SelectCommand.Parameters.Clear()
+            xcAdapter.SelectCommand.CommandText = "Select * from charter where Charterfirma = ?"
+            xcAdapter.SelectCommand.Parameters.AddWithValue("@p1", charter)
             dsToernverwaltung.Charter.Clear()
             xcAdapter.Fill(dsToernverwaltung.Charter)
             If bsCharter.Count > 0 Then
-                bsCharter.Position = 0
+                DbAccess.SafePosition(bsCharter)
                 bsCharterE.AddNew()
                 bsCharterE.AddNew()
                 dsExport.CharterE.Rows(0)("Charterfirma") = dsToernverwaltung.Charter.Rows(0)("Charterfirma").ToString()
@@ -646,20 +664,24 @@ Class ExpoNeu
         Dim br As System.Data.DataRowView = bsAgentur.Current
         xaAdapter.SelectCommand = New OleDb.OleDbCommand
         xaAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
-        xaAdapter.SelectCommand.CommandText = "Select * from agentur where Agentur = '" & SafeData.SqlQuote(agentura) & "'"
+        xaAdapter.SelectCommand.Parameters.Clear()
+        xaAdapter.SelectCommand.CommandText = "Select * from agentur where Agentur = ?"
+        xaAdapter.SelectCommand.Parameters.AddWithValue("@p1", agentura)
         dsToernverwaltung.Agentur.Clear()
         xaAdapter.Fill(dsToernverwaltung.Agentur)
         Dim xadapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
         Dim xd As System.Data.DataRowView = bsAgenturE.Current
         xadapter.SelectCommand = New OleDb.OleDbCommand
         xadapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
-        xadapter.SelectCommand.CommandText = "Select * from agenturE where Agentur = '" & SafeData.SqlQuote(agentura) & "'"
+        xadapter.SelectCommand.Parameters.Clear()
+        xadapter.SelectCommand.CommandText = "Select * from agenturE where Agentur = ?"
+        xadapter.SelectCommand.Parameters.AddWithValue("@p1", agentura)
         bsAgenturE.CancelEdit()
         dsExport.AgenturE.Clear()
         xadapter.Fill(dsExport.AgenturE)
         If bsAgenturE.Count = 0 Then
             If bsAgentur.Count > 0 Then
-                bsAgentur.Position = 0
+                DbAccess.SafePosition(bsAgentur)
                 bsAgenturE.AddNew()
                 bsAgenturE.AddNew()
                 dsExport.AgenturE.Rows(0)("Agentur") = dsToernverwaltung.Agentur.Rows(0)("Agentur").ToString()
@@ -833,8 +855,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Bordkassa WHERE Toern = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM Bordkassa WHERE Toern = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -869,8 +892,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Toernverwaltung.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Wacheplan WHERE Toern = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM Wacheplan WHERE Toern = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -910,8 +934,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Bootlog WHERE Bootname = '" & bootnameL & "' "
+        Dim sqlSelect As String = "SELECT * FROM Bootlog WHERE Bootname = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", bootnameL)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -943,8 +968,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Sicherheitseinweisung WHERE Toernbezeichnung = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM Sicherheitseinweisung WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -991,8 +1017,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Toerndaten WHERE Toernbezeichnung = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM Toerndaten WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -1041,8 +1068,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Dokumentation WHERE Toernbezeichnung = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM Dokumentation WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -1090,8 +1118,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM LogDaten WHERE Toerbezeichnung = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM LogDaten WHERE Toerbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -1132,8 +1161,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Maengel WHERE Toernbezeichnung = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM Maengel WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -1164,8 +1194,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM Zusammenfassung2 WHERE Toernbezeichnung = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM Zusammenfassung2 WHERE Toernbezeichnung = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()
@@ -1207,8 +1238,9 @@ Class ExpoNeu
         Dim connQuelle As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Logbuch.mdb")
         Dim connZiel As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Export.mdb")
 
-        Dim sqlSelect As String = "SELECT * FROM LogWacheplan WHERE Toern = '" & aaa & "' "
+        Dim sqlSelect As String = "SELECT * FROM LogWacheplan WHERE Toern = ? "
         Dim cmdQuelle As New OleDbCommand(sqlSelect, connQuelle)
+        cmdQuelle.Parameters.AddWithValue("@p1", aaa)
 
         connQuelle.Open()
         Dim reader As OleDbDataReader = cmdQuelle.ExecuteReader()

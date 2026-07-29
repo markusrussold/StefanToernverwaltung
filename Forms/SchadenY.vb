@@ -1,4 +1,4 @@
-﻿Public Class SchadenY
+Public Class SchadenY
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim sAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim xAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -87,7 +87,7 @@
         bsVersicherter.CancelEdit()
         dsVersicherung.Versicherter.Clear()
         tAdapter.Fill(dsVersicherung.Versicherter)
-        bsVersicherter.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsVersicherter)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         Select Case bsVersicherter.Count
             Case 0
                 MsgBox("Kein Versicherter mit angegebenen Buchstabenkombination vorhanden")
@@ -101,7 +101,7 @@
                 Fenster("b")
                 TextBox34.Focus()
             Case Else
-                bsVersicherter.Position = 0
+                DbAccess.SafePosition(bsVersicherter)
                 dgvToern.Visible = True
                 Fenster("v")
         End Select
@@ -175,7 +175,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 Fenster("t")
             Case 1
-                bsToernname.Position = 0
+                DbAccess.SafePosition(bsToernname)
                 Fenster("b")
                 TextBox8.Focus()
                 sucheSchaden()
@@ -235,7 +235,7 @@
                 aenderung = True
                 '               RichTextBox2.Location = New Point(11, 20)
             Case Else
-                bsSchaden.Position = 0
+                DbAccess.SafePosition(bsSchaden)
                 Fenster("v")
         End Select
         ButtonSpeichern.Enabled = True

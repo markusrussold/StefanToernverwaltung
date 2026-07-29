@@ -1,4 +1,4 @@
-﻿Public Class Info
+Public Class Info
     Dim Freischaltung As String
     Dim x As New CheckKey
     Dim ok As Boolean
@@ -32,7 +32,7 @@
         dsToernverwaltung.Steuerdaten.Clear()
         sAdapter.Fill(dsToernverwaltung.Steuerdaten)
         If bsSteuerdaten.Count > 0 Then
-            bsSteuerdaten.Position = 0
+            DbAccess.SafePosition(bsSteuerdaten)
         End If
         If bsSteuerdaten.Count > 0 Then
             If dsToernverwaltung.Steuerdaten.Rows(0)("bezeichnung").ToString = "Version" Then

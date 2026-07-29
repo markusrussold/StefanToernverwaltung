@@ -1,4 +1,4 @@
-﻿Public Class Ablauf
+Public Class Ablauf
     Dim fbreite As Integer
     Dim fhoehe As Integer
     Public iii As Integer
@@ -78,7 +78,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 '                Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 CheckBox1.Text = dsToernverwaltung.Toernname.Rows(0)("Skipper").ToString
                 GroupBoxBesprechung.Location = New Point(17, 107)
                 GroupBox1Törn.Location = New Point(1700, 107)

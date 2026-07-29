@@ -1,4 +1,4 @@
-﻿Public Class Distress
+Public Class Distress
     Dim buch1 As String
     Dim iii As Integer
     Dim aaa As String
@@ -41,7 +41,7 @@
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         pAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0
+        DbAccess.SafePosition(bsToernname)
         bsToernname.AddNew()
         Toern.Visible = False
         With DataGridView1
@@ -68,10 +68,10 @@
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         pAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0
+        DbAccess.SafePosition(bsToernname)
         Select Case bsToernname.Count
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bootsname = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 Toern.Visible = False
                 DataGridView1.Visible = True
@@ -88,7 +88,7 @@
                     Case 0
                         MsgBox("Kein Boot vorhanden")
                    Case 1
-                        bsBoot.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                        DbAccess.SafePosition(bsBoot)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                         mmsi = dsToernverwaltung.Boot.Rows(0)("MMSI").ToString
                         schiffnr = dsToernverwaltung.Boot.Rows(0)("Schiffsnummer").ToString
                         Label4.Text = dsToernverwaltung.Boot.Rows(0)("Bootname").ToString
@@ -146,7 +146,7 @@ Gefunden:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         nAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         crewanzahl = bsTC.Count + 1
     End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click

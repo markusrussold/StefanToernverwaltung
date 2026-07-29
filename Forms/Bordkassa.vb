@@ -1,4 +1,4 @@
-﻿Imports System.Runtime.InteropServices
+Imports System.Runtime.InteropServices
 Public Class Bordkassa
     Dim buch1 As String
     Dim aaa As String
@@ -48,7 +48,7 @@ Public Class Bordkassa
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         LAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         ComboBox2.Items.Add("Kassa")
         If bsListdaten.Count = 1 Then
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
@@ -151,7 +151,7 @@ Public Class Bordkassa
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 TextBox1.Text = TextBox22.Text
                 TextBox16.Text = TextBox1.Text      'Törnname
                 Bootsname = dsToernverwaltung.Toernname.Rows(0)("bootsname").ToString
@@ -744,7 +744,7 @@ ende:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld0", "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7", "Feld8", "Feld9", "Feld10", "Feld11", "Feld12", "Feld13", "Feld14", "Feld15", "Feld16", "Feld17", "Feld18", "Feld19", "Feld20", "Feld21", "Feld22", "Feld23", "Feld24", "Feld25", "Feld26", "Feld27", "Feld28", "Feld29", "Feld30", "Feld31")
         Xs.PrintBordkassa(t)
@@ -1103,7 +1103,7 @@ ende:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xtAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         If bsTemp.Count > 0 Then
             iip = bsTemp.Count - 1
             For Me.pi = 0 To iip

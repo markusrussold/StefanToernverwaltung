@@ -1,4 +1,4 @@
-﻿Public Class Kursbestellung3
+Public Class Kursbestellung3
     Dim mkAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kmAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -128,7 +128,7 @@
                     bsKursmaterial.CancelEdit()
                     DsAusbildung.Kursmaterial.Clear()
                     kmAdapter.Fill(DsAusbildung.Kursmaterial)
-                    bsKursmaterial.Position = 0
+                    DbAccess.SafePosition(bsKursmaterial)
                     If bsKursmaterial.Count = 1 Then
                         TextBox5.Text = DsAusbildung.Kursmaterial.Rows(0)("Listenpreis").ToString
                         TextBox6.Text = DsAusbildung.Kursmaterial.Rows(0)("Einkaufspreis").ToString
@@ -148,7 +148,7 @@
         bsKursmaterial.CancelEdit()
         DsAusbildung.Kursmaterial.Clear()
         kmAdapter.Fill(DsAusbildung.Kursmaterial)
-        bsKursmaterial.Position = 0
+        DbAccess.SafePosition(bsKursmaterial)
         If bsKursmaterial.Count = 1 Then
             TextBox5.Text = DsAusbildung.Kursmaterial.Rows(0)("Listenpreis").ToString
             TextBox6.Text = DsAusbildung.Kursmaterial.Rows(0)("Einkaufspreis").ToString

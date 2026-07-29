@@ -1,4 +1,4 @@
-﻿
+
 Imports System.IO
 Imports System.Text
 Public Class Adressen
@@ -43,7 +43,7 @@ Public Class Adressen
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -92,7 +92,7 @@ Public Class Adressen
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         aaa = bsCrewAdressen.Count
         For i = 0 To aaa - 1
             dsToernverwaltung.CrewAdressen.Rows(i)("R3") = " "
@@ -103,7 +103,7 @@ Public Class Adressen
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         aaa = bsCrewAdressen.Count
         CheckBox1.Checked = True
         Crew.crewprogramm = False
@@ -173,7 +173,7 @@ Public Class Adressen
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         aaa = bsCrewAdressen.Count
 
     End Sub
@@ -309,7 +309,7 @@ Public Class Adressen
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         For i = 0 To bsCrewAdressen.Count - 1
             If Not DBNull.Value.Equals(dsToernverwaltung.CrewAdressen.Rows(i)("Bemerkung")) Then
                 If Inhalt(dsToernverwaltung.CrewAdressen.Rows(i)("Bemerkung"), TextBox8.Text) Then
@@ -347,7 +347,7 @@ Public Class Adressen
                 bsCrewAdressen.CancelEdit()
                 dsToernverwaltung.CrewAdressen.Clear()
                 cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-                bsCrewAdressen.Position = 0
+                DbAccess.SafePosition(bsCrewAdressen)
                 dsToernverwaltung.CrewAdressen.Rows(0)("R3") = "X"
                 bsCrewAdressen.EndEdit()
                 taCrewAdressen.Update(dsToernverwaltung.CrewAdressen)
@@ -356,7 +356,7 @@ Public Class Adressen
             bsCrewAdressen.CancelEdit()
             dsToernverwaltung.CrewAdressen.Clear()
             cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-            bsCrewAdressen.Position = 0
+            DbAccess.SafePosition(bsCrewAdressen)
         Else
             aaa = bsCrewAdressen.Count
             For i = 0 To aaa - 1
@@ -423,7 +423,7 @@ Public Class Adressen
                 bsCrewAdressen.CancelEdit()
                 dsToernverwaltung.CrewAdressen.Clear()
                 cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-                bsCrewAdressen.Position = 0
+                DbAccess.SafePosition(bsCrewAdressen)
                 dsToernverwaltung.CrewAdressen.Rows(0)("R3") = "X"
                 bsCrewAdressen.EndEdit()
                 taCrewAdressen.Update(dsToernverwaltung.CrewAdressen)
@@ -432,7 +432,7 @@ Public Class Adressen
             bsCrewAdressen.CancelEdit()
             dsToernverwaltung.CrewAdressen.Clear()
             cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-            bsCrewAdressen.Position = 0
+            DbAccess.SafePosition(bsCrewAdressen)
         End If
         Dim ii As Integer
         Dim anzahl As Integer

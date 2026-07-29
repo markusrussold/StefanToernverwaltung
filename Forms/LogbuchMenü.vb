@@ -1,4 +1,4 @@
-﻿Public Class LogbuchMenü
+Public Class LogbuchMenü
     Dim aaa As String
     Dim buch1 As String
     Dim position As Integer
@@ -98,7 +98,7 @@
                 dsToernverwaltung.Toernname.Clear()
                 xAdapter.Fill(dsToernverwaltung.Toernname)
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label14.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 datvon = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumvon"))
                 datbis = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("datumbis"))
@@ -144,7 +144,7 @@
         bsToerndaten.CancelEdit()
         DsLogbuch.Toerndaten.Clear()
         pAdapter.Fill(DsLogbuch.Toerndaten)
-        bsToerndaten.Position = 0
+        DbAccess.SafePosition(bsToerndaten)
         aaa = bsToerndaten.Count
         Label7.Text = 0
         If aaa = 0 Then
@@ -170,7 +170,7 @@
         bsBootLog.CancelEdit()
         DsLogbuch.BootLog.Clear()
         pAdapter.Fill(DsLogbuch.BootLog)
-        bsBootLog.Position = 0
+        DbAccess.SafePosition(bsBootLog)
         aaa = bsBootLog.Count
         If IsNumeric(Label7.Text) Then
             If aaa = 0 Then
@@ -195,7 +195,7 @@
         bsZusammenfassung2.CancelEdit()
         DsLogbuch.Zusammenfassung2.Clear()
         pAdapter.Fill(DsLogbuch.Zusammenfassung2)
-        bsZusammenfassung2.Position = 0
+        DbAccess.SafePosition(bsZusammenfassung2)
         aaa = bsZusammenfassung2.Count
          If aaa = 0 Then
             Label11.Text = "Zusammenfassung wurde noch nicht gestartet."
@@ -215,7 +215,7 @@
         bsDokumentation.CancelEdit()
         DsLogbuch.Dokumentation.Clear()
         pAdapter.Fill(DsLogbuch.Dokumentation)
-        bsDokumentation.Position = 0
+        DbAccess.SafePosition(bsDokumentation)
         aaa = bsDokumentation.Count
         If aaa = 0 Then
             Label10.Text = "Tageslogbuch und Tagesdokumentation sind noch nicht eingegeben."
@@ -233,7 +233,7 @@
         bsSicherheitseinweisung.CancelEdit()
         DsLogbuch.Sicherheitseinweisung.Clear()
         pAdapter.Fill(DsLogbuch.Sicherheitseinweisung)
-        bsSicherheitseinweisung.Position = 0
+        DbAccess.SafePosition(bsSicherheitseinweisung)
         aaa = bsSicherheitseinweisung.Count
         If aaa > 0 Then
              If DsLogbuch.Sicherheitseinweisung.Rows(0)("lifebelt") And
@@ -266,7 +266,7 @@
         bsMaengel.CancelEdit()
         DsLogbuch.Maengel.Clear()
         pAdapter.Fill(DsLogbuch.Maengel)
-        bsMaengel.Position = 0
+        DbAccess.SafePosition(bsMaengel)
         aaa = bsMaengel.Count
         If aaa = 0 Then
             Label12.Text = "Keine Mängel am Boot festgestellt."

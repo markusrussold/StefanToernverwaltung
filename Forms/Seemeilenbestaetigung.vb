@@ -1,4 +1,4 @@
-﻿Public Class Seemeilenbestaetigung
+Public Class Seemeilenbestaetigung
     Public Freischaltung As String
      Public aenderung As Boolean
     Public aaa As String
@@ -78,7 +78,7 @@
 
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         bsToernname.AddNew()
         aenderung = False
         MaskedTextBox1.Mask = "00.00.0000"
@@ -226,7 +226,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 CrewlisteAnzeigen()
                 GroupBox2.Visible = False
                 GroupBox4.Visible = True
@@ -314,7 +314,7 @@ Gefunden:
         xAdapter.Fill(dsToernverwaltung.CrewAdressen)
         Select Case bsCrewAdressen.Count
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 schAdresse = dsToernverwaltung.CrewAdressen.Rows(0)("Plz").ToString + " " + dsToernverwaltung.CrewAdressen.Rows(0)("ort").ToString + ", " + dsToernverwaltung.CrewAdressen.Rows(0)("Straße").ToString
                 lizenz = dsToernverwaltung.CrewAdressen.Rows(0)("Segelschein").ToString
                 lizDatum = dsToernverwaltung.CrewAdressen.Rows(0)("SegelscheinDatum").ToString
@@ -338,7 +338,7 @@ Gefunden:
         xAdapter.Fill(dsToernverwaltung.Boot)
         Select Case bsBoot.Count
             Case 1
-                bsBoot.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsBoot)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bsTemp.AddNew()
                 type = dsToernverwaltung.Boot.Rows(0)("Schiffstyp").ToString
                 boot = boot + " / " + dsToernverwaltung.Boot.Rows(0)("Schiffsnummer")
@@ -646,7 +646,7 @@ Gefunden:
                 If bsTemp.Count = 0 Then
                     bsTemp.AddNew()
                     bsTemp.AddNew()
-                    bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                    DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                     dsToernverwaltung.Temp.Rows(0)("Feld0") = dsToernverwaltung.CrewAdressen.Rows(0)("VZname").ToString
                     gebdat = SafeData.FormatDateDe(dsToernverwaltung.CrewAdressen.Rows(0)("Gebdatum"))
                     dsToernverwaltung.Temp.Rows(0)("Feld1") = gebdat
@@ -786,7 +786,7 @@ Gefunden:
                     End If
                     taTemp.Update(dsToernverwaltung.Temp)
                 Else
-                    bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                    DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                     dsToernverwaltung.Temp.Rows(0)("Feld0") = dsToernverwaltung.CrewAdressen.Rows(0)("VZname").ToString
                     gebdat = datum10(dsToernverwaltung.CrewAdressen.Rows(0)("Gebdatum").ToString)
                     dsToernverwaltung.Temp.Rows(0)("Feld1") = gebdat
@@ -1034,7 +1034,7 @@ Gefunden:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         If TextBox1.Text > " " Then
             If bsTemp.Count > 0 Then
                 dv = bsTemp.List

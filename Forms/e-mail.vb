@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Net.Mail
 Public Class EMail
     Dim variableemail As String
@@ -111,7 +111,7 @@ Public Class EMail
                 bsKurse.CancelEdit()
                 DsAusbildung.Kurse.Clear()
                 kAdapter.Fill(DsAusbildung.Kurse)
-                bsKurse.Position = 0
+                DbAccess.SafePosition(bsKurse)
                 RadioButton4.Visible = True
                 RadioButton5.Visible = True
                 ComboBox3.Visible = True
@@ -131,7 +131,7 @@ Public Class EMail
                 bsKurse.CancelEdit()
                 DsAusbildung.Veranstaltungen.Clear()
                 vaAdapter.Fill(DsAusbildung.Veranstaltungen)
-                bsVeranstaltungen.Position = 0
+                DbAccess.SafePosition(bsVeranstaltungen)
                 iii = bsVeranstaltungen.Count - 1
                 For i = 0 To iii
                     If DsAusbildung.Veranstaltungen.Rows(i)("Veranstaltung").ToString > "" Then
@@ -171,7 +171,7 @@ Public Class EMail
             bsListdaten.CancelEdit()
             dsToernverwaltung.Listdaten.Clear()
             pAdapter.Fill(dsToernverwaltung.Listdaten)
-            bsListdaten.Position = 0
+            DbAccess.SafePosition(bsListdaten)
             iii = bsListdaten.Count - 1
             For i = 0 To iii
                 aaa = dsToernverwaltung.Listdaten.Rows(i)("Bezeichnung").ToString
@@ -181,7 +181,7 @@ Public Class EMail
             bsListdaten.CancelEdit()
             dsToernverwaltung.Listdaten.Clear()
             pAdapter.Fill(dsToernverwaltung.Listdaten)
-            bsListdaten.Position = 0
+            DbAccess.SafePosition(bsListdaten)
             If bsListdaten.Count = 1 Then
                 comboFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
                 comboFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -236,7 +236,7 @@ Public Class EMail
             bsKontakte.CancelEdit()
             DsAusbildung.Kontakte.Clear()
             ktAdapter.Fill(DsAusbildung.Kontakte)
-            bsKontakte.Position = 0
+            DbAccess.SafePosition(bsKontakte)
 
             Dim cAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
         Dim rc As System.Data.DataRowView = bsCrewAdressen.Current
@@ -246,7 +246,7 @@ Public Class EMail
             bsCrewAdressen.CancelEdit()
             dsToernverwaltung.CrewAdressen.Clear()
             cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-            bsCrewAdressen.Position = 0
+            DbAccess.SafePosition(bsCrewAdressen)
 
             t1 = GetSetting("T1", "mail", "T")
             If t1 > "" Then
@@ -460,7 +460,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         adrzaehler = bsCrewAdressen.Count
         Label9.Text = adrzaehler + " Adressen aus der Vorauswahl"
         listboxfuellen()
@@ -479,7 +479,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         adrzaehler = bsCrewAdressen.Count
         Label9.Text = adrzaehler + " Adressen aus der Vorauswahl"
         listboxfuellen()
@@ -498,7 +498,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         adrzaehler = bsCrewAdressen.Count
         Label9.Text = adrzaehler + " Adressen aus der Vorauswahl"
         listboxfuellen()
@@ -527,7 +527,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         If bsCrewAdressen.Count = 1 Then
             If dsToernverwaltung.CrewAdressen.Rows(0)("email").ToString > " " Then
                 ListBox2.Items.Add(ListBox1.Text)
@@ -552,7 +552,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
     End Sub
 
     Private Sub ListBox2_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox2.DoubleClick
@@ -610,7 +610,7 @@ endsub:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld22", "Feld0")
         XLE.PrintEmail(t)
@@ -626,7 +626,7 @@ endsub:
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             RichTextBox4.Clear()
             richFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
@@ -704,7 +704,7 @@ endsub:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         tcAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         adrzaehler = bsTC.Count
         Label9.Text = adrzaehler + " Adressen aus der Vorauswahl"
         Dim iii As Integer
@@ -754,7 +754,7 @@ endsub:
             bsCrewAdressen.CancelEdit()
             dsToernverwaltung.CrewAdressen.Clear()
             cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-            bsCrewAdressen.Position = 0
+            DbAccess.SafePosition(bsCrewAdressen)
             TextBox5.Text = dsToernverwaltung.CrewAdressen.Rows(0)("email").ToString
             nm = dsToernverwaltung.CrewAdressen.Rows(0)("zuname").ToString
             vnm = dsToernverwaltung.CrewAdressen.Rows(0)("vorname").ToString
@@ -797,7 +797,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         adrzaehler = bsCrewAdressen.Count
         Label9.Text = adrzaehler + " Adressen aus der Vorauswahl"
         listboxfuellen()
@@ -890,7 +890,7 @@ endsub:
         bsTeilnehmer.CancelEdit()
         DsAusbildung.Teilnehmer.Clear()
         tAdapter.Fill(DsAusbildung.Teilnehmer)
-        bsTeilnehmer.Position = 0
+        DbAccess.SafePosition(bsTeilnehmer)
         aaa = bsTeilnehmer.Count
         If bsTeilnehmer.Count = 0 Then
             MsgBox(" Diesen Kurs haben noch keine Teilnehmer gebucht.")
@@ -918,7 +918,7 @@ endsub:
         bsVeranstalTeilnehmer.CancelEdit()
         DsAusbildung.VeranstalTeilnehmer.Clear()
         vtAdapter.Fill(DsAusbildung.VeranstalTeilnehmer)
-        bsVeranstalTeilnehmer.Position = 0
+        DbAccess.SafePosition(bsVeranstalTeilnehmer)
         aaa = bsVeranstalTeilnehmer.Count
         If bsVeranstalTeilnehmer.Count = 0 Then
             MsgBox(" Diesen Veranstaltung haben noch keine Teilnehmer gebucht.")
@@ -947,7 +947,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         nm = dsToernverwaltung.CrewAdressen.Rows(0)("zuname").ToString
         vnm = dsToernverwaltung.CrewAdressen.Rows(0)("vorname").ToString
         r1 = dsToernverwaltung.CrewAdressen.Rows(0)("r1").ToString
@@ -980,7 +980,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         adrzaehler = bsCrewAdressen.Count
         Label9.Text = adrzaehler + " Adressen aus der Vorauswahl"
         listboxfuellen()
@@ -1045,7 +1045,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         iii = bsCrewAdressen.Count - 1
         For Me.ij = 0 To iii
             Select Case fb_Auswahl
@@ -1099,7 +1099,7 @@ endsub:
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         adrzaehler = bsCrewAdressen.Count
         Label9.Text = adrzaehler + " Adressen aus der Vorauswahl"
         listboxfuellen()

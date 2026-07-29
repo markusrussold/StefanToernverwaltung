@@ -1,4 +1,4 @@
-﻿Public Class Geburtstagskalender
+Public Class Geburtstagskalender
     Public Freischaltung As String
     Public aenderung As Boolean
     Public aaa As String
@@ -37,7 +37,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         ComboBox1.Items.Add("Jänner")
         ComboBox1.Items.Add("Februar")
         ComboBox1.Items.Add("März")
@@ -75,7 +75,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         xAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsCrewAdressen.List
         '       t = dv.ToTable("Printing", False, "Name", "Vorname", "Plz", "Ort", "MNr", "MBereich", "MDatum")
         If ok Then
@@ -127,7 +127,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         aaa = "M"
     End Sub
 
@@ -149,7 +149,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         aaa = "J"
     End Sub
 

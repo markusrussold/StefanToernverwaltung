@@ -1,4 +1,4 @@
-﻿Public Class Kalkulationsblatt
+Public Class Kalkulationsblatt
     Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -50,7 +50,7 @@
         bsToernKalkulation.CancelEdit()
         dsToernverwaltung.ToernKalkulation.Clear()
         pAdapter.Fill(dsToernverwaltung.ToernKalkulation)
-        bsToernKalkulation.Position = 0
+        DbAccess.SafePosition(bsToernKalkulation)
         bsToernKalkulation.AddNew()
         If IsDBNull(GetSetting("toern", "Anzahlung", "T", "0")) Then
             Anzahlung = 0
@@ -355,7 +355,7 @@ Gefunden:
         aenderung = True
         dsToernverwaltung.BootKalkulation.Clear()
         xAdapter.Fill(dsToernverwaltung.BootKalkulation)
-        bsBootKalkulation.Position = 0
+        DbAccess.SafePosition(bsBootKalkulation)
         For i = 0 To bsBootKalkulation.Count - 1
             '          dsToernverwaltung.BootKalkulation.Rows(i)("anteil") = dsToernverwaltung.BootKalkulation.Rows(i)("Kosten").ToString() * Anzahlung / 100
             '         Restdatum = TextBox19.Text

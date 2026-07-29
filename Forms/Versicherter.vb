@@ -1,4 +1,4 @@
-﻿Public Class Versicherter
+Public Class Versicherter
     Dim hafadapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim unfadapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim Recadapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -96,7 +96,7 @@
                 xAdapter.SelectCommand.CommandText = "Select * from Versicherter order by VersicherterName"
                 xAdapter.Fill(dsVersicherung.Versicherter)
             Case 1
-                bsVersicherter.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsVersicherter)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bbb = dsVersicherung.Versicherter.Rows(0)("Polizze").ToString
                 aaa = dsVersicherung.Versicherter.Rows(0)("VersicherterName").ToString
                 vAdapter.SelectCommand = New OleDb.OleDbCommand
@@ -113,7 +113,7 @@
                     taVertrag.Update(dsVersicherung.Vertrag)
                 End If
             Case Else
-                bsVersicherter.Position = 0
+                DbAccess.SafePosition(bsVersicherter)
                 DataGridView1.Visible = True
                 GroupBox1.Location = New Point(2000, 2000)
                 GroupBox2.Location = New Point(25, 115)
@@ -786,7 +786,7 @@
                 DataGridView2.Visible = False
                 suchentoern()
             Case 1
-                bsToernKalkulation.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernKalkulation)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 '   (anz, tbeg, tend, chk, wk)
                 anz = dsToernverwaltung.ToernKalkulation.Rows(0)("crewanzahl").ToString
                 tbeg = dsToernverwaltung.ToernKalkulation.Rows(0)("Toernanfang").ToString
@@ -835,7 +835,7 @@
                 dsToernverwaltung.Toernname.Clear()
                 tAdapter.Fill(dsToernverwaltung.Toernname)
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 '   (anz, tbeg, tend, chk, wk)
                 '           anz = dsToernverwaltung.Toernname.Rows(0)("crewanzahl").ToString
                 tbeg = dsToernverwaltung.Toernname.Rows(0)("Datumvon").ToString

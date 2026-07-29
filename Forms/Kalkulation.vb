@@ -1,4 +1,4 @@
-﻿Public Class Kalkulation
+Public Class Kalkulation
     Public aenderung As Boolean
     Public namensaenderung As Boolean
     Dim Restdatum As Date
@@ -86,7 +86,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         iii = bsCrewAdressen.Count - 1
         For i = 0 To iii
             aaa = dsToernverwaltung.CrewAdressen.Rows(i)("vzname").ToString
@@ -100,7 +100,7 @@
         bsBoot.CancelEdit()
         dsToernverwaltung.Boot.Clear()
         pAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
+        DbAccess.SafePosition(bsBoot)
         iii = bsBoot.Count - 1
         For i = 0 To iii
             aaa = dsToernverwaltung.Boot.Rows(i)("Bootname").ToString
@@ -387,7 +387,7 @@
                 xAdapter.Fill(dsToernverwaltung.ToernKalkulation)
                  Formularloeschen()
             Case 1
-                bsToernKalkulation.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernKalkulation)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Restdatum = MaskedTextBox4.Text
                 KalkAlt = dsToernverwaltung.ToernKalkulation.Rows(0)("Toern").ToString
                 MaskedTextBox6.Enabled = True
@@ -457,7 +457,7 @@ Gefunden:
             bsBoot.CancelEdit()
             dsToernverwaltung.Boot.Clear()
             pAdapter.Fill(dsToernverwaltung.Boot)
-            bsBoot.Position = 0
+            DbAccess.SafePosition(bsBoot)
             If bsBoot.Count > 0 Then
                 bootsrabatt = dsToernverwaltung.Boot.Rows(0)("Clubnachlas")
                 If Not DBNull.Value.Equals(dsToernverwaltung.Boot.Rows(0)("Reinigung")) Then
@@ -1788,7 +1788,7 @@ ok:
             bsListdaten.CancelEdit()
             dsToernverwaltung.Listdaten.Clear()
             lAdapter.Fill(dsToernverwaltung.Listdaten)
-            bsListdaten.Position = 0
+            DbAccess.SafePosition(bsListdaten)
             If bsListdaten.Count = 1 Then
                 comboFuellen1(dsToernverwaltung.Listdaten.Rows(0)("Feld3").ToString, 1)
                 comboFuellen1(dsToernverwaltung.Listdaten.Rows(0)("Feld5").ToString, 2)
@@ -2166,7 +2166,7 @@ ByVal e As System.EventArgs) Handles RadioButton1.Click, RadioButton2.Click, Rad
                 xAdapter.SelectCommand.CommandText = "Select * from Versicherter order by VersicherterName"
                 xAdapter.Fill(dsVersicherung.Versicherter)
             Case 1
-                bsVersicherter.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsVersicherter)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bbb = dsVersicherung.Versicherter.Rows(0)("Polizze").ToString
                 aaa = dsVersicherung.Versicherter.Rows(0)("VersicherterName").ToString
                 vAdapter.SelectCommand = New OleDb.OleDbCommand
@@ -2183,7 +2183,7 @@ ByVal e As System.EventArgs) Handles RadioButton1.Click, RadioButton2.Click, Rad
                 TextBox25.Text = dsVersicherung.Vertrag.Rows(0)("rue-kosten").ToString
                 TextBox64.Text = dsVersicherung.Vertrag.Rows(0)("fol-kosten").ToString
             Case Else
-                bsVersicherter.Position = 0
+                DbAccess.SafePosition(bsVersicherter)
                 DataGridView1.Visible = True
         End Select
     End Sub

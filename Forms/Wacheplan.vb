@@ -1,4 +1,4 @@
-﻿Public Class Wacheplan
+Public Class Wacheplan
     Dim fbreite As Integer
     Dim fhoehe As Integer
     Dim aenderung As Boolean
@@ -92,7 +92,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Dim d1 As Date = dsToernverwaltung.Toernname.Rows(0)("Datumvon").ToString
                 Dim d2 As Date = dsToernverwaltung.Toernname.Rows(0)("DAtumbis").ToString
                 Dim diff As TimeSpan = d2 - d1
@@ -593,7 +593,7 @@ Gefunden:
         bsWacheplan.CancelEdit()
         dsToernverwaltung.Wacheplan.Clear()
         wAdapter.Fill(dsToernverwaltung.Wacheplan)
-        bsWacheplan.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsWacheplan)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         ijj = bsWacheplan.Count - 1
         Do While stunden > 0
             If CheckBox4.Checked = True Then                        ' Wachführer, Navigator und Rudergänger
@@ -871,7 +871,7 @@ nix:
         bsWacheplan.CancelEdit()
         dsToernverwaltung.Wacheplan.Clear()
         wAdapter.Fill(dsToernverwaltung.Wacheplan)
-        bsWacheplan.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsWacheplan)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         If bsWacheplan.Count = 0 Then
             MsgBox("Wachenplan ist nicht erstellt.")
             Exit Sub

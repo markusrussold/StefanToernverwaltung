@@ -1,4 +1,4 @@
-﻿Public Class KursTeilnVerw
+Public Class KursTeilnVerw
     Dim aaa As String
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim bAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -40,7 +40,7 @@
         bsKurse.CancelEdit()
         DsAusbildung.Kurse.Clear()
         bAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis1").ToString)
         ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis2").ToString)
         ComboBox1.Items.Add(DsAusbildung.Kurse.Rows(0)("Preis3").ToString)

@@ -1,4 +1,4 @@
-﻿Public Class Kursteilnehmer3
+Public Class Kursteilnehmer3
     Dim mkAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim aaa As String
     Dim SatzAnzahl As String
@@ -23,7 +23,7 @@
         kAdapter.SelectCommand.CommandText = "Select * from Kurse  order by Kursbezeichnung,Fahrtbereich"
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
         bsKurse.AddNew()
 
     End Sub
@@ -51,7 +51,7 @@
                 DsAusbildung.Kurse.Clear()
                 kAdapter.Fill(DsAusbildung.Kurse)
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 suchenTeilnehmer()
             Case Else
         End Select
@@ -65,7 +65,7 @@
             Case 0
                 MsgBox("Kein Kursteilnehmer mit angegebenen Buchstabenkombination vorhanden. Soll ein neuer angelegt werden?", MsgBoxStyle.YesNo)
              Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         End Select
     End Sub
     Private Sub Button1Drucken_Click(sender As System.Object, e As System.EventArgs) Handles Button1Drucken.Click

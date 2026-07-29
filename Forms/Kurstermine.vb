@@ -1,4 +1,4 @@
-﻿Public Class Kurstermine
+Public Class Kurstermine
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim teAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -56,7 +56,7 @@
         kAdapter.SelectCommand.CommandText = "Select * from Kurse  order by Kursbeginn desc "
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
 
 
         DataGridView3.Columns(0).Width = 150
@@ -342,7 +342,7 @@ DruckEnde:
                 MsgBox("Keine Kurskurse mit gesuchtem Kurs vorhanden.")
                 DataGridView2.Visible = True
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView2.Visible = False
                 TextBox7.Text = TextBox13.Text
                 TextBox6.Text = TextBox14.Text
@@ -460,7 +460,7 @@ DruckEnde:
                 '            End If
                 DataGridView3.Visible = True
             Case 1
-                bsKurse.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKurse)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 tAdapter.SelectCommand.CommandText = "Select * from teilnehmer where kurs = '" & TextBox7.Text & "' and fb ='" & TextBox6.Text & "' order by vzname  "
                 bsTeilnehmer.CancelEdit()
                 DsAusbildung.Teilnehmer.Clear()
@@ -526,7 +526,7 @@ DruckEnde:
                     teAdapter.Fill(DsAusbildung.Termine)
                 End If
             Case 1
-                bsTermine.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsTermine)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 aenderung = True
             Case Else

@@ -114,9 +114,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ApplicationEvents.vb" />
+    <Compile Include="Helpers\AppLog.vb" />
+    <Compile Include="Helpers\AppSettings.vb" />
     <Compile Include="Helpers\DatabaseBootstrap.vb" />
+    <Compile Include="Helpers\DbAccess.vb" />
     <Compile Include="Helpers\SafeData.vb" />
     <Compile Include="Helpers\FormUi.vb" />
+    <Compile Include="Helpers\InputValidation.vb" />
+    <Compile Include="Helpers\PathGuard.vb" />
     <Compile Include="Helpers\CheckKey.vb" />
     <Compile Include="Forms\Begruessung.Designer.vb">
       <DependentUpon>Begruessung.vb</DependentUpon>

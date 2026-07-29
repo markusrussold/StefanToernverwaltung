@@ -1,4 +1,4 @@
-﻿Public Class CrewDetails
+Public Class CrewDetails
     Dim fbreite As Integer
     Dim fhoehe As Integer
     Public iii As Integer
@@ -96,7 +96,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 '                Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 namevz = dsToernverwaltung.Toernname.Rows(0)("Skipper").ToString
                 Label13.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 ListBox1.Items.Add(namevz)

@@ -31,7 +31,7 @@ Public Class Cover
         bsBootLog.CancelEdit()
         DsLogbuch.BootLog.Clear()
         pAdapter.Fill(DsLogbuch.BootLog)
-        bsBootLog.Position = 0
+        DbAccess.SafePosition(bsBootLog)
         aaa = bsBootLog.Count
         bsBootLog.AddNew()
         ButtonFL.Enabled = False
@@ -85,7 +85,7 @@ Public Class Cover
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Location = New Point(1200, 110)
                 GroupBoxToern.Enabled = True
                 GroupBoxBoot.Enabled = True
@@ -148,7 +148,7 @@ Gefunden:
         bsToerndaten.CancelEdit()
         DsLogbuch.Toerndaten.Clear()
         tAdapter.Fill(DsLogbuch.Toerndaten)
-        bsToerndaten.Position = 0
+        DbAccess.SafePosition(bsToerndaten)
         aaa = bsToerndaten.Count
         If aaa > 0 Then
             aenderungT = True
@@ -166,7 +166,7 @@ Gefunden:
         bsBootLog.CancelEdit()
         DsLogbuch.BootLog.Clear()
         pAdapter.Fill(DsLogbuch.BootLog)
-        bsBootLog.Position = 0
+        DbAccess.SafePosition(bsBootLog)
         aaa = bsBootLog.Count
         If aaa > 0 Then
             aenderungB = True

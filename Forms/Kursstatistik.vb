@@ -1,4 +1,4 @@
-﻿Public Class Kursstatistik
+Public Class Kursstatistik
     Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, _
    ByVal wParam As Integer, ByVal lParam As Integer) As Integer
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -36,7 +36,7 @@
         bsKurse.CancelEdit()
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
         If bsKurse.Count > 0 Then
             aaa = ""
             iii = bsKurse.Count - 1
@@ -106,7 +106,7 @@
         bsKurse.CancelEdit()
         DsAusbildung.Kurse.Clear()
         kAdapter.Fill(DsAusbildung.Kurse)
-        bsKurse.Position = 0
+        DbAccess.SafePosition(bsKurse)
         '       bsTemp.AddNew()
         For Me.ij = 0 To bsKurse.Count - 1
             Lehrer = DsAusbildung.Kurse.Rows(ij)("Vortragende").ToString
@@ -134,14 +134,14 @@
             bsTeilnehmer.CancelEdit()
             DsAusbildung.Teilnehmer.Clear()
             tAdapter.Fill(DsAusbildung.Teilnehmer)
-            bsTeilnehmer.Position = 0
+            DbAccess.SafePosition(bsTeilnehmer)
             For Me.iii = 0 To bsTeilnehmer.Count - 1
                 VZ_Name = DsAusbildung.Teilnehmer.Rows(iii)("vzname").ToString
                 cAdapter.SelectCommand.CommandText = "Select * from crewadressen where vzname = '" & VZ_Name & "' "
                 bsCrewAdressen.CancelEdit()
                 dsToernverwaltung.CrewAdressen.Clear()
                 cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-                bsCrewAdressen.Position = 0
+                DbAccess.SafePosition(bsCrewAdressen)
                 If bsCrewAdressen.Count = 1 Then
                     geschlecht = dsToernverwaltung.CrewAdressen.Rows(0)("anrede").ToString
                 Else
@@ -203,14 +203,14 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
         Herr = bsTemp.Count
         aaa = "Frau"
         pAdapter.SelectCommand.CommandText = "Select * from Temp where feld5 like '%" & aaa & "%' "
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
         Frau = bsTemp.Count
         '       
         ProgressBarM.Minimum = 0
@@ -238,7 +238,7 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
         ProgressBar1.Maximum = bsTemp.Count
         ProgressBar2.Maximum = bsTemp.Count
         ProgressBar3.Maximum = bsTemp.Count
@@ -257,7 +257,7 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
         SendMessage(ProgressBar1.Handle, &H400 + 16, &H1, 0) 'Grün
         FB1 = bsTemp.Count
         ProgressBar1.Value = FB1
@@ -269,7 +269,7 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
         FB2 = bsTemp.Count
         SendMessage(ProgressBar2.Handle, &H400 + 16, &H3, 0) 'Gelb
         ProgressBar2.Value = FB2
@@ -281,7 +281,7 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
         FB3 = bsTemp.Count
         SendMessage(ProgressBar3.Handle, &H400 + 16, &H1, 0) '?
         ProgressBar3.Value = FB3
@@ -293,7 +293,7 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
         FB4 = bsTemp.Count
         SendMessage(ProgressBar4.Handle, &H400 + 16, &H2, 0) 'Rot
         ProgressBar4.Value = FB4
@@ -306,7 +306,7 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
 
         Dim XL As New PrintoutKS
         Dim dv As DataView
@@ -320,7 +320,7 @@
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
 
          t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7")
         XL.PrintKursstatistik(t)

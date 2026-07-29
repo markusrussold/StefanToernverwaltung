@@ -1,4 +1,4 @@
-﻿Public Class Werbung
+Public Class Werbung
     Public aenderung As Boolean
     Public aaa As String
     Public iii As Integer
@@ -23,7 +23,7 @@
         bsWerbemassnahme.CancelEdit()
         DsAusbildung.Werbemassnahme.Clear()
         pAdapter.Fill(DsAusbildung.Werbemassnahme)
-        bsWerbemassnahme.Position = 0
+        DbAccess.SafePosition(bsWerbemassnahme)
         bsWerbemassnahme.AddNew()
         With DataGridView1
             .Columns(0).Width = 150
@@ -41,7 +41,7 @@
         bsListbox.CancelEdit()
         DsAusbildung.Listbox.Clear()
         pAdapter.Fill(DsAusbildung.Listbox)
-        bsListbox.Position = 0
+        DbAccess.SafePosition(bsListbox)
         If bsListbox.Count = 1 Then
             comboFuellen(DsAusbildung.Listbox.Rows(0)("Feld1").ToString)
             comboFuellen(DsAusbildung.Listbox.Rows(0)("Feld2").ToString)
@@ -148,7 +148,7 @@
                 xAdapter.Fill(DsAusbildung.Werbemassnahme)
                 Formularloeschen()
             Case 1
-                bsWerbemassnahme.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsWerbemassnahme)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 ComboBox1.Text = TextBox4.Text
             Case Else
@@ -187,7 +187,7 @@
                 xAdapter.Fill(DsAusbildung.Werbemassnahme)
                 Formularloeschen()
             Case 1
-                bsWerbemassnahme.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsWerbemassnahme)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 ComboBox1.Text = TextBox4.Text
             Case Else

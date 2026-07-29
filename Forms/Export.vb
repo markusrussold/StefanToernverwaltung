@@ -1,4 +1,4 @@
-﻿Public Class Export
+Public Class Export
     Public exportdatei As String
     Public aenderung As Boolean
     Public aaa As String
@@ -198,10 +198,10 @@
         xAdapter.SelectCommand.CommandText = "Select * from Toernname where toernbezeichnung = '" & aaa & "'"
         dsToernverwaltung.Toernname.Clear()
         xAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0
+        DbAccess.SafePosition(bsToernname)
         ip = bsToernname.Count
         ip = bsToernnameE.Count
-        bsToernnameE.Position = 0
+        DbAccess.SafePosition(bsToernnameE)
         bsToernnameE.AddNew()
         dsExport.ToernnameE.Rows(ij)("DatumVon") = dsToernverwaltung.Toernname.Rows(0)("DatumVon").ToString()
         dsExport.ToernnameE.Rows(ij)("DatumBis") = dsToernverwaltung.Toernname.Rows(0)("DatumBis").ToString()
@@ -298,7 +298,7 @@
         xtAdapter.SelectCommand.CommandText = "Select * from tc where toern = '" & aaa & "'"
         dsToernverwaltung.TC.Clear()
         xtAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         iip = bsTC.Count - 1
         it = bsTCE.Count - 1
         For Me.ip = 0 To iip
@@ -341,7 +341,7 @@
         xcAdapter.SelectCommand.CommandText = "Select * from CrewAdressen where vzname = '" & crewname & "'"
         dsToernverwaltung.CrewAdressen.Clear()
         xcAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         heute = Today
         ic = bsCrewAdressenE.Count - 1
         If bsCrewAdressen.Count > 0 Then
@@ -399,8 +399,8 @@
         xbAdapter.SelectCommand.CommandText = "Select * from boot where bootname = '" & boot & "'"
         dsToernverwaltung.Boot.Clear()
         xbAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
-        bsBootE.Position = 0
+        DbAccess.SafePosition(bsBoot)
+        DbAccess.SafePosition(bsBootE)
         bsBootE.AddNew()
         dsExport.BootE.Rows(ij)("Bootname") = dsToernverwaltung.Boot.Rows(0)("Bootname").ToString()
         dsExport.BootE.Rows(ij)("Marke") = dsToernverwaltung.Boot.Rows(0)("Marke").ToString()
@@ -456,7 +456,7 @@
         dsToernverwaltung.Charter.Clear()
         xcAdapter.Fill(dsToernverwaltung.Charter)
         If bsCharter.Count > 0 Then
-            bsCharter.Position = 0
+            DbAccess.SafePosition(bsCharter)
             bsCharterE.AddNew()
             dsExport.CharterE.Rows(ij)("Charterfirma") = dsToernverwaltung.Charter.Rows(0)("Charterfirma").ToString()
             dsExport.CharterE.Rows(ij)("Straße") = dsToernverwaltung.Charter.Rows(0)("Straße").ToString()
@@ -503,7 +503,7 @@
         xadapter.Fill(dsExport.AgenturE)
         If bsAgenturE.Count = 0 Then
             If bsAgentur.Count > 0 Then
-                bsAgentur.Position = 0
+                DbAccess.SafePosition(bsAgentur)
                 bsAgenturE.AddNew()
                 bsAgenturE.AddNew()
                 dsExport.AgenturE.Rows(0)("Agentur") = dsToernverwaltung.Agentur.Rows(0)("Agentur").ToString()

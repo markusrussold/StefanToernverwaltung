@@ -82,7 +82,7 @@ Public Class Toern
         bsBoot.CancelEdit()
         dsToernverwaltung.Boot.Clear()
         pAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
+        DbAccess.SafePosition(bsBoot)
         iii = bsBoot.Count - 1
         For i = 0 To iii
             aaa = dsToernverwaltung.Boot.Rows(i)("Bootname").ToString
@@ -95,7 +95,7 @@ Public Class Toern
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         iii = bsCrewAdressen.Count - 1
         For i = 0 To iii
             aaa = dsToernverwaltung.CrewAdressen.Rows(i)("vzname").ToString
@@ -118,7 +118,7 @@ Public Class Toern
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         LAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -154,7 +154,7 @@ Public Class Toern
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         LAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -191,7 +191,7 @@ Public Class Toern
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         LAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -357,7 +357,7 @@ Gefunden:
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 ComboBox2.Text = dsToernverwaltung.Toernname.Rows(0)("Skipper").ToString
                 ComboBox1.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 ansteuerungszaehler = 0
@@ -631,7 +631,7 @@ Gefunden:
         dsToernverwaltung.Toernname.Clear()
         xAdapter.Fill(dsToernverwaltung.Toernname)
         aaa = bsToernname.Count
-        bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         TextBox16.Text = TextBox15.Text
         bsToernname.EndEdit()
         taToernname.Update(dsToernverwaltung.Toernname)
@@ -1265,17 +1265,18 @@ ok:
     End Sub
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         If System.IO.File.Exists(bericht & PDFname) Then
-            Process.Start(Menü.AcrobatReader, bericht & PDFname)
-            '        Process.Start("AcroRd32.exe", "document.pdf")
+            If Not PathGuard.TryStartPdf(Menü.AcrobatReader, bericht & PDFname) Then
+                MsgBox("PDF konnte nicht geöffnet werden: " & bericht & PDFname)
+            End If
         Else
             MsgBox("Datei existiert nicht am Ort ' " & bericht & TextBox1.Text & ".pdf")
         End If
     End Sub
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
         If System.IO.File.Exists(logbuch & PDFname) Then
-            Process.Start(Menü.AcrobatReader, logbuch & PDFname)
-            '         Process.Start("AcroRd32.exe", Application.StartupPath & "\Berichte\" & TextBox15.Text)
-            '        Process.Start("AcroRd32.exe", "document.pdf")
+            If Not PathGuard.TryStartPdf(Menü.AcrobatReader, logbuch & PDFname) Then
+                MsgBox("PDF konnte nicht geöffnet werden: " & logbuch & PDFname)
+            End If
         Else
             MsgBox("Datei existiert nicht am Ort ' " & logbuch & PDFname) ' ")
         End If
@@ -1619,7 +1620,7 @@ ok:
         bsBoot.CancelEdit()
         dsToernverwaltung.Boot.Clear()
         pAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
+        DbAccess.SafePosition(bsBoot)
         If bsBoot.Count = 1 Then
             If TextBox2.Text = "" Then
                 TextBox2.Text = dsToernverwaltung.Boot.Rows(0)("Marinaort").ToString + "/" + dsToernverwaltung.Boot.Rows(0)("Marina").ToString
@@ -1667,7 +1668,7 @@ ok:
         bsBoot.CancelEdit()
         dsToernverwaltung.Boot.Clear()
         pAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
+        DbAccess.SafePosition(bsBoot)
         If IsNumeric(TextBox20.Text) Then
             TextBox20.Text = (verbrauch + TextBox20.Text) / 2
         Else

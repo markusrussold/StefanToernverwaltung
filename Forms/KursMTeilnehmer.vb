@@ -1,4 +1,4 @@
-﻿Public Class KursMTeilnehmer
+Public Class KursMTeilnehmer
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter             'Teilnehmer
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter             ' Kontakte
     Dim mAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter            '  Materialkurs
@@ -78,7 +78,7 @@
                 aAdapter.Fill(dsToernverwaltung.CrewAdressen)
                 DataGridView1.Visible = True
             Case 1
-                '             bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                '             DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 TeilnehmerSuchen()
                 If CheckBox1.Checked Then
                     Label10.Visible = True

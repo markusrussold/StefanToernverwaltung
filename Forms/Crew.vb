@@ -36,7 +36,7 @@ Public Class Crew
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         aaa = bsCrewAdressen.Count
         Label23.Text = "Anzahl der gespeicherten Adressen: " + aaa
         bsCrewAdressen.AddNew()
@@ -47,7 +47,7 @@ Public Class Crew
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -82,7 +82,7 @@ Public Class Crew
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen2(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen2(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -351,7 +351,7 @@ endesp: Me.Cursor = Cursors.Default
                 DataGridView1.Visible = True
                 DataGridView1.Location = New Point(10, 20)
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 ComboBox1.Text = TextBox19.Text
                 ComboBox2.Text = TextBox18.Text
@@ -549,7 +549,7 @@ Gefunden:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         tAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         iii = bsTC.Count - 1
         For i = 0 To iii
             aaa = "Crew       " + dsToernverwaltung.TC.Rows(i)("Toern").ToString
@@ -568,7 +568,7 @@ Gefunden:
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         aAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         iii = bsToernname.Count - 1
         For i = 0 To iii
             aaa = "Skipper  " + dsToernverwaltung.Toernname.Rows(i)("Toernbezeichnung").ToString

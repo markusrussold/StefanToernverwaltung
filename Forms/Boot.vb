@@ -51,7 +51,7 @@ Public Class Boot
         bsBoot.CancelEdit()
         dsToernverwaltung.Boot.Clear()
         pAdapter.Fill(dsToernverwaltung.Boot)
-        bsBoot.Position = 0
+        DbAccess.SafePosition(bsBoot)
         aaa = bsBoot.Count
         Label36.Text = "Anzahl der gespeicherten Boote: " + aaa
         bsBoot.AddNew()
@@ -63,7 +63,7 @@ Public Class Boot
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen1(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen1(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -98,7 +98,7 @@ Public Class Boot
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen2(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen2(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -133,7 +133,7 @@ Public Class Boot
         bsListdaten.CancelEdit()
         dsToernverwaltung.Listdaten.Clear()
         pAdapter.Fill(dsToernverwaltung.Listdaten)
-        bsListdaten.Position = 0
+        DbAccess.SafePosition(bsListdaten)
         If bsListdaten.Count = 1 Then
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld1").ToString)
             comboFuellen3(dsToernverwaltung.Listdaten.Rows(0)("Feld2").ToString)
@@ -168,7 +168,7 @@ Public Class Boot
         bsCharter.CancelEdit()
         dsToernverwaltung.Charter.Clear()
         pAdapter.Fill(dsToernverwaltung.Charter)
-        bsCharter.Position = 0
+        DbAccess.SafePosition(bsCharter)
         For i = 0 To bsCharter.Count - 1
             ComboBox4.Items.Add(dsToernverwaltung.Charter.Rows(i)("Charterfirma").ToString)
         Next
@@ -413,7 +413,7 @@ EndeSub:        Formularloeschen()
                 xAdapter.Fill(dsToernverwaltung.Boot)
                 Formularloeschen()
             Case 1
-                bsBoot.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsBoot)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 RichTextBox1.Visible = True
                 '               aenderung = True
@@ -488,7 +488,7 @@ Gefunden:
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         xAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         iii = bsToernname.Count - 1
         For i = 0 To iii
             aaa = dsToernverwaltung.Toernname.Rows(i)("Toernbezeichnung").ToString
@@ -596,7 +596,7 @@ Gefunden:
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         xAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         For Me.iii = 0 To bsToernname.Count - 1
             dsToernverwaltung.Toernname.Rows(iii)("Bootsname") = TextBox18.Text
             bsToernname.EndEdit()
@@ -609,7 +609,7 @@ Gefunden:
         bsToernKalkulation.CancelEdit()
         dsToernverwaltung.ToernKalkulation.Clear()
         xAdapter.Fill(dsToernverwaltung.ToernKalkulation)
-        bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         For Me.iii = 0 To bsToernKalkulation.Count - 1
             dsToernverwaltung.ToernKalkulation.Rows(iii)("Boot") = TextBox18.Text
             bsToernKalkulation.EndEdit()
@@ -622,7 +622,7 @@ Gefunden:
         bsBootKalkulation.CancelEdit()
         dsToernverwaltung.BootKalkulation.Clear()
         xAdapter.Fill(dsToernverwaltung.BootKalkulation)
-        bsBootKalkulation.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsBootKalkulation)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         For Me.iii = 0 To bsBootKalkulation.Count - 1
             dsToernverwaltung.BootKalkulation.Rows(iii)("Boot") = TextBox18.Text
             bsBootKalkulation.EndEdit()
@@ -635,7 +635,7 @@ Gefunden:
         bsBootLog.CancelEdit()
         DsLogbuch.BootLog.Clear()
         xAdapter.Fill(DsLogbuch.BootLog)
-        bsBootLog.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsBootLog)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         For Me.iii = 0 To bsBootLog.Count - 1
             DsLogbuch.BootLog.Rows(iii)("Bootname") = TextBox18.Text
             bsBootLog.EndEdit()

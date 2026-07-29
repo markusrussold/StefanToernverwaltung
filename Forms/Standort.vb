@@ -1,4 +1,4 @@
-﻿Public Class Standort
+Public Class Standort
     Dim pAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim aaa As String
     Dim aenderung As Boolean
@@ -33,7 +33,7 @@
         bsListbox.CancelEdit()
         DsAusbildung.Listbox.Clear()
         pAdapter.Fill(DsAusbildung.Listbox)
-        bsListbox.Position = 0
+        DbAccess.SafePosition(bsListbox)
         If bsListbox.Count = 1 Then
             comboFuellen1(DsAusbildung.Listbox.Rows(0)("Feld1").ToString)
             comboFuellen1(DsAusbildung.Listbox.Rows(0)("Feld2").ToString)
@@ -68,7 +68,7 @@
         bsListbox.CancelEdit()
         DsAusbildung.Listbox.Clear()
         pAdapter.Fill(DsAusbildung.Listbox)
-        bsListbox.Position = 0
+        DbAccess.SafePosition(bsListbox)
         If bsListbox.Count = 1 Then
             comboFuellen2(DsAusbildung.Listbox.Rows(0)("Feld1").ToString)
             comboFuellen2(DsAusbildung.Listbox.Rows(0)("Feld2").ToString)
@@ -123,7 +123,7 @@
         bsStandort.CancelEdit()
         DsAusbildung.Standort.Clear()
         pAdapter.Fill(DsAusbildung.Standort)
-        bsStandort.Position = 0
+        DbAccess.SafePosition(bsStandort)
         aaa = bsStandort.Count
         Label13.Text = "Anzahl der gespeicherten Standorte: " + aaa
         bsStandort.AddNew()
@@ -268,7 +268,7 @@ abbruch:
                 xAdapter.Fill(DsAusbildung.Standort)
                 FormularLoeschen()
             Case 1
-                bsStandort.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsStandort)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 RichTextBox1.Visible = True
                 cbTyp.Text = txbTyp.Text
@@ -449,7 +449,7 @@ Gefunden:
                 xAdapter.Fill(DsAusbildung.Standort)
                 FormularLoeschen()
             Case 1
-                bsStandort.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsStandort)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView1.Visible = False
                 RichTextBox1.Visible = True
                 cbTyp.Text = txbTyp.Text

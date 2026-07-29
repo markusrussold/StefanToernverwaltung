@@ -1,4 +1,4 @@
-﻿Public Class Crewliste
+Public Class Crewliste
     Public Freischaltung As String
     Public toername As String
     Public aaa As String
@@ -48,7 +48,7 @@
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         pAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0
+        DbAccess.SafePosition(bsToernname)
         bsToernname.AddNew()
 
         With DataGridView1
@@ -109,7 +109,7 @@
                 xAdapter.SelectCommand.CommandText = "Select * from Toernname order by toernbezeichnung"
                 xAdapter.Fill(dsToernverwaltung.Toernname)
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 toername = TextBox1.Text
                 bsTemp.AddNew()
                 If ok Then
@@ -170,7 +170,7 @@ Gefunden:
         bsToernKalkulation.CancelEdit()
         dsToernverwaltung.ToernKalkulation.Clear()
         pkAdapter.Fill(dsToernverwaltung.ToernKalkulation)
-        bsToernKalkulation.Position = 0
+        DbAccess.SafePosition(bsToernKalkulation)
     End Sub
     Private Sub radiobutons()
         Select Case land
@@ -212,7 +212,7 @@ Gefunden:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         tAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         iii = bsTC.Count - 1
         kk += 1
         For Me.pii = 0 To iii
@@ -241,7 +241,7 @@ Gefunden:
         End If
         Select Case bsCrewAdressen.Count
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bsTemp.AddNew()
                 If ok Then
                     dsToernverwaltung.Temp.Rows(pii + kk)("Feld1") = dsToernverwaltung.CrewAdressen.Rows(0)("Zuname").ToString
@@ -288,7 +288,7 @@ Gefunden:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld7", "Feld8", "Feld6", "Feld9", "Feld3", "Feld4", "Feld5", "Feld10", "Feld11", "Feld12", "Feld13", "Feld14")
         XL.PrintCrewListe(t)

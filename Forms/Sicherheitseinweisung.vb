@@ -1,4 +1,4 @@
-﻿Public Class Sicherheitseinweisung
+Public Class Sicherheitseinweisung
     Dim aaa As String
     Dim buch1 As String
     Dim position As Integer
@@ -29,7 +29,7 @@
         bsSicherheitseinweisung.CancelEdit()
         DsLogbuch.Sicherheitseinweisung.Clear()
         pAdapter.Fill(DsLogbuch.Sicherheitseinweisung)
-        bsSicherheitseinweisung.Position = 0
+        DbAccess.SafePosition(bsSicherheitseinweisung)
         aaa = bsSicherheitseinweisung.Count
         bsSicherheitseinweisung.AddNew()
         aaa = TextBox1.Text
@@ -77,7 +77,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 '            Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 '              Label2.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 DataGridToern.Location = New Point(1200, 110)
                 TextBox2.Text = TextBox1.Text
@@ -119,7 +119,7 @@ Gefunden:
         bsSicherheitseinweisung.CancelEdit()
         DsLogbuch.Sicherheitseinweisung.Clear()
         pAdapter.Fill(DsLogbuch.Sicherheitseinweisung)
-        bsSicherheitseinweisung.Position = 0
+        DbAccess.SafePosition(bsSicherheitseinweisung)
         aaa = bsSicherheitseinweisung.Count
         MaskedTextBox1.Focus()
         If aaa = 0 Then

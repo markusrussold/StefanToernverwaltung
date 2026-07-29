@@ -188,7 +188,7 @@ ende:
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Menü.Close()
-        Process.Start("verwaltung.exe")
+        PathGuard.TryStartFile(IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "verwaltung.exe"))
         Me.Close()
     End Sub
 End Class

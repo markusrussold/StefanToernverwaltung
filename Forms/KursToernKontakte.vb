@@ -1,4 +1,4 @@
-﻿Public Class KursToernKontakte
+Public Class KursToernKontakte
     Dim pAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim Name_Kontakt As Boolean
@@ -51,7 +51,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
 
         kAdapter.SelectCommand = New OleDb.OleDbCommand
         kAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Ausbildung.mdb")
@@ -63,7 +63,7 @@
         bsKontakte.CancelEdit()
         DsAusbildung.Kontakte.Clear()
         kAdapter.Fill(DsAusbildung.Kontakte)
-        bsKontakte.Position = 0
+        DbAccess.SafePosition(bsKontakte)
         aaa = bsKontakte.Count
         Label23.Text = "Anzahl der gespeicherten Kontakte: " + aaa
         bsKontakte.AddNew()
@@ -126,7 +126,7 @@
                         bsKontakte.CancelEdit()
                         DsAusbildung.Kontakte.Clear()
                         kAdapter.Fill(DsAusbildung.Kontakte)
-                        bsKontakte.Position = 0
+                        DbAccess.SafePosition(bsKontakte)
                         Label23.Text = "Anzahl der gespeicherten Kontakte: " + aaa
                         bsKontakte.AddNew()
                         Formularloeschen()
@@ -149,7 +149,7 @@
         bsKontakte.CancelEdit()
         DsAusbildung.Kontakte.Clear()
         kAdapter.Fill(DsAusbildung.Kontakte)
-        bsKontakte.Position = 0
+        DbAccess.SafePosition(bsKontakte)
         '       bsKontakte.AddNew()
         '        DsAusbildung.Kontakte.Last()
         TextBox1.Text = ""
@@ -234,7 +234,7 @@
         bsCrewAdressen.CancelEdit()
         dsToernverwaltung.CrewAdressen.Clear()
         pAdapter.Fill(dsToernverwaltung.CrewAdressen)
-        bsCrewAdressen.Position = 0
+        DbAccess.SafePosition(bsCrewAdressen)
         KontakteGruppe.Location = New Point(2000, 1000)
         RichTextBox1.Size = New Point(908, 330)
         AdressenGruppe.Location = New Point(12, 175)
@@ -248,7 +248,7 @@
         bsKontakte.CancelEdit()
         DsAusbildung.Kontakte.Clear()
         kAdapter.Fill(DsAusbildung.Kontakte)
-        bsKontakte.Position = 0
+        DbAccess.SafePosition(bsKontakte)
         aaa = bsKontakte.Count
         Label23.Text = "Anzahl der gespeicherten Kontakte: " + aaa
         KontakteGruppe.Location = New Point(12, 175)
@@ -314,7 +314,7 @@ GefundenK:
                 DataGridView1.Visible = True
                 DataGridView1.Location = New Point(12, 20)
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 '              GroupBox1.Enabled = True
                 TextBox2.Text = TextBox6.Text
                 TextBox3.Text = TextBox5.Text
@@ -371,7 +371,7 @@ GefundenK:
                 DataGridView1.Visible = True
                 DataGridView1.Location = New Point(12, 20)
             Case 1
-                bsKontakte.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsKontakte)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 Label3.Text = TextBox2.Text + "   " + TextBox3.Text
                 KontakteGruppe.Location = New Point(2000, 1000)
                 BemerkungGruppe.Location = New Point(12, 175)

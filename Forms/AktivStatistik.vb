@@ -1,4 +1,4 @@
-﻿Public Class AktivStatistik
+Public Class AktivStatistik
     Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, _
     ByVal wParam As Integer, ByVal lParam As Integer) As Integer
     Dim cAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -66,7 +66,7 @@
         bsVeranstaltungen.CancelEdit()
         DsAusbildung.Veranstaltungen.Clear()
         vAdapter.Fill(DsAusbildung.Veranstaltungen)
-        bsVeranstaltungen.Position = 0
+        DbAccess.SafePosition(bsVeranstaltungen)
         For i = 0 To bsVeranstaltungen.Count - 1
             aaa = DsAusbildung.Veranstaltungen.Rows(i)("Veranstaltung").ToString
             tAdapter.SelectCommand = New OleDb.OleDbCommand
@@ -75,7 +75,7 @@
             bsVeranstalTeilnehmer.CancelEdit()
             DsAusbildung.VeranstalTeilnehmer.Clear()
             tAdapter.Fill(DsAusbildung.VeranstalTeilnehmer)
-            bsVeranstalTeilnehmer.Position = 0
+            DbAccess.SafePosition(bsVeranstalTeilnehmer)
             For j = 0 To bsVeranstalTeilnehmer.Count - 1
                 aaa = DsAusbildung.VeranstalTeilnehmer.Rows(j)("vzname").ToString
                 Dim c As System.Data.DataRowView = bsCrewAdressen.Current
@@ -84,7 +84,7 @@
                 cAdapter.SelectCommand.CommandText = "Select * from Crewadressen where vzname = '" & aaa & "' "
                 dsToernverwaltung.CrewAdressen.Clear()
                 cAdapter.Fill(dsToernverwaltung.CrewAdressen)
-                bsCrewAdressen.Position = 0
+                DbAccess.SafePosition(bsCrewAdressen)
                 bsTemp.AddNew()
                 Feld6.Text = "False"
                 If bsCrewAdressen.Count = 1 Then
@@ -158,7 +158,7 @@ ende:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
 
         Dim XL As New PrintOutVS
         Dim dv As DataView
@@ -172,7 +172,7 @@ ende:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         pAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0
+        DbAccess.SafePosition(bsTemp)
 
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6")
         XL.PrintAktivStatistik(t)

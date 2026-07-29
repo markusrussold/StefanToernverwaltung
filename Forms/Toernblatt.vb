@@ -1,4 +1,4 @@
-﻿Public Class Toernblatt
+Public Class Toernblatt
     Public Freischaltung As String
     Public toername As String
     Public aaa As String
@@ -45,7 +45,7 @@
         bsToernname.CancelEdit()
         dsToernverwaltung.Toernname.Clear()
         pAdapter.Fill(dsToernverwaltung.Toernname)
-        bsToernname.Position = 0
+        DbAccess.SafePosition(bsToernname)
         bsToernname.AddNew()
         DataGridView1.Columns(0).Width = 150
              TextBox1.Text = GetSetting("Toern", "Logbuch", "T", "")
@@ -107,7 +107,7 @@
                 xAdapter.SelectCommand.CommandText = "Select * from Toernname order by toernbezeichnung"
                 xAdapter.Fill(dsToernverwaltung.Toernname)
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 toername = TextBox1.Text
                 skipper = dsToernverwaltung.Toernname.Rows(0)("Skipper").ToString
                 boot = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
@@ -151,7 +151,7 @@ Gefunden:
                 kk = kk - 1
                 MsgBox(nm + " ist nicht mehr in der Crew Adressenliste")
             Case 1
-                bsCrewAdressen.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCrewAdressen)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bsTemp.AddNew()
                 If ok Then
                     dsToernverwaltung.Temp.Rows(i + kk)("Feld1") = dsToernverwaltung.CrewAdressen.Rows(0)("Zuname").ToString
@@ -187,7 +187,7 @@ Gefunden:
         bsTemp.CancelEdit()
         dsToernverwaltung.Temp.Clear()
         xAdapter.Fill(dsToernverwaltung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld1", "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7", "Feld8", "Feld9", "Feld10", "Feld11", "Feld12", "Feld13", "Feld14", "Feld15", "Feld16", "Feld17", "Feld18", "Feld19", "Feld20", "Feld21", "Feld23", "Feld24", "Feld25", "Feld26", "feld27", "Feld22", "Feld28")
         XL.PrintToernBlatt(t)
@@ -227,7 +227,7 @@ Gefunden:
         xAdapter.Fill(dsToernverwaltung.Charter)
         Select Case bsCharter.Count
             Case 1
-                bsCharter.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsCharter)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bsTemp.AddNew()
                 dsToernverwaltung.Temp.Rows(i + kk)("Feld1") = dsToernverwaltung.Charter.Rows(0)("Charterfirma").ToString
                 dsToernverwaltung.Temp.Rows(i + kk)("Feld2") = dsToernverwaltung.Charter.Rows(0)("Land").ToString
@@ -266,7 +266,7 @@ Gefunden:
         xAdapter.Fill(dsToernverwaltung.Boot)
         Select Case bsBoot.Count
             Case 1
-                bsBoot.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsBoot)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 bsTemp.AddNew()
                 dsToernverwaltung.Temp.Rows(i + kk)("Feld1") = dsToernverwaltung.Boot.Rows(0)("Bootname").ToString
                 dsToernverwaltung.Temp.Rows(i + kk)("Feld2") = dsToernverwaltung.Boot.Rows(0)("Marke").ToString
@@ -372,7 +372,7 @@ Gefunden:
         bsTC.CancelEdit()
         dsToernverwaltung.TC.Clear()
         tAdapter.Fill(dsToernverwaltung.TC)
-        bsTC.Position = 0
+        DbAccess.SafePosition(bsTC)
         iii = bsTC.Count - 1
         For Me.i = 0 To iii
             aaa = dsToernverwaltung.TC.Rows(i)("VZName").ToString

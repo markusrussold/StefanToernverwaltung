@@ -1,4 +1,4 @@
-﻿Public Class Kursbestellung
+Public Class Kursbestellung
     Dim mkAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kmAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -91,7 +91,7 @@
                 DsAusbildung.MaterialKurs.Clear()
                 mkAdapter.Fill(DsAusbildung.MaterialKurs)
             Case 1
-                bsMaterialKurs.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsMaterialKurs)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 GroupBox3.Visible = False
                 GroupBox2.Location = New Point(330, 20)
                 GroupBox2.Visible = True
@@ -149,7 +149,7 @@
                 DsAusbildung.Kurse.Clear()
                 mkAdapter.Fill(DsAusbildung.Kurse)
             Case 1
-                bsMaterialKurs.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsMaterialKurs)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 GroupBox3.Visible = False
                 GroupBox2.Location = New Point(330, 20)
                 GroupBox2.Visible = True
@@ -266,7 +266,7 @@
                         bsKursmaterial.CancelEdit()
                         DsAusbildung.Kursmaterial.Clear()
                         mAdapter.Fill(DsAusbildung.Kursmaterial)
-                        bsKursmaterial.Position = 0
+                        DbAccess.SafePosition(bsKursmaterial)
                         If bsKursmaterial.Count = 1 Then
                             TextBox5.Text = DsAusbildung.Kursmaterial.Rows(0)("Listenpreis").ToString
                             TextBox6.Text = DsAusbildung.Kursmaterial.Rows(0)("Einkaufspreis").ToString
@@ -286,7 +286,7 @@
             bsKursmaterial.CancelEdit()
             DsAusbildung.Kursmaterial.Clear()
             mAdapter.Fill(DsAusbildung.Kursmaterial)
-            bsKursmaterial.Position = 0
+            DbAccess.SafePosition(bsKursmaterial)
             If bsKursmaterial.Count = 1 Then
                 TextBox5.Text = DsAusbildung.Kursmaterial.Rows(0)("Listenpreis").ToString
                 TextBox6.Text = DsAusbildung.Kursmaterial.Rows(0)("Einkaufspreis").ToString

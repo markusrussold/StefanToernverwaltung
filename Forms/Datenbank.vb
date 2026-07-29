@@ -272,7 +272,7 @@ Public Class Datenbank
                 dsToernverwaltung.Toernname.Clear()
                 xAdapter.Fill(dsToernverwaltung.Toernname)
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 TextBox11.Text = dsToernverwaltung.Toernname.Rows(0)("Toernbezeichnung").ToString
                 '              ListBox1.Focus()
                 PictureBox2.Visible = True

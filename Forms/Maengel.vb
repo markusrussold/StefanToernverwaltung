@@ -1,4 +1,4 @@
-﻿Public Class Maengel
+Public Class Maengel
     Dim aaa As String
     Dim buch1 As String
     Dim position As Integer
@@ -24,7 +24,7 @@
         bsMaengel.CancelEdit()
         DsLogbuch.Maengel.Clear()
         pAdapter.Fill(DsLogbuch.Maengel)
-        bsMaengel.Position = 0
+        DbAccess.SafePosition(bsMaengel)
         aaa = bsMaengel.Count
         bsMaengel.AddNew()
         aaa = TextBox1.Text
@@ -75,7 +75,7 @@
                 xAdapter.Fill(dsToernverwaltung.Toernname)
                 Formularloeschen()
             Case 1
-                bsToernname.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsToernname)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 '              Label2.Text = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 DataGridToern.Location = New Point(1200, 110)
                 TextBox5.Text = TextBox1.Text
@@ -97,7 +97,7 @@
         bsMaengel.CancelEdit()
         DsLogbuch.Maengel.Clear()
         pAdapter.Fill(DsLogbuch.Maengel)
-        bsMaengel.Position = 0
+        DbAccess.SafePosition(bsMaengel)
         aaa = bsMaengel.Count
         bsMaengel.AddNew()
         GroupBox2.Focus()

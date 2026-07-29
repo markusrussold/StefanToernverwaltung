@@ -1,4 +1,4 @@
-﻿Public Class Kursbestellung1
+Public Class Kursbestellung1
     Dim kmAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim kAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
     Dim tAdapter As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter
@@ -77,7 +77,7 @@
                 DsAusbildung.Kurse.Clear()
                 kAdapter.Fill(DsAusbildung.Kurse)
             Case 1
-                bsMaterialKurs.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsMaterialKurs)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 DataGridView4.Visible = False
                 DataGridView3.Location = New Point(12, 140)
                 ListBox1.Location = New Point(405, 140)

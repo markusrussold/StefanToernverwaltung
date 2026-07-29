@@ -1,4 +1,4 @@
-﻿Public Class CrewBesprechungDruck
+Public Class CrewBesprechungDruck
     Dim fbreite As Integer
     Dim fhoehe As Integer
     Public iii As Integer
@@ -121,7 +121,7 @@
                 xAdapter.Fill(dsCrewbesprechung.Ablauf)
                 '                Formularloeschen()
             Case 1
-                bsAblauf.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+                DbAccess.SafePosition(bsAblauf)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
                 gbAuswertungen.Location = New Point(19, 130)
                 GroupBox1Törn.Location = New Point(1700, 107)
                 TörnA = TextBox1.Text
@@ -132,7 +132,7 @@
                 bsToernname.CancelEdit()
                 dsToernverwaltung.Toernname.Clear()
                 pAdapter.Fill(dsToernverwaltung.Toernname)
-                bsToernname.Position = 0
+                DbAccess.SafePosition(bsToernname)
                 boot = dsToernverwaltung.Toernname.Rows(0)("Bootsname").ToString
                 termin = SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("Datumvon")) + " - " + SafeData.FormatDateDe(dsToernverwaltung.Toernname.Rows(0)("Datumbis"))
                 revier = ""
@@ -157,7 +157,7 @@
                 bsBoot.CancelEdit()
                 dsToernverwaltung.Boot.Clear()
                 bAdapter.Fill(dsToernverwaltung.Boot)
-                bsToernname.Position = 0
+                DbAccess.SafePosition(bsToernname)
                 charter = dsToernverwaltung.Boot.Rows(0)("Charterfirma").ToString
                 produkt = dsToernverwaltung.Boot.Rows(0)("Marke").ToString
             Case Else
@@ -225,7 +225,7 @@ Gefunden:
         bsTemp.CancelEdit()
         dsCrewbesprechung.Temp.Clear()
         xtAdapter.Fill(dsCrewbesprechung.Temp)
-        bsTemp.Position = 0         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
+        DbAccess.SafePosition(bsTemp)         'bewirkt dass über <datenbindung die Felder angezeigt (befüllt) werden, zuvor war Pos = -1
         dv = bsTemp.List
         t = dv.ToTable("Printing", False, "Feld2", "Feld3", "Feld4", "Feld5", "Feld6", "Feld7", "Feld8", "Feld9", "Feld10", "Feld11", "Feld12", "Feld13", "Feld14", "Feld15", "Feld16", "Feld17", "Feld18", "Feld19", "Feld20", "Feld21", "Feld23", "Feld24")
         Xs.PrintCrewbesprechung(t)
