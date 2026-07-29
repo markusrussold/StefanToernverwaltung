@@ -744,20 +744,15 @@ weiter:
             If My.Computer.FileSystem.FileExists("Toernverwaltung.mdb") And My.Computer.FileSystem.FileExists("update.exe") Then
                 SaveSetting("Datenbank", "vorhanden", "T", Text.Substring(23, 8))
                 Process.Start("Update.exe")
-                dsToernverwaltung.Steuerdaten.Rows(0)("Bezeichnung") = "Version"
-                dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = Vers.ToString.Substring(23, 2)
-                bsSteuerdaten.EndEdit()
-                taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
-            ElseIf My.Computer.FileSystem.FileExists("Toernverwaltung.mdb") Then
-                ' Kein update.exe vorhanden: Versionsstempel in der vorhandenen DB setzen und fortfahren
-                dsToernverwaltung.Steuerdaten.Rows(0)("Bezeichnung") = "Version"
-                dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = Vers.ToString.Substring(23, 2)
-                bsSteuerdaten.EndEdit()
-                taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
-            Else
-                MsgBox("Die Struktur der Datenbank wurde geändert. Die Neue ToernverwaltungNeu.mdb ist nicht vorhanden. Die Verarbeitung ist nicht möglich.")
-                Vers = "Falsch                               "
             End If
+            ' Schema/Version werden von DatabaseBootstrap sichergestellt; Stempel hier aktualisieren.
+            If dsToernverwaltung.Steuerdaten.Rows.Count = 0 Then
+                bsSteuerdaten.AddNew()
+            End If
+            dsToernverwaltung.Steuerdaten.Rows(0)("Bezeichnung") = "Version"
+            dsToernverwaltung.Steuerdaten.Rows(0)("feld1") = Vers.ToString.Substring(23, 2)
+            bsSteuerdaten.EndEdit()
+            taSteuerdaten.Update(dsToernverwaltung.Steuerdaten)
         End If
     End Sub
 
