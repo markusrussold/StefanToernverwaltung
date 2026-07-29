@@ -18,12 +18,6 @@ Namespace My
             Me.EnableVisualStyles = True
             Me.SaveMySettingsOnExit = True
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
-            ' Register global handlers here — before any WinForms handle/control is created
-            ' (including the splash screen). SetUnhandledExceptionMode throws if called later.
-            AddHandler Global.System.Windows.Forms.Application.ThreadException, AddressOf OnUiThreadException
-            Global.System.Windows.Forms.Application.SetUnhandledExceptionMode(
-                Global.System.Windows.Forms.UnhandledExceptionMode.CatchException)
-            AddHandler Global.System.AppDomain.CurrentDomain.UnhandledException, AddressOf OnDomainUnhandledException
         End Sub
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>

@@ -9,6 +9,12 @@ Namespace My
     Partial Friend Class MyApplication
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+            ' Do NOT call Application.SetUnhandledExceptionMode here (or in Sub New):
+            ' with a splash screen / VB Application Framework it throws
+            ' InvalidOperationException once any control handle exists.
+            ' Logging uses Me.UnhandledException + AppDomain instead.
+            AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf OnDomainUnhandledException
+
             SafeData.ApplyGermanCulture()
             AppLog.Info("Application startup")
 
@@ -27,10 +33,6 @@ Namespace My
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
             AppLog.ShowError("Unerwarteter Fehler.", e.Exception)
             e.ExitApplication = False
-        End Sub
-
-        Private Sub OnUiThreadException(ByVal sender As Object, ByVal e As ThreadExceptionEventArgs)
-            AppLog.ShowError("Unerwarteter Fehler in der Oberfläche.", e.Exception)
         End Sub
 
         Private Sub OnDomainUnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
