@@ -515,11 +515,11 @@ Public Class Logdaten
                             If distanzr < 0 Then distanzr = 0
                             distanzt = TextBox22.Text                ' Tagesdistanz
                             If gross Or genua Then
-                                TextBox23.Text = distanzr.ToString("0.0")       ' Unter Segel
+                                TextBox23.Text = distanzr.ToString("0.###", Globalization.CultureInfo.GetCultureInfo("de-DE"))       ' Unter Segel
                                 TextBox24.Text = 0
                             Else
                                 TextBox23.Text = 0
-                                TextBox24.Text = distanzr.ToString("0.0")       ' mit Motor
+                                TextBox24.Text = distanzr.ToString("0.###", Globalization.CultureInfo.GetCultureInfo("de-DE"))       ' mit Motor
                             End If
                          End If
                     End If
@@ -884,9 +884,27 @@ endesub:
         textänderung = False
     End Sub
 
-    Private Sub TextBox5_LostFocus(sender As Object, e As System.EventArgs) Handles TextBox5.LostFocus
-        TextBox5.Text = Replace(TextBox5.Text, ".", ",")
+    Private Sub TextBox4_LostFocus(sender As Object, e As System.EventArgs) Handles TextBox4.LostFocus
+        TextBox4.Text = FormatPipeDecimal(TextBox4.Text)
     End Sub
+
+    Private Sub TextBox5_LostFocus(sender As Object, e As System.EventArgs) Handles TextBox5.LostFocus
+        TextBox5.Text = FormatPipeDecimal(TextBox5.Text)
+    End Sub
+
+    ''' <summary>
+    ''' Keeps decimal precision from NMEA/pipe values and normalizes to de-DE (comma)
+    ''' so Single bindings (DueGTag etc.) parse and store correctly.
+    ''' </summary>
+    Private Function FormatPipeDecimal(ByVal raw As String) As String
+        If String.IsNullOrWhiteSpace(raw) Then Return ""
+        Dim s As String = raw.Trim()
+        Dim n As Double
+        If SafeData.TryParseNumber(s, n) Then
+            Return n.ToString("0.###", Globalization.CultureInfo.GetCultureInfo("de-DE"))
+        End If
+        Return s.Replace("."c, ","c)
+    End Function
 
     Private Sub TextBox14_LostFocus(sender As Object, e As System.EventArgs) Handles TextBox14.LostFocus
         TextBox14.Text = Replace(TextBox14.Text, ".", ",")
@@ -914,18 +932,27 @@ endesub:
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim result As Integer
-
         MaskedTextBox3.Text = DateTime.Now.ToString("HH:mm:ss")
         Try
-             If NMEARelayPipeHelper.IsPipeAvailable() = 1 Then
-                TextBox18.Text = SendPipeCommand("GET_LATLON")
-                 result = SendPipeCommand("GET_COG")
-                TextBox4.Text = result
-                result = SendPipeCommand("GET_TRIPDIST")
-                TextBox5.Text = result
+            If NMEARelayPipeHelper.IsPipeAvailable() = 1 Then
+                Dim latLon As String = SendPipeCommand("GET_LATLON")
+                If Not String.IsNullOrWhiteSpace(latLon) Then
+                    TextBox18.Text = latLon.Trim()
+                End If
+
+                ' Keep decimals: pipe returns String; do not coerce to Integer.
+                Dim cog As String = FormatPipeDecimal(SendPipeCommand("GET_COG"))
+                If cog.Length > 0 Then
+                    TextBox4.Text = cog
+                End If
+
+                Dim tripDist As String = FormatPipeDecimal(SendPipeCommand("GET_TRIPDIST"))
+                If tripDist.Length > 0 Then
+                    TextBox5.Text = tripDist
+                End If
             End If
         Catch xx As Exception
+            AppLog.Warn("Daten holen fehlgeschlagen: " & xx.Message)
         End Try
         TextBox3.Text = luftdruck
         ComboBox2.Text = windrichtung
