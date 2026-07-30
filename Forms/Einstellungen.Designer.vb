@@ -2,7 +2,6 @@
 Partial Class Einstellungen
     Inherits System.Windows.Forms.Form
 
-    'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -14,12 +13,8 @@ Partial Class Einstellungen
         End Try
     End Sub
 
-    'Wird vom Windows Form-Designer benötigt.
     Private components As System.ComponentModel.IContainer
 
-    'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
-    'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
-    'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Einstellungen))
@@ -33,8 +28,18 @@ Partial Class Einstellungen
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.chkAntriebsart = New System.Windows.Forms.CheckBox()
+        Me.chkWolken = New System.Windows.Forms.CheckBox()
+        Me.chkLuftdruck = New System.Windows.Forms.CheckBox()
+        Me.chkSeegang = New System.Windows.Forms.CheckBox()
+        Me.chkWindstaerke = New System.Windows.Forms.CheckBox()
+        Me.chkWindRichtung = New System.Windows.Forms.CheckBox()
+        Me.chkCopyFromPrevious = New System.Windows.Forms.CheckBox()
+        Me.lblDatenHolenHint = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -67,9 +72,9 @@ Partial Class Einstellungen
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(323, 235)
+        Me.Button1.Location = New System.Drawing.Point(323, 390)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(179, 52)
+        Me.Button1.Size = New System.Drawing.Size(179, 40)
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "Speichern"
         Me.Button1.UseVisualStyleBackColor = True
@@ -135,11 +140,107 @@ Partial Class Einstellungen
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "Cent"
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.lblDatenHolenHint)
+        Me.GroupBox3.Controls.Add(Me.chkAntriebsart)
+        Me.GroupBox3.Controls.Add(Me.chkWolken)
+        Me.GroupBox3.Controls.Add(Me.chkLuftdruck)
+        Me.GroupBox3.Controls.Add(Me.chkSeegang)
+        Me.GroupBox3.Controls.Add(Me.chkWindstaerke)
+        Me.GroupBox3.Controls.Add(Me.chkWindRichtung)
+        Me.GroupBox3.Controls.Add(Me.chkCopyFromPrevious)
+        Me.GroupBox3.Location = New System.Drawing.Point(13, 220)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(489, 155)
+        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Logbuch – Daten holen"
+        '
+        'chkCopyFromPrevious
+        '
+        Me.chkCopyFromPrevious.AutoSize = True
+        Me.chkCopyFromPrevious.Location = New System.Drawing.Point(25, 28)
+        Me.chkCopyFromPrevious.Name = "chkCopyFromPrevious"
+        Me.chkCopyFromPrevious.Size = New System.Drawing.Size(280, 17)
+        Me.chkCopyFromPrevious.TabIndex = 0
+        Me.chkCopyFromPrevious.Text = "Felder vom vorherigen Eintrag übernehmen"
+        Me.chkCopyFromPrevious.UseVisualStyleBackColor = True
+        '
+        'chkWindRichtung
+        '
+        Me.chkWindRichtung.AutoSize = True
+        Me.chkWindRichtung.Location = New System.Drawing.Point(45, 55)
+        Me.chkWindRichtung.Name = "chkWindRichtung"
+        Me.chkWindRichtung.Size = New System.Drawing.Size(94, 17)
+        Me.chkWindRichtung.TabIndex = 1
+        Me.chkWindRichtung.Text = "Windrichtung"
+        Me.chkWindRichtung.UseVisualStyleBackColor = True
+        '
+        'chkWindstaerke
+        '
+        Me.chkWindstaerke.AutoSize = True
+        Me.chkWindstaerke.Location = New System.Drawing.Point(199, 55)
+        Me.chkWindstaerke.Name = "chkWindstaerke"
+        Me.chkWindstaerke.Size = New System.Drawing.Size(88, 17)
+        Me.chkWindstaerke.TabIndex = 2
+        Me.chkWindstaerke.Text = "Windstärke"
+        Me.chkWindstaerke.UseVisualStyleBackColor = True
+        '
+        'chkSeegang
+        '
+        Me.chkSeegang.AutoSize = True
+        Me.chkSeegang.Location = New System.Drawing.Point(345, 55)
+        Me.chkSeegang.Name = "chkSeegang"
+        Me.chkSeegang.Size = New System.Drawing.Size(68, 17)
+        Me.chkSeegang.TabIndex = 3
+        Me.chkSeegang.Text = "Seegang"
+        Me.chkSeegang.UseVisualStyleBackColor = True
+        '
+        'chkLuftdruck
+        '
+        Me.chkLuftdruck.AutoSize = True
+        Me.chkLuftdruck.Location = New System.Drawing.Point(45, 82)
+        Me.chkLuftdruck.Name = "chkLuftdruck"
+        Me.chkLuftdruck.Size = New System.Drawing.Size(73, 17)
+        Me.chkLuftdruck.TabIndex = 4
+        Me.chkLuftdruck.Text = "Luftdruck"
+        Me.chkLuftdruck.UseVisualStyleBackColor = True
+        '
+        'chkWolken
+        '
+        Me.chkWolken.AutoSize = True
+        Me.chkWolken.Location = New System.Drawing.Point(199, 82)
+        Me.chkWolken.Name = "chkWolken"
+        Me.chkWolken.Size = New System.Drawing.Size(62, 17)
+        Me.chkWolken.TabIndex = 5
+        Me.chkWolken.Text = "Wolken"
+        Me.chkWolken.UseVisualStyleBackColor = True
+        '
+        'chkAntriebsart
+        '
+        Me.chkAntriebsart.AutoSize = True
+        Me.chkAntriebsart.Location = New System.Drawing.Point(345, 82)
+        Me.chkAntriebsart.Name = "chkAntriebsart"
+        Me.chkAntriebsart.Size = New System.Drawing.Size(79, 17)
+        Me.chkAntriebsart.TabIndex = 6
+        Me.chkAntriebsart.Text = "Antriebsart"
+        Me.chkAntriebsart.UseVisualStyleBackColor = True
+        '
+        'lblDatenHolenHint
+        '
+        Me.lblDatenHolenHint.Location = New System.Drawing.Point(22, 112)
+        Me.lblDatenHolenHint.Name = "lblDatenHolenHint"
+        Me.lblDatenHolenHint.Size = New System.Drawing.Size(450, 32)
+        Me.lblDatenHolenHint.TabIndex = 7
+        Me.lblDatenHolenHint.Text = "Gilt beim Klick auf 'Daten holen'. Ohne vorherigen Eintrag am selben Tag bleiben die Felder leer. Uhrzeit und NMEA-Daten werden weiterhin aktualisiert."
+        '
         'Einstellungen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(536, 299)
+        Me.ClientSize = New System.Drawing.Size(536, 448)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox1)
@@ -150,6 +251,8 @@ Partial Class Einstellungen
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -163,4 +266,13 @@ Partial Class Einstellungen
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkCopyFromPrevious As System.Windows.Forms.CheckBox
+    Friend WithEvents chkWindRichtung As System.Windows.Forms.CheckBox
+    Friend WithEvents chkWindstaerke As System.Windows.Forms.CheckBox
+    Friend WithEvents chkSeegang As System.Windows.Forms.CheckBox
+    Friend WithEvents chkLuftdruck As System.Windows.Forms.CheckBox
+    Friend WithEvents chkWolken As System.Windows.Forms.CheckBox
+    Friend WithEvents chkAntriebsart As System.Windows.Forms.CheckBox
+    Friend WithEvents lblDatenHolenHint As System.Windows.Forms.Label
 End Class

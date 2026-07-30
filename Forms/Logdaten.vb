@@ -973,13 +973,80 @@ endesub:
             AppLog.Warn("Daten holen fehlgeschlagen: " & xx.Message)
         End Try
         UpdateRelayStatusLabel()
-        TextBox3.Text = luftdruck
-        ComboBox2.Text = windrichtung
-        TextBox2.Text = Windstaerke
-        ComboBox1.Text = Seegangalt
-        ComboBox3.Text = bewolkung
-        ComboBox4.Text = antrieb
+        ApplyPreviousEntryFieldsFromSettings()
     End Sub
+
+    ''' <summary>
+    ''' Optionally copies weather/drive fields from the previous same-day entry.
+    ''' Controlled via Extras → Einstellungen → Logbuch – Daten holen.
+    ''' </summary>
+    Private Sub ApplyPreviousEntryFieldsFromSettings()
+        If Not LogbookDatenHolenSettings.CopyFromPreviousEnabled Then Return
+
+        Dim prev As DataRow = FindPreviousLogEntry()
+        If prev Is Nothing Then Return
+
+        If LogbookDatenHolenSettings.CopyWindRichtung Then
+            windrichtung = SafeData.CoalesceString(prev("WindRichtung"))
+            ComboBox2.Text = windrichtung
+        End If
+        If LogbookDatenHolenSettings.CopyWindstaerke Then
+            Windstaerke = SafeData.CoalesceString(prev("Windstaerke"))
+            TextBox2.Text = Windstaerke
+        End If
+        If LogbookDatenHolenSettings.CopySeegang Then
+            Seegangalt = SafeData.CoalesceString(prev("Seegang"))
+            ComboBox1.Text = Seegangalt
+        End If
+        If LogbookDatenHolenSettings.CopyLuftdruck Then
+            Dim druckText As String = SafeData.CoalesceString(prev("Luftdruck"))
+            TextBox3.Text = druckText
+            Dim druck As Double
+            If SafeData.TryParseNumber(druckText, druck) Then
+                luftdruck = CInt(Math.Truncate(druck))
+            End If
+        End If
+        If LogbookDatenHolenSettings.CopyWolken Then
+            bewolkung = SafeData.CoalesceString(prev("Wolken"))
+            ComboBox3.Text = bewolkung
+        End If
+        If LogbookDatenHolenSettings.CopyAntriebsart Then
+            antrieb = SafeData.CoalesceString(prev("Antriebsart"))
+            ComboBox4.Text = antrieb
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Returns the chronologically last same-day log row before the current edit row.
+    ''' </summary>
+    Private Function FindPreviousLogEntry() As DataRow
+        Try
+            If DsLogbuch Is Nothing OrElse DsLogbuch.Logdaten Is Nothing Then Return Nothing
+            If DsLogbuch.Logdaten.Rows.Count = 0 Then Return Nothing
+
+            Dim currentDrv As DataRowView = TryCast(bsLogdaten.Current, DataRowView)
+            Dim currentRow As DataRow = Nothing
+            If currentDrv IsNot Nothing Then currentRow = currentDrv.Row
+
+            Dim candidates As New List(Of DataRow)
+            For Each row As DataRow In DsLogbuch.Logdaten.Rows
+                If row.RowState = DataRowState.Deleted OrElse row.RowState = DataRowState.Detached Then Continue For
+                If currentRow IsNot Nothing AndAlso Object.ReferenceEquals(row, currentRow) Then Continue For
+                candidates.Add(row)
+            Next
+            If candidates.Count = 0 Then Return Nothing
+
+            candidates.Sort(Function(a As DataRow, b As DataRow)
+                                Dim ta As String = SafeData.CoalesceString(a("Uhrzeit"))
+                                Dim tb As String = SafeData.CoalesceString(b("Uhrzeit"))
+                                Return String.CompareOrdinal(ta, tb)
+                            End Function)
+            Return candidates(candidates.Count - 1)
+        Catch ex As Exception
+            AppLog.Warn("FindPreviousLogEntry: " & ex.Message)
+            Return Nothing
+        End Try
+    End Function
 
     Private Sub UpdateRelayStatusLabel()
         Try

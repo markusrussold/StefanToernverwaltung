@@ -117,6 +117,7 @@
     <Compile Include="Helpers\AppLog.vb" />
     <Compile Include="Helpers\AppSettings.vb" />
     <Compile Include="Helpers\AppVersion.vb" />
+    <Compile Include="Helpers\LogbookDatenHolenSettings.vb" />
     <Compile Include="Helpers\DatabaseBootstrap.vb" />
     <Compile Include="Helpers\DbAccess.vb" />
     <Compile Include="Helpers\SafeData.vb" />
