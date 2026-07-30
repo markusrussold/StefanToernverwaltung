@@ -459,10 +459,12 @@ Public Class Logdaten
                     Else
                         bsLogdaten.EndEdit()
                         taLogdaten.Update(DsLogbuch.Logdaten)
+                        PublishDriveStatusToPipe(antrieb)
                     End If
                 Else
                     bsLogdaten.EndEdit()
                     taLogdaten.Update(DsLogbuch.Logdaten)
+                    PublishDriveStatusToPipe(antrieb)
                 End If
             Else
                 tagessprung(sender, e)
@@ -472,6 +474,7 @@ Public Class Logdaten
                 bewolkung = ComboBox3.Text
                 bsLogdaten.AddNew()
                 taLogdaten.Update(DsLogbuch.Logdaten)
+                PublishDriveStatusToPipe(antrieb)
             End If
 
             TagesTrace0(distanzt)                   ' Tagesdistanz des Vortages übernehmen wenn nicht mit 0 begonnen
@@ -890,6 +893,17 @@ endesub:
 
     Private Sub TextBox5_LostFocus(sender As Object, e As System.EventArgs) Handles TextBox5.LostFocus
         TextBox5.Text = FormatPipeDecimal(TextBox5.Text)
+    End Sub
+
+    ''' <summary>
+    ''' Pushes Antriebsart to the NMEA relay. Never raises; pipe may be offline.
+    ''' </summary>
+    Private Sub PublishDriveStatusToPipe(ByVal antriebsart As String)
+        Try
+            NMEARelayPipeHelper.TryPublishDriveStatus(antriebsart)
+        Catch
+            ' Defensive: pipe status must never block logbook save.
+        End Try
     End Sub
 
     ''' <summary>
