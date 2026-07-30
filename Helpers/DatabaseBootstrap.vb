@@ -13,7 +13,13 @@ Imports System.IO
 ''' </summary>
 Public Module DatabaseBootstrap
 
-    Public Const AppMajorVersion As String = "13"
+    ''' <summary>DB compatibility major; always mirrors AppVersion.Major.</summary>
+    Public ReadOnly Property AppMajorVersion As String
+        Get
+            Return AppVersion.MajorString
+        End Get
+    End Property
+
     Private Const JetProvider As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
 
     Public Sub EnsureAll(Optional ByVal baseDirectory As String = Nothing)

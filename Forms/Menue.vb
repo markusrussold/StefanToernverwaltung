@@ -49,11 +49,8 @@ Public Class Menü
         Me.taBootKalkulation.Fill(Me.dsToernverwaltung.BootKalkulation)
         Me.taCrewAdressen.Fill(Me.dsToernverwaltung.CrewAdressen)
 
-        '       Definition der Versionen    X.ZZ.Y      :
-        '            X ändert sich bei Datenbankänderung
-        '            Z ändert sich bei Funktionsänderung/Ergänzung
-        '            Y ändert sich bei Fehlerbehebung
-        Me.Text = "Törnverwaltung Version 13.02.04"
+        ' Version: X.ZZ.Y — single source Helpers/AppVersion.vb (tools\bump-version.ps1)
+        Me.Text = AppVersion.DisplayTitle
         '
         '
         SaveSetting("Datenbank", "neu", "T", SafeData.ExtractVersionStamp(Me.Text))

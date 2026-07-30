@@ -4,6 +4,14 @@ Desktop-Anwendung zur Verwaltung von Segeltörns, Crews, Booten, Kursen und Logb
 
 **Aktuelle Version:** 13.02.04
 
+Versionierung (`X.ZZ.Y`): Quelle ist `Helpers/AppVersion.vb`. Hochzählen mit:
+
+```powershell
+powershell -NoProfile -File tools\bump-version.ps1 -Part patch   # Bugfix (Y)
+powershell -NoProfile -File tools\bump-version.ps1 -Part minor   # Feature (ZZ)
+powershell -NoProfile -File tools\bump-version.ps1 -Part major   # DB-Breaking (X)
+```
+
 ## Funktionsumfang
 
 - **Törnverwaltung** — Törns anlegen, bearbeiten, Routen und Seemeilen erfassen
