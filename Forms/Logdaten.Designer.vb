@@ -24,12 +24,12 @@ Partial Class Logdaten
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Logdaten))
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.UhrzeitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WindRichtungDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -100,7 +100,7 @@ Partial Class Logdaten
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.gbFahrt = New System.Windows.Forms.GroupBox()
-        Me.TextBox37 = New System.Windows.Forms.TextBox()
+        Me.lblRelayStatus = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label35 = New System.Windows.Forms.Label()
@@ -136,6 +136,7 @@ Partial Class Logdaten
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TextBox37 = New System.Windows.Forms.TextBox()
         Me.ButtonSpeichern = New System.Windows.Forms.Button()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -478,7 +479,7 @@ Partial Class Logdaten
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(657, 496)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(314, 16)
+        Me.Label1.Size = New System.Drawing.Size(313, 16)
         Me.Label1.TabIndex = 23
         Me.Label1.Text = "Zeile löschen: Zeit Von mit Leerstelle überschreiben"
         '
@@ -590,7 +591,7 @@ Partial Class Logdaten
         Me.CheckBox6.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.bsDokumentation, "CheckBatterie", True))
         Me.CheckBox6.Location = New System.Drawing.Point(7, 100)
         Me.CheckBox6.Name = "CheckBox6"
-        Me.CheckBox6.Size = New System.Drawing.Size(132, 20)
+        Me.CheckBox6.Size = New System.Drawing.Size(131, 20)
         Me.CheckBox6.TabIndex = 27
         Me.CheckBox6.Text = "Batteriespannung"
         Me.CheckBox6.UseVisualStyleBackColor = True
@@ -601,7 +602,7 @@ Partial Class Logdaten
         Me.CheckBox5.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.bsDokumentation, "CheckOel", True))
         Me.CheckBox5.Location = New System.Drawing.Point(7, 77)
         Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(73, 20)
+        Me.CheckBox5.Size = New System.Drawing.Size(72, 20)
         Me.CheckBox5.TabIndex = 26
         Me.CheckBox5.Text = "Ölstand"
         Me.CheckBox5.UseVisualStyleBackColor = True
@@ -612,7 +613,7 @@ Partial Class Logdaten
         Me.CheckBox4.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.bsDokumentation, "WasserTanken", True))
         Me.CheckBox4.Location = New System.Drawing.Point(7, 50)
         Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(145, 20)
+        Me.CheckBox4.Size = New System.Drawing.Size(144, 20)
         Me.CheckBox4.TabIndex = 25
         Me.CheckBox4.Text = "Wasser voll getankt"
         Me.CheckBox4.UseVisualStyleBackColor = True
@@ -623,7 +624,7 @@ Partial Class Logdaten
         Me.CheckBox3.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.bsDokumentation, "CheckBilge", True))
         Me.CheckBox3.Location = New System.Drawing.Point(7, 21)
         Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(58, 20)
+        Me.CheckBox3.Size = New System.Drawing.Size(57, 20)
         Me.CheckBox3.TabIndex = 24
         Me.CheckBox3.Text = "Bilge"
         Me.CheckBox3.UseVisualStyleBackColor = True
@@ -658,7 +659,7 @@ Partial Class Logdaten
         Me.Label25.AutoSize = True
         Me.Label25.Location = New System.Drawing.Point(6, 101)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(76, 16)
+        Me.Label25.Size = New System.Drawing.Size(75, 16)
         Me.Label25.TabIndex = 6
         Me.Label25.Text = "Kraftstoff [€]"
         '
@@ -691,7 +692,7 @@ Partial Class Logdaten
         Me.Label24.AutoSize = True
         Me.Label24.Location = New System.Drawing.Point(9, 76)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(72, 16)
+        Me.Label24.Size = New System.Drawing.Size(71, 16)
         Me.Label24.TabIndex = 2
         Me.Label24.Text = "Kraftstoff [l]"
         '
@@ -700,7 +701,7 @@ Partial Class Logdaten
         Me.Label23.AutoSize = True
         Me.Label23.Location = New System.Drawing.Point(6, 50)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(79, 16)
+        Me.Label23.Size = New System.Drawing.Size(78, 16)
         Me.Label23.TabIndex = 1
         Me.Label23.Text = "Tagesende"
         '
@@ -709,7 +710,7 @@ Partial Class Logdaten
         Me.Label22.AutoSize = True
         Me.Label22.Location = New System.Drawing.Point(6, 21)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(89, 16)
+        Me.Label22.Size = New System.Drawing.Size(88, 16)
         Me.Label22.TabIndex = 0
         Me.Label22.Text = "Tagesanfang"
         '
@@ -750,7 +751,7 @@ Partial Class Logdaten
         Me.CheckBox2.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.bsDokumentation, "ZielStrom", True))
         Me.CheckBox2.Location = New System.Drawing.Point(6, 100)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(116, 20)
+        Me.CheckBox2.Size = New System.Drawing.Size(115, 20)
         Me.CheckBox2.TabIndex = 19
         Me.CheckBox2.Text = "Stromanschluß"
         Me.CheckBox2.UseVisualStyleBackColor = True
@@ -761,7 +762,7 @@ Partial Class Logdaten
         Me.CheckBox1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.bsDokumentation, "ZielMüll", True))
         Me.CheckBox1.Location = New System.Drawing.Point(6, 75)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(115, 20)
+        Me.CheckBox1.Size = New System.Drawing.Size(114, 20)
         Me.CheckBox1.TabIndex = 18
         Me.CheckBox1.Text = "Müllensorgung"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -771,7 +772,7 @@ Partial Class Logdaten
         Me.Label21.AutoSize = True
         Me.Label21.Location = New System.Drawing.Point(3, 50)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(65, 16)
+        Me.Label21.Size = New System.Drawing.Size(64, 16)
         Me.Label21.TabIndex = 1
         Me.Label21.Text = "Gebühr  €"
         '
@@ -780,7 +781,7 @@ Partial Class Logdaten
         Me.Label20.AutoSize = True
         Me.Label20.Location = New System.Drawing.Point(3, 21)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(66, 16)
+        Me.Label20.Size = New System.Drawing.Size(65, 16)
         Me.Label20.TabIndex = 0
         Me.Label20.Text = "Anlegeart"
         '
@@ -797,7 +798,7 @@ Partial Class Logdaten
         Me.Label19.AutoSize = True
         Me.Label19.Location = New System.Drawing.Point(684, 50)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(97, 16)
+        Me.Label19.Size = New System.Drawing.Size(96, 16)
         Me.Label19.TabIndex = 16
         Me.Label19.Text = "Wetterbericht 2"
         '
@@ -814,7 +815,7 @@ Partial Class Logdaten
         Me.Label18.AutoSize = True
         Me.Label18.Location = New System.Drawing.Point(684, 78)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(97, 16)
+        Me.Label18.Size = New System.Drawing.Size(96, 16)
         Me.Label18.TabIndex = 14
         Me.Label18.Text = "Wetterbericht 3"
         '
@@ -874,7 +875,7 @@ Partial Class Logdaten
         Me.Label17.AutoSize = True
         Me.Label17.Location = New System.Drawing.Point(886, 22)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(49, 16)
+        Me.Label17.Size = New System.Drawing.Size(48, 16)
         Me.Label17.TabIndex = 5
         Me.Label17.Text = "Uhrzeit"
         '
@@ -883,7 +884,7 @@ Partial Class Logdaten
         Me.Label16.AutoSize = True
         Me.Label16.Location = New System.Drawing.Point(684, 22)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(97, 16)
+        Me.Label16.Size = New System.Drawing.Size(96, 16)
         Me.Label16.TabIndex = 4
         Me.Label16.Text = "Wetterbericht 1"
         '
@@ -892,7 +893,7 @@ Partial Class Logdaten
         Me.Label15.AutoSize = True
         Me.Label15.Location = New System.Drawing.Point(467, 22)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(45, 16)
+        Me.Label15.Size = New System.Drawing.Size(44, 16)
         Me.Label15.TabIndex = 3
         Me.Label15.Text = "Zielort"
         '
@@ -901,7 +902,7 @@ Partial Class Logdaten
         Me.Label14.AutoSize = True
         Me.Label14.Location = New System.Drawing.Point(205, 22)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(84, 16)
+        Me.Label14.Size = New System.Drawing.Size(83, 16)
         Me.Label14.TabIndex = 2
         Me.Label14.Text = "Ausgangsort"
         '
@@ -910,7 +911,7 @@ Partial Class Logdaten
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(125, 22)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(33, 16)
+        Me.Label13.Size = New System.Drawing.Size(32, 16)
         Me.Label13.TabIndex = 1
         Me.Label13.Text = "Tag"
         '
@@ -919,7 +920,7 @@ Partial Class Logdaten
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(6, 22)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(47, 16)
+        Me.Label12.Size = New System.Drawing.Size(46, 16)
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Datum"
         '
@@ -933,6 +934,7 @@ Partial Class Logdaten
         '
         'gbFahrt
         '
+        Me.gbFahrt.Controls.Add(Me.lblRelayStatus)
         Me.gbFahrt.Controls.Add(Me.Button1)
         Me.gbFahrt.Controls.Add(Me.PictureBox1)
         Me.gbFahrt.Controls.Add(Me.Label35)
@@ -976,13 +978,15 @@ Partial Class Logdaten
         Me.gbFahrt.TabStop = False
         Me.gbFahrt.Text = "Fahrt Log"
         '
-        'TextBox37
+        'lblRelayStatus
         '
-        Me.TextBox37.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.bsLogdaten, "Toerbezeichnung", True))
-        Me.TextBox37.Location = New System.Drawing.Point(1107, 425)
-        Me.TextBox37.Name = "TextBox37"
-        Me.TextBox37.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox37.TabIndex = 1124
+        Me.lblRelayStatus.AutoSize = True
+        Me.lblRelayStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRelayStatus.Location = New System.Drawing.Point(326, 529)
+        Me.lblRelayStatus.Name = "lblRelayStatus"
+        Me.lblRelayStatus.Size = New System.Drawing.Size(93, 13)
+        Me.lblRelayStatus.TabIndex = 1125
+        Me.lblRelayStatus.Text = "NMEA-Relay: …"
         '
         'Button1
         '
@@ -1010,7 +1014,7 @@ Partial Class Logdaten
         Me.Label35.AutoSize = True
         Me.Label35.Location = New System.Drawing.Point(757, 461)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(36, 16)
+        Me.Label35.Size = New System.Drawing.Size(35, 16)
         Me.Label35.TabIndex = 1121
         Me.Label35.Text = "oder"
         '
@@ -1072,7 +1076,7 @@ Partial Class Logdaten
         Me.Label30.AutoSize = True
         Me.Label30.Location = New System.Drawing.Point(657, 435)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(56, 16)
+        Me.Label30.Size = New System.Drawing.Size(55, 16)
         Me.Label30.TabIndex = 20
         Me.Label30.Text = "Position"
         '
@@ -1092,7 +1096,7 @@ Partial Class Logdaten
         Me.ComboBox4.FormattingEnabled = True
         Me.ComboBox4.Location = New System.Drawing.Point(844, 485)
         Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(100, 24)
+        Me.ComboBox4.Size = New System.Drawing.Size(120, 24)
         Me.ComboBox4.TabIndex = 111
         '
         'Be5
@@ -1166,7 +1170,7 @@ Partial Class Logdaten
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(326, 493)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(103, 16)
+        Me.Label9.Size = New System.Drawing.Size(102, 16)
         Me.Label9.TabIndex = 8
         Me.Label9.Text = "Kurs über Grund"
         '
@@ -1228,7 +1232,7 @@ Partial Class Logdaten
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(704, 515)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(121, 16)
+        Me.Label11.Size = New System.Drawing.Size(120, 16)
         Me.Label11.TabIndex = 10
         Me.Label11.Text = "Distanz des Tages"
         '
@@ -1237,7 +1241,7 @@ Partial Class Logdaten
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(704, 488)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(72, 16)
+        Me.Label10.Size = New System.Drawing.Size(71, 16)
         Me.Label10.TabIndex = 9
         Me.Label10.Text = "Antriebsart"
         '
@@ -1246,7 +1250,7 @@ Partial Class Logdaten
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(375, 464)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(54, 16)
+        Me.Label8.Size = New System.Drawing.Size(53, 16)
         Me.Label8.TabIndex = 7
         Me.Label8.Text = "Wolken"
         '
@@ -1255,7 +1259,7 @@ Partial Class Logdaten
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(375, 436)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(61, 16)
+        Me.Label7.Size = New System.Drawing.Size(60, 16)
         Me.Label7.TabIndex = 6
         Me.Label7.Text = "Luftdruck"
         '
@@ -1264,7 +1268,7 @@ Partial Class Logdaten
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(8, 515)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(64, 16)
+        Me.Label6.Size = New System.Drawing.Size(63, 16)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Seegang"
         '
@@ -1273,7 +1277,7 @@ Partial Class Logdaten
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(8, 490)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(101, 16)
+        Me.Label5.Size = New System.Drawing.Size(100, 16)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Windstärke [kn]"
         '
@@ -1282,7 +1286,7 @@ Partial Class Logdaten
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(8, 463)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(85, 16)
+        Me.Label4.Size = New System.Drawing.Size(84, 16)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Windrichtung"
         '
@@ -1291,7 +1295,7 @@ Partial Class Logdaten
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(8, 436)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(49, 16)
+        Me.Label3.Size = New System.Drawing.Size(48, 16)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Uhrzeit"
         '
@@ -1305,6 +1309,14 @@ Partial Class Logdaten
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = " "
+        '
+        'TextBox37
+        '
+        Me.TextBox37.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.bsLogdaten, "Toerbezeichnung", True))
+        Me.TextBox37.Location = New System.Drawing.Point(1107, 425)
+        Me.TextBox37.Name = "TextBox37"
+        Me.TextBox37.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox37.TabIndex = 1124
         '
         'ButtonSpeichern
         '
@@ -1498,35 +1510,35 @@ Partial Class Logdaten
         'DataGridView3
         '
         Me.DataGridView3.AutoGenerateColumns = False
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView3.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView3.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn2, Me.Toernbezeichnung, Me.Datum, Me.Wetterbericht1, Me.Wetterbericht2, Me.Wetterbericht3, Me.Uhrzeit, Me.Bemerkungen, Me.Besonderes, Me.ZielGebühr, Me.ZielMüll, Me.ZielStrom, Me.MotorStdAnfang, Me.MotorStdEnde, Me.Kraftstoffgetankt, Me.Kraffstoffkosten, Me.CheckBilge, Me.WasserTanken, Me.CheckOel, Me.CheckBatterie, Me.Ausgangsort, Me.Zielort})
         Me.DataGridView3.DataSource = Me.bsDokumentation
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView3.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView3.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView3.Location = New System.Drawing.Point(1288, 40)
         Me.DataGridView3.Name = "DataGridView3"
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView3.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView3.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView3.RowHeadersWidth = 62
         Me.DataGridView3.Size = New System.Drawing.Size(240, 150)
         Me.DataGridView3.TabIndex = 1101
@@ -1828,35 +1840,35 @@ Partial Class Logdaten
         'DataGridView4
         '
         Me.DataGridView4.AutoGenerateColumns = False
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView4.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView4.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn3, Me.DatumVonDataGridViewTextBoxColumn, Me.DatumBisDataGridViewTextBoxColumn, Me.AusgangsmarinaDataGridViewTextBoxColumn, Me.EndeMarinaDataGridViewTextBoxColumn, Me.ToernbezeichnungDataGridViewTextBoxColumn, Me.SmSegelDataGridViewTextBoxColumn, Me.SmMotorDataGridViewTextBoxColumn, Me.SmGesamtDataGridViewTextBoxColumn, Me.NachtfahrtenDataGridViewTextBoxColumn, Me.NachtansteuerungenDataGridViewTextBoxColumn, Me.BordtageDataGridViewTextBoxColumn, Me.AusserhalbFB2DataGridViewTextBoxColumn, Me.AusserhalbFB3DataGridViewTextBoxColumn, Me.TornberichtDataGridViewTextBoxColumn, Me.BootsnameDataGridViewTextBoxColumn, Me.SkipperDataGridViewTextBoxColumn, Me.LetzterSegeltagDataGridViewCheckBoxColumn, Me.BemerkungDataGridViewTextBoxColumn, Me.BordkassaDataGridViewTextBoxColumn, Me.RouteDataGridViewTextBoxColumn, Me.LogbuchDataGridViewTextBoxColumn, Me.R1DataGridViewTextBoxColumn, Me.R2DataGridViewTextBoxColumn, Me.R3DataGridViewTextBoxColumn, Me.IDToernDataGridViewTextBoxColumn, Me.Nachtfahrtvon1DataGridViewTextBoxColumn, Me.Nachtfahrtbis1DataGridViewTextBoxColumn, Me.Sm1DataGridViewTextBoxColumn, Me.NachtfDatumvon1DataGridViewTextBoxColumn, Me.NachtZeitvon1DataGridViewTextBoxColumn, Me.NachtfDatumbis1DataGridViewTextBoxColumn, Me.NachtZeitbis1DataGridViewTextBoxColumn, Me.NachtFahrtvon2DataGridViewTextBoxColumn, Me.NachtFahrtbis2DataGridViewTextBoxColumn, Me.SM2DataGridViewTextBoxColumn, Me.NachtDatumvon2DataGridViewTextBoxColumn, Me.NachtZeitvon2DataGridViewTextBoxColumn, Me.NachtDatumbis2DataGridViewTextBoxColumn, Me.NachtZeitbis2DataGridViewTextBoxColumn, Me.Std50StartDataGridViewTextBoxColumn, Me.Std50ZielDataGridViewTextBoxColumn, Me.Std50SmGesDataGridViewTextBoxColumn, Me.Std50smFB2DataGridViewTextBoxColumn, Me.Std50DatumStartDataGridViewTextBoxColumn, Me.Std50ZeitStartDataGridViewTextBoxColumn, Me.Std50DatumZielDataGridViewTextBoxColumn, Me.Std50ZeitZielDataGridViewTextBoxColumn, Me.GezHafen1DataGridViewTextBoxColumn, Me.GezDatum1DataGridViewTextBoxColumn, Me.GezZeit1DataGridViewTextBoxColumn, Me.GezHafen2DataGridViewTextBoxColumn, Me.GezDatum2DataGridViewTextBoxColumn, Me.GezZeit2DataGridViewTextBoxColumn, Me.FB4StartDataGridViewTextBoxColumn, Me.FB4ZielDataGridViewTextBoxColumn, Me.FB4SmGesDataGridViewTextBoxColumn, Me.FB4SmFb3DataGridViewTextBoxColumn, Me.FB4DatumStartDataGridViewTextBoxColumn, Me.FB4ZeitStartDataGridViewTextBoxColumn, Me.FB4DatumZielDataGridViewTextBoxColumn, Me.FB4ZeitZielDataGridViewTextBoxColumn, Me.RevierDataGridViewTextBoxColumn, Me.VerbrauchproToernDataGridViewTextBoxColumn})
         Me.DataGridView4.DataSource = Me.bsToernname
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView4.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView4.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView4.Location = New System.Drawing.Point(1288, 209)
         Me.DataGridView4.Name = "DataGridView4"
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView4.RowHeadersDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView4.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView4.RowHeadersWidth = 62
         Me.DataGridView4.Size = New System.Drawing.Size(240, 150)
         Me.DataGridView4.TabIndex = 1103
@@ -2705,6 +2717,7 @@ Partial Class Logdaten
     Friend WithEvents TextBox35 As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents lblRelayStatus As System.Windows.Forms.Label
     Friend WithEvents TextBox37 As System.Windows.Forms.TextBox
     Friend WithEvents UhrzeitDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents WindRichtungDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn

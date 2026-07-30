@@ -2,7 +2,7 @@
 
 Desktop-Anwendung zur Verwaltung von Segeltörns, Crews, Booten, Kursen und Logbüchern. Geschrieben in **VB.NET (WinForms)** für **.NET Framework 4.8 (x86)**.
 
-**Aktuelle Version:** 13.02.04
+**Aktuelle Version:** 13.02.05
 
 Versionierung (`X.ZZ.Y`): Quelle ist `Helpers/AppVersion.vb`. Hochzählen mit:
 

@@ -112,8 +112,10 @@ Public Class Logdaten
         ComboBox4.Items.Add("ge")
         ComboBox4.Items.Add("GR GE")
         ComboBox4.Items.Add("gr ge")
+        ComboBox4.Items.Add("ANKER")
+        ComboBox4.Items.Add("LIEGEPLATZ")
 
-        Dim rw As System.Data.DataRowView = bsLogWacheplan.Current
+        UpdateRelayStatusLabel()
         WAdapter.SelectCommand = New OleDb.OleDbCommand
         WAdapter.SelectCommand.Connection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=logbuch.mdb")
         WAdapter.SelectCommand.CommandText = "Select * from LogWacheplan where toern = '" & toerna & "' order by datum"
@@ -264,6 +266,7 @@ Public Class Logdaten
         Label26.Visible = False
         logSeite = True
         gbFahrt.Text = "Fahrt log am " + Label13.Text + " den " + MaskedTextBox2.Text
+        UpdateRelayStatusLabel()
         '       aenderungL = True
         Dim datmu As Date
         If Not SafeData.TryParseMaskedDate(MaskedTextBox2.Text, datmu) Then Exit Sub
@@ -904,6 +907,7 @@ endesub:
         Catch
             ' Defensive: pipe status must never block logbook save.
         End Try
+        UpdateRelayStatusLabel()
     End Sub
 
     ''' <summary>
@@ -968,12 +972,35 @@ endesub:
         Catch xx As Exception
             AppLog.Warn("Daten holen fehlgeschlagen: " & xx.Message)
         End Try
+        UpdateRelayStatusLabel()
         TextBox3.Text = luftdruck
         ComboBox2.Text = windrichtung
         TextBox2.Text = Windstaerke
         ComboBox1.Text = Seegangalt
         ComboBox3.Text = bewolkung
         ComboBox4.Text = antrieb
+    End Sub
+
+    Private Sub UpdateRelayStatusLabel()
+        Try
+            If lblRelayStatus Is Nothing OrElse lblRelayStatus.IsDisposed Then Return
+            Dim online As Boolean = NMEARelayPipeHelper.IsRelayOnline()
+            lblRelayStatus.Text = NMEARelayPipeHelper.GetRelayStatusText()
+            If online Then
+                lblRelayStatus.ForeColor = Drawing.Color.DarkGreen
+            Else
+                lblRelayStatus.ForeColor = Drawing.Color.Firebrick
+            End If
+        Catch
+            If lblRelayStatus IsNot Nothing AndAlso Not lblRelayStatus.IsDisposed Then
+                lblRelayStatus.Text = "NMEA-Relay: offline"
+                lblRelayStatus.ForeColor = Drawing.Color.Firebrick
+            End If
+        End Try
+    End Sub
+
+    Private Sub lblRelayStatus_Click(sender As Object, e As EventArgs) Handles lblRelayStatus.Click
+        UpdateRelayStatusLabel()
     End Sub
     Private Sub Leerzeilen()
         Dim leer As String = "0"

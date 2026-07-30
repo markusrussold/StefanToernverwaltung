@@ -67,6 +67,18 @@ Public Module NMEARelayPipeHelper
         Return 0
     End Function
 
+    Public Function IsRelayOnline() As Boolean
+        Return IsPipeAvailable() = 1
+    End Function
+
+    ''' <summary>Short German status text for UI labels.</summary>
+    Public Function GetRelayStatusText() As String
+        If IsRelayOnline() Then
+            Return "NMEA-Relay: online"
+        End If
+        Return "NMEA-Relay: offline"
+    End Function
+
     ''' <summary>
     ''' Publishes one exclusive drive status command from Antriebsart text
     ''' (e.g. "M GR", "m GE", "ANKER", "LIEGEPLATZ"). No-ops when pipe is down.
@@ -95,11 +107,14 @@ Public Module NMEARelayPipeHelper
         Dim raw As String = antriebsart.Trim()
         Dim upper As String = raw.ToUpperInvariant()
 
-        ' Explicit status words (optional free text / future combo values).
-        If upper.Contains("ANKER") OrElse upper.Contains("ANCHOR") Then
+        ' Explicit status words / combo values.
+        If String.Equals(raw, "ANKER", StringComparison.OrdinalIgnoreCase) OrElse
+           upper.Contains("ANKER") OrElse upper.Contains("ANCHOR") Then
             Return CmdSetAnchor
         End If
-        If upper.Contains("DOCK") OrElse upper.Contains("LIEGE") OrElse upper.Contains("HAFEN") OrElse upper.Contains("MARINA") Then
+        If String.Equals(raw, "LIEGEPLATZ", StringComparison.OrdinalIgnoreCase) OrElse
+           upper.Contains("DOCK") OrElse upper.Contains("LIEGE") OrElse
+           upper.Contains("HAFEN") OrElse upper.Contains("MARINA") Then
             Return CmdSetDocked
         End If
 
