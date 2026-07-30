@@ -442,6 +442,9 @@ Public Class Logdaten
                 MsgBox("Uhrzeit nicht versorgt, speichern nicht möglich!")
                 GoTo endesub
             End If
+            If TextBox5.Text > "" AndAlso TextBox5.Text <> " " Then
+                If Not ValidateDayDistanceNonDecreasing() Then GoTo endesub
+            End If
             '                                     Daten zwischenspeichern
             luftdruck = TextBox3.Text
             windrichtung = ComboBox2.Text
@@ -1013,6 +1016,40 @@ endesub:
             ComboBox4.Text = antrieb
         End If
     End Sub
+
+    ''' <summary>
+    ''' Ensures DueGTag is not lower than the previous same-day entry.
+    ''' The first entry of the day is always allowed.
+    ''' </summary>
+    Private Function ValidateDayDistanceNonDecreasing() As Boolean
+        Try
+            Dim prev As DataRow = FindPreviousLogEntry()
+            If prev Is Nothing Then Return True
+
+            Dim currentDist As Double
+            If Not SafeData.TryParseNumber(TextBox5.Text, currentDist) Then
+                MsgBox("Distanz des Tages ist ungültig.")
+                TextBox5.Focus()
+                Return False
+            End If
+
+            Dim prevDist As Double = 0
+            SafeData.TryParseNumber(prev("DueGTag"), prevDist)
+
+            If currentDist < prevDist Then
+                Dim prevText As String = SafeData.CoalesceString(prev("DueGTag"))
+                If String.IsNullOrWhiteSpace(prevText) Then prevText = "0"
+                MsgBox("Die Distanz des Tages darf nicht kleiner sein als beim vorherigen Eintrag (" & prevText & ").")
+                TextBox5.Focus()
+                Return False
+            End If
+
+            Return True
+        Catch ex As Exception
+            AppLog.Warn("ValidateDayDistanceNonDecreasing: " & ex.Message)
+            Return True
+        End Try
+    End Function
 
     ''' <summary>
     ''' Returns the chronologically last same-day log row before the current edit row.
