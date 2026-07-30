@@ -112,8 +112,6 @@ Public Class Logdaten
         ComboBox4.Items.Add("ge")
         ComboBox4.Items.Add("GR GE")
         ComboBox4.Items.Add("gr ge")
-        ComboBox4.Items.Add("ANKER")
-        ComboBox4.Items.Add("LIEGEPLATZ")
 
         UpdateRelayStatusLabel()
         WAdapter.SelectCommand = New OleDb.OleDbCommand

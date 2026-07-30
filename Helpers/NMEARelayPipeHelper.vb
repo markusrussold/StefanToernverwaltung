@@ -16,8 +16,6 @@ Public Module NMEARelayPipeHelper
     Public Const CmdSetSail As String = "SET_SAIL"
     Public Const CmdSetEngineSail As String = "SET_ENGINESAIL"
     Public Const CmdSetEngine As String = "SET_ENGINE"
-    Public Const CmdSetAnchor As String = "SET_ANCHOR"
-    Public Const CmdSetDocked As String = "SET_DOCKED"
 
     ''' <summary>
     ''' Sends a command through a named pipe and returns the server response.
@@ -81,7 +79,7 @@ Public Module NMEARelayPipeHelper
 
     ''' <summary>
     ''' Publishes one exclusive drive status command from Antriebsart text
-    ''' (e.g. "M GR", "m GE", "ANKER", "LIEGEPLATZ"). No-ops when pipe is down.
+    ''' (e.g. "M GR", "m GE"). No-ops when pipe is down or status is unrecognized.
     ''' </summary>
     Public Function TryPublishDriveStatus(ByVal antriebsart As String) As Boolean
         Try
@@ -105,18 +103,6 @@ Public Module NMEARelayPipeHelper
     Public Function MapAntriebsartToPipeCommand(ByVal antriebsart As String) As String
         If String.IsNullOrWhiteSpace(antriebsart) Then Return Nothing
         Dim raw As String = antriebsart.Trim()
-        Dim upper As String = raw.ToUpperInvariant()
-
-        ' Explicit status words / combo values.
-        If String.Equals(raw, "ANKER", StringComparison.OrdinalIgnoreCase) OrElse
-           upper.Contains("ANKER") OrElse upper.Contains("ANCHOR") Then
-            Return CmdSetAnchor
-        End If
-        If String.Equals(raw, "LIEGEPLATZ", StringComparison.OrdinalIgnoreCase) OrElse
-           upper.Contains("DOCK") OrElse upper.Contains("LIEGE") OrElse
-           upper.Contains("HAFEN") OrElse upper.Contains("MARINA") Then
-            Return CmdSetDocked
-        End If
 
         Dim motorOn As Boolean = HasExactToken(raw, "M")
         Dim sailOn As Boolean = HasExactToken(raw, "GR") OrElse HasExactToken(raw, "GE")
