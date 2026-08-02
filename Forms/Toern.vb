@@ -785,6 +785,7 @@ Gefunden:
                 bsBordkassa.EndEdit()
                 taBordkassa.Update(dsToernverwaltung.Bordkassa)
             Next
+            TripRenameHelper.RenameInCrewbesprechung(ToernAlt, TextBox1.Text)
         End If
         Namensaenderung = False
         aenderung = False

@@ -318,24 +318,42 @@ druckende:
         Dim faktor As Single
         Dim pixel As GraphicsUnit = GraphicsUnit.Pixel
         Dim bildbb As Single = 320
-        bootname = row(16)
+        bootname = SafeData.CoalesceString(row(16))
         bootname = bootname.Replace(" ", "")
-        bootfoto = Image.FromFile(Trim$(speicherbild))
-        If row(19) Is Nothing Then
-            MsgBox("Bild des Bootes ist nicht versorgt")
+
+        Dim bootBildPfad As String = SafeData.CoalesceString(row(19))
+        Dim logoPfad As String = If(speicherbild, "").Trim()
+        Dim geladen As Boolean = False
+
+        If Not String.IsNullOrWhiteSpace(bootBildPfad) AndAlso My.Computer.FileSystem.FileExists(bootBildPfad) Then
+            Try
+                bootfoto = Image.FromFile(bootBildPfad)
+                geladen = True
+            Catch ex As Exception
+                AppLog.Warn("PrintoutCB.kojen Bild: " & ex.Message)
+            End Try
+        ElseIf Not String.IsNullOrWhiteSpace(logoPfad) AndAlso My.Computer.FileSystem.FileExists(logoPfad) Then
+            Try
+                bootfoto = Image.FromFile(logoPfad)
+                geladen = True
+            Catch ex As Exception
+                AppLog.Warn("PrintoutCB.kojen Logo: " & ex.Message)
+            End Try
         Else
-            If My.Computer.FileSystem.FileExists(row(19)) Then
-                bootfoto = Image.FromFile(row(19))
-                BildB = bootfoto.Width
-                bildh = bootfoto.Height
+            MsgBox("Bild des Bootes ist nicht versorgt")
+        End If
+
+        If geladen AndAlso bootfoto IsNot Nothing Then
+            BildB = bootfoto.Width
+            bildh = bootfoto.Height
+            If bildh > 0 Then
                 faktor = BildB / bildh
-                '  bildbb / faktor    muss klein 580 sein in einer Schleife
 bild1:
                 If bildbb / faktor > 400 Then
                     bildbb -= 10
                     GoTo bild1
                 End If
-                ev.Graphics.DrawImage(bootfoto, New Rectangle(xPos(3) - 30, yPos, bildbb, bildbb / faktor))
+                ev.Graphics.DrawImage(bootfoto, New Rectangle(xPos(3) - 30, yPos, CInt(bildbb), CInt(bildbb / faktor)))
             End If
         End If
         zeile += 4

@@ -444,8 +444,16 @@ weiter:
     End Sub
     Private Sub ButtonSpeichernKojen_Click(sender As System.Object, e As System.EventArgs) Handles ButtonSpeichernKojen.Click
         aaa = TextBox62.Text
-        bsCrewDetails.EndEdit()
-        taCrewDetails.Update(dsCrewbesprechung.CrewDetails)
+        Try
+            bsCrewDetails.EndEdit()
+            taCrewDetails.Update(dsCrewbesprechung.CrewDetails)
+        Catch ex As Exception
+            AppLog.Warn("CrewDetails speichern: " & ex.Message)
+            MsgBox("Crewdetails konnten nicht gespeichert werden." & Environment.NewLine &
+                   "Prüfen Sie, ob in Crewbesprechung.mdb die Spalte Bild in der Tabelle CrewDetails vorhanden ist." &
+                   Environment.NewLine & ex.Message)
+            Return
+        End Try
         GroupBoxAnreiseKenn.Location = New Point(180, 130)
         GroupBoxKojen.Location = New Point(1700, 107)
         ButtonGleich.Enabled = False

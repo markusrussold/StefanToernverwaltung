@@ -938,6 +938,7 @@ Gefunden:
                     bsBootKalkulation.EndEdit()
                     taBootKalkulation.Update(dsToernverwaltung.BootKalkulation)
                 Next
+                TripRenameHelper.RenameInCrewbesprechung(ToernAlt, TextBox2.Text)
 
             End If
             namensaenderung = False

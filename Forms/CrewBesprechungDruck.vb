@@ -257,10 +257,14 @@ Gefunden:
             TextBox11.Text = dsCrewbesprechung.CrewDetails.Rows(0)("bs2").ToString
             TextBox12.Text = dsCrewbesprechung.CrewDetails.Rows(0)("hb2").ToString
             TextBox13.Text = dsCrewbesprechung.CrewDetails.Rows(0)("hs2").ToString
-            TextBox14.Text = dsCrewbesprechung.CrewDetails.Rows(0)("Kenntnisse").ToString
-            TextBox21.Text = dsCrewbesprechung.CrewDetails.Rows(0)("Bild").ToString
-            TextBox22.Text = dsCrewbesprechung.CrewDetails.Rows(0)("R1").ToString
-            TextBox24.Text = dsCrewbesprechung.CrewDetails.Rows(0)("R2").ToString
+            TextBox14.Text = SafeData.CoalesceString(dsCrewbesprechung.CrewDetails.Rows(0)("Kenntnisse"))
+            If dsCrewbesprechung.CrewDetails.Columns.Contains("Bild") Then
+                TextBox21.Text = SafeData.CoalesceString(dsCrewbesprechung.CrewDetails.Rows(0)("Bild"))
+            Else
+                TextBox21.Text = ""
+            End If
+            TextBox22.Text = SafeData.CoalesceString(dsCrewbesprechung.CrewDetails.Rows(0)("R1"))
+            TextBox24.Text = SafeData.CoalesceString(dsCrewbesprechung.CrewDetails.Rows(0)("R2"))
             TextBox15.Text = charter
             TextBox16.Text = produkt
             TextBox18.Text = boot

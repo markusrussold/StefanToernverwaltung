@@ -121,6 +121,7 @@
     <Compile Include="Helpers\DatabaseBootstrap.vb" />
     <Compile Include="Helpers\DbAccess.vb" />
     <Compile Include="Helpers\SafeData.vb" />
+    <Compile Include="Helpers\TripRenameHelper.vb" />
     <Compile Include="Helpers\FormUi.vb" />
     <Compile Include="Helpers\InputValidation.vb" />
     <Compile Include="Helpers\PathGuard.vb" />

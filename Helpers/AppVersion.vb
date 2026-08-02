@@ -13,7 +13,7 @@ Imports System.Globalization
 Public Module AppVersion
 
     ''' <summary>Display / product version, zero-padded minor (e.g. 13.02.04).</summary>
-    Public Const Number As String = "13.02.05"
+    Public Const Number As String = "13.02.06"
 
     Public ReadOnly Property DisplayTitle As String
         Get
